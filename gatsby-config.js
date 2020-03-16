@@ -1,7 +1,7 @@
 module.exports = {
   plugins: [
     {
-      resolve: 'gatsby-plugin-react-axe',
+      resolve: "gatsby-plugin-react-axe",
       options: {
         // Integrate react-axe in production. This defaults to false.
         showInProduction: false,
@@ -15,11 +15,11 @@ module.exports = {
         // See: https://github.com/dequelabs/axe-core/blob/master/doc/API.md#context-parameter
         axeContext: {
           // Your axe-core context.
-        }
+        },
       },
     },
     {
-      resolve: 'gatsby-source-wordpress',
+      resolve: "gatsby-source-wordpress",
       options: {
         /*
          * The base URL of the WordPress site without the trailingslash and the protocol. This is required.
@@ -38,7 +38,7 @@ module.exports = {
         verboseOutput: false,
         // Set how many pages are retrieved per API request.
         perPage: 100,
-      }
-    }
+      },
+    },
   ],
 }
