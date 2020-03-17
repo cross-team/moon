@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "gatsby": "^2.19.7",
+    "gatsby-plugin-material-ui": "^2.1.6",
     "gatsby-plugin-react-axe": "^0.4.0",
     "gatsby-source-wordpress": "^3.1.68",
     "react": "^16.12.0",

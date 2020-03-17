@@ -40,5 +40,6 @@ module.exports = {
         perPage: 100,
       },
     },
+    "gatsby-plugin-material-ui",
   ],
 }
