@@ -29,12 +29,7 @@ export default function Layout({ children, title }) {
         ></link>
       </Helmet>
       <Header mainContent={mainContent} />
-      <main
-        className={classes.main}
-        ref={mainContent}
-        data-testid="mainContent"
-        tabIndex="-1"
-      >
+      <main className={classes.main} ref={mainContent} tabIndex="-1">
         {children}
       </main>
     </Theme>

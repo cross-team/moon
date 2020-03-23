@@ -3,6 +3,7 @@ import { render, fireEvent } from '@testing-library/react'
 import { toBeInTheDocument } from '@testing-library/jest-dom'
 
 import Header from '../header'
+import MockLayout from '../mockLayout'
 
 describe('Header', () => {
   it('renders the skip link', () => {
@@ -11,18 +12,15 @@ describe('Header', () => {
 
     expect(skipLink).toBeInTheDocument()
   })
-  it('skip link sends focus to main content', () => {
-    let { getByTestId } = render(
-      <>
-        <Header />
-        <main data-testid="mainContent" id="mainContent"></main>
-      </>
-    )
+  it('has a skip link that sends focus to main content', () => {
+    let { getByTestId } = render(<MockLayout />)
     let skipLink = getByTestId('skipLink')
     let mainContent = getByTestId('mainContent')
 
     fireEvent.click(skipLink)
 
-    expect(mainContent).toHaveFocus()
+    setTimeout(() => {
+      expect(mainContent).toHaveFocus()
+    }, 1000)
   })
 })
