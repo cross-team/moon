@@ -1,7 +1,7 @@
 module.exports = {
   plugins: [
     {
-      resolve: "gatsby-plugin-react-axe",
+      resolve: 'gatsby-plugin-react-axe',
       options: {
         // Integrate react-axe in production. This defaults to false.
         showInProduction: false,
@@ -19,15 +19,15 @@ module.exports = {
       },
     },
     {
-      resolve: "gatsby-source-wordpress",
+      resolve: 'gatsby-source-wordpress',
       options: {
         /*
          * The base URL of the WordPress site without the trailingslash and the protocol. This is required.
          * Example : 'demo.wp-api.org' or 'www.example-site.com'
          */
-        baseUrl: "lenza.co",
+        baseUrl: 'lenza.co',
         // The protocol. This can be http or https.
-        protocol: "https",
+        protocol: 'https',
         // Indicates whether the site is hosted on wordpress.com.
         // If false, then the assumption is made that the site is self hosted.
         // If true, then the plugin will source its content on wordpress.com using the JSON REST API V2.
@@ -40,6 +40,7 @@ module.exports = {
         perPage: 100,
       },
     },
-    "gatsby-plugin-material-ui",
+    'gatsby-plugin-material-ui',
+    'gatsby-plugin-react-helmet',
   ],
 }
