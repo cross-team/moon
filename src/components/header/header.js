@@ -15,6 +15,13 @@ var useStyles = makeStyles(theme => ({
   tabs: {
     alignSelf: 'flex-end',
   },
+  tab: {
+    '&:focus': {
+      border: '2px solid',
+      borderColor: theme.palette.secondary.light,
+      borderRadius: '4px',
+    },
+  },
 }))
 
 export default function Header({ mainContent }) {
@@ -48,9 +55,9 @@ export default function Header({ mainContent }) {
           onChange={handleChange}
           aria-label="Site Navigation"
         >
-          <Tab disableRipple label="Tab 1" />
-          <Tab disableRipple label="Tab 2" />
-          <Tab disableRipple label="Tab 3" />
+          <Tab className={classes.tab} disableRipple label="Tab 1" />
+          <Tab className={classes.tab} disableRipple label="Tab 2" />
+          <Tab className={classes.tab} disableRipple label="Tab 3" />
         </Tabs>
       </Toolbar>
     </AppBar>
