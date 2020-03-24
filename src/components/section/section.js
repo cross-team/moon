@@ -19,13 +19,17 @@ var useStyles = makeStyles(theme => ({
   },
 }))
 
-export default function Section({ children, heading }) {
+export default function Section({ children, heading = '' }) {
   var classes = useStyles()
 
   return (
     <Card className={classes.root}>
       <Grid container direction="column" alignItems="center">
-        <a href="#navigation" className={classes.skipLink}>
+        <a
+          href="#skipToMain"
+          data-testid="skipLink"
+          className={classes.skipLink}
+        >
           <Typography>Skip to Nav</Typography>
         </a>
         <Typography variant="h1">{heading}</Typography>

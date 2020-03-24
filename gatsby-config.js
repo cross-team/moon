@@ -42,5 +42,6 @@ module.exports = {
     },
     'gatsby-plugin-material-ui',
     'gatsby-plugin-react-helmet',
+    'gatsby-plugin-react-axe',
   ],
 }

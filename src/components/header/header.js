@@ -36,6 +36,7 @@ export default function Header({ mainContent }) {
         <a
           href="#"
           onClick={skipToMain}
+          id="skipToMain"
           data-testid="skipLink"
           className={classes.skipLink}
         >

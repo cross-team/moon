@@ -1,4 +1,5 @@
-import React, { useRef, useEffect } from 'react'
+import React, { useRef } from 'react'
+import ReactDOM from 'react-dom'
 import { Helmet } from 'react-helmet'
 import { makeStyles } from '@material-ui/core/styles'
 
@@ -18,9 +19,16 @@ export default function Layout({ children, title }) {
   var classes = useStyles()
   var mainContent = useRef(null)
 
+  if (process.env.NODE_ENV !== 'production') {
+    import('react-axe').then(axe => {
+      axe.default(React, ReactDOM, 1000)
+    })
+  }
+
   return (
     <Theme>
       <Helmet>
+        <html lang="en" />
         <meta charSet="utf-8" />
         <title>{title}</title>
         <link
