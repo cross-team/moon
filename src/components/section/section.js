@@ -30,7 +30,7 @@ export default function Section({ children, heading = '' }) {
           data-testid="skipLink"
           className={classes.skipLink}
         >
-          <Typography>Skip to Nav</Typography>
+          <Typography>Skip to Navigation</Typography>
         </a>
         <Typography variant="h1">{heading}</Typography>
         <CardContent>{children}</CardContent>

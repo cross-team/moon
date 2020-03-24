@@ -7,14 +7,14 @@ import MockLayout from '../mockLayout'
 
 describe('Header', () => {
   it('renders the skip link', () => {
-    let { getByTestId } = render(<Header />)
-    let skipLink = getByTestId('skipLink')
+    let { getByText } = render(<Header />)
+    let skipLink = getByText('Skip to Main Content')
 
     expect(skipLink).toBeInTheDocument()
   })
   it('has a skip link that sends focus to main content', () => {
-    let { getByTestId } = render(<MockLayout />)
-    let skipLink = getByTestId('skipLink')
+    let { getByText, getByTestId } = render(<MockLayout />)
+    let skipLink = getByText('Skip to Main Content')
     let mainContent = getByTestId('mainContent')
 
     fireEvent.click(skipLink)
