@@ -2,7 +2,7 @@ import React from 'react'
 
 import Header from './header'
 
-export default function MockLayout() {
+export default function MockLayout1() {
   var mainContent = React.useRef(null)
 
   return (

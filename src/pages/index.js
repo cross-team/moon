@@ -11,6 +11,9 @@ export default () => (
         <Section heading="Section 1">
           <Typography>Section 1 Content.</Typography>
         </Section>
+        <Section heading="Section 2" color="light">
+          <Typography>Section 2 Content.</Typography>
+        </Section>
       </Grid>
     </Grid>
   </Layout>

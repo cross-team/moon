@@ -18,8 +18,9 @@ var useStyles = makeStyles(theme => ({
   tab: {
     '&:focus': {
       border: '2px solid',
-      borderColor: theme.palette.secondary.light,
+      borderColor: theme.palette.primary.light,
       borderRadius: '4px',
+      color: `${theme.palette.primary.contrastText} !important`,
     },
   },
 }))
@@ -32,9 +33,21 @@ export default function Header({ mainContent }) {
     setTab(newValue)
   }
 
+  function getFirstFocusableChild(children) {
+    for (let child of children) {
+      if (child.tabIndex == 0) return child
+      if (child.children !== []) {
+        let result = getFirstFocusableChild(child.children)
+        if (result !== null) return result
+      }
+    }
+    return null
+  }
+
   function skipToMain() {
-    console.log(mainContent)
-    mainContent.current.focus()
+    let child = getFirstFocusableChild(mainContent.current.children)
+    if (child === null) mainContent.current.focus()
+    else child.focus()
   }
 
   return (

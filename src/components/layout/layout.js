@@ -10,7 +10,7 @@ import './layout.css'
 
 var useStyles = makeStyles(theme => ({
   main: {
-    width: '90%',
+    width: '100%',
     margin: 'auto',
   },
 }))

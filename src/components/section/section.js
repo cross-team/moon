@@ -6,21 +6,36 @@ import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 
 var useStyles = makeStyles(theme => ({
-  root: {
+  root: props => ({
+    height: '100vh',
     width: '100%',
-    border: '2px solid',
-    borderColor: theme.palette.primary.dark,
-    marginTop: theme.spacing(2),
-  },
-  skipLink: {
+    borderRadius: '0px',
+    backgroundColor: props.bgColor,
+    color: props.textColor,
+  }),
+  skipLink: props => ({
     alignSelf: 'flex-end',
-    color: '#000',
+    color: props.linkColor,
     margin: theme.spacing(1),
-  },
+  }),
 }))
 
-export default function Section({ children, heading = '' }) {
-  var classes = useStyles()
+export default function Section({ children, color = 'dark', heading = '' }) {
+  var styleProps = {
+    dark: {
+      bgColor: '#222',
+      textColor: '#fefefe',
+      focusColor: '#04f',
+      linkColor: '#ffec00',
+    },
+    light: {
+      bgColor: '#fefefe',
+      textColor: '#222',
+      focusColor: '#f00',
+      linkColor: '#04f',
+    },
+  }
+  var classes = useStyles(styleProps[color])
 
   return (
     <Card className={classes.root}>
