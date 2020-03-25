@@ -10,32 +10,18 @@ var useStyles = makeStyles(theme => ({
     height: '100vh',
     width: '100%',
     borderRadius: '0px',
-    backgroundColor: props.bgColor,
-    color: props.textColor,
+    backgroundColor: theme.palette.components[props.color].bgColor,
+    color: theme.palette.components[props.color].textColor,
   }),
   skipLink: props => ({
     alignSelf: 'flex-end',
-    color: props.linkColor,
+    color: theme.palette.components[props.color].linkColor,
     margin: theme.spacing(1),
   }),
 }))
 
 export default function Section({ children, color = 'dark', heading = '' }) {
-  var styleProps = {
-    dark: {
-      bgColor: '#222',
-      textColor: '#fefefe',
-      focusColor: '#04f',
-      linkColor: '#ffec00',
-    },
-    light: {
-      bgColor: '#fefefe',
-      textColor: '#222',
-      focusColor: '#f00',
-      linkColor: '#04f',
-    },
-  }
-  var classes = useStyles(styleProps[color])
+  var classes = useStyles({ color })
 
   return (
     <Card className={classes.root}>

@@ -15,6 +15,20 @@ var theme = createMuiTheme({
       dark: '#0030b3',
       contrastText: '#fefefe',
     },
+    components: {
+      dark: {
+        bgColor: '#222',
+        textColor: '#fefefe',
+        focusColor: '#04f',
+        linkColor: '#ffec00',
+      },
+      light: {
+        bgColor: '#fefefe',
+        textColor: '#222',
+        focusColor: '#f00',
+        linkColor: '#04f',
+      },
+    },
   },
   typography: {
     fontFamily: "'Miriam Libre', 'Helvetica', 'Arial', sans-serif",

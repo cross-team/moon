@@ -18,7 +18,7 @@ var useStyles = makeStyles(theme => ({
   tab: {
     '&:focus': {
       border: '2px solid',
-      borderColor: theme.palette.primary.light,
+      borderColor: theme.palette.secondary.main,
       borderRadius: '4px',
       color: `${theme.palette.primary.contrastText} !important`,
     },
