@@ -1,41 +1,86 @@
-import React from 'react'
-import { makeStyles } from '@material-ui/core/styles'
-import Card from '@material-ui/core/Card'
-import CardContent from '@material-ui/core/CardContent'
+import React, { useState, useRef, useEffect } from 'react'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
+import Button from '@material-ui/core/Button'
+import Collapse from '@material-ui/core/Collapse'
+import ReactPlayer from 'react-player'
+import useStyles from './section-styles'
 
-var useStyles = makeStyles(theme => ({
-  root: props => ({
-    height: '100vh',
-    width: '100%',
-    borderRadius: '0px',
-    backgroundColor: theme.palette.components[props.color].bgColor,
-    color: theme.palette.components[props.color].textColor,
-  }),
-  skipLink: props => ({
-    alignSelf: 'flex-end',
-    color: theme.palette.components[props.color].linkColor,
-    margin: theme.spacing(1),
-  }),
-}))
+export default function Section({
+  children,
+  color = 'dark',
+  heading = '',
+  bgImg = '',
+  bgImgAlt = 'Image Needs Proper Alt Text',
+  img = '',
+  imgAlt = 'Image Needs Proper Alt Text',
+  videoURL = '',
+  transcript = 'Video Needs Proper Transcript',
+}) {
+  var classes = useStyles({ color, bgImg })
+  var [transcriptOn, setTranscriptOn] = useState(false)
+  var transcriptRef = useRef(null)
 
-export default function Section({ children, color = 'dark', heading = '' }) {
-  var classes = useStyles({ color })
+  useEffect(() => {
+    if (transcriptOn) transcriptRef.current.focus()
+  }, [transcriptOn])
+
+  function handleTranscript() {
+    setTranscriptOn(!transcriptOn)
+  }
 
   return (
-    <Card className={classes.root}>
-      <Grid container direction="column" alignItems="center">
-        <a
-          href="#skipToMain"
-          data-testid="skipLink"
-          className={classes.skipLink}
-        >
-          <Typography>Skip to Navigation</Typography>
-        </a>
-        <Typography variant="h1">{heading}</Typography>
-        <CardContent>{children}</CardContent>
+    <Grid
+      className={classes.root}
+      container
+      direction="column"
+      alignItems="center"
+      wrap="nowrap"
+      aria-label={bgImg && bgImgAlt}
+    >
+      <a href="#skipToMain" data-testid="skipLink" className={classes.skipLink}>
+        <Typography>Skip to Navigation</Typography>
+      </a>
+      <Typography variant="h1">{heading}</Typography>
+      <Grid container justify="center" item spacing={8}>
+        {(videoURL || img) && (
+          <Grid
+            item
+            xs={12}
+            lg={6}
+            container
+            direction="column"
+            alignItems="center"
+            justify="center"
+          >
+            {img && <img src={img} alt={imgAlt} />}
+            {videoURL && (
+              <>
+                <div className={classes.playerContainer}>
+                  <ReactPlayer
+                    className={classes.player}
+                    url={videoURL}
+                    controls
+                    width="100%"
+                    height="100%"
+                  />
+                </div>
+                <Collapse className={classes.transcript} in={transcriptOn}>
+                  <Typography ref={transcriptRef} tabIndex="-1">
+                    {transcript}
+                  </Typography>
+                </Collapse>
+                <Button variant="contained" onClick={handleTranscript}>
+                  {transcriptOn ? 'Hide Transcript' : 'Show Transcript'}
+                </Button>
+              </>
+            )}
+          </Grid>
+        )}
+        <Grid item xs={12} lg={videoURL || img ? 6 : 12}>
+          {children}
+        </Grid>
       </Grid>
-    </Card>
+    </Grid>
   )
 }

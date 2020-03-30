@@ -6,7 +6,7 @@ var theme = createMuiTheme({
     primary: {
       light: '#fefefe',
       main: '#222',
-      dark: '#222',
+      dark: '#000',
       contrastText: '#fefefe',
     },
     secondary: {
@@ -15,6 +15,7 @@ var theme = createMuiTheme({
       dark: '#0030b3',
       contrastText: '#fefefe',
     },
+    divider: 'rgba(254, 254, 254, 1)',
     components: {
       dark: {
         bgColor: '#222',
@@ -27,6 +28,12 @@ var theme = createMuiTheme({
         textColor: '#222',
         focusColor: '#f00',
         linkColor: '#04f',
+      },
+      blue: {
+        bgColor: '#04f',
+        textColor: '#fefefe',
+        focusColor: '#f00',
+        linkColor: '#ffec00',
       },
     },
   },
