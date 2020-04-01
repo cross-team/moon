@@ -30,60 +30,65 @@ export default function Section({
   }
 
   return (
-    <Grid
-      className={classes.root}
-      container
-      direction="column"
-      alignItems="center"
-      wrap="nowrap"
-      justify="center"
-      aria-label={bgImg && bgImgAlt}
-    >
-      <a href="#skipToMain" data-testid="skipLink" className={classes.skipLink}>
-        <Typography>Skip to Navigation</Typography>
-      </a>
-      <Typography className={classes.heading} variant="h1">
-        {heading}
-      </Typography>
-      <Grid container justify="center" item spacing={8}>
-        {(videoURL || img) && (
-          <Grid
-            item
-            xs={12}
-            lg={6}
-            container
-            direction="column"
-            alignItems="center"
-            justify="center"
-          >
-            {img && <img src={img} alt={imgAlt} />}
-            {videoURL && (
-              <>
-                <div className={classes.playerContainer}>
-                  <ReactPlayer
-                    className={classes.player}
-                    url={videoURL}
-                    controls
-                    width="100%"
-                    height="100%"
-                  />
-                </div>
-                <Collapse className={classes.transcript} in={transcriptOn}>
-                  <Typography ref={transcriptRef} tabIndex="-1">
-                    {transcript}
-                  </Typography>
-                </Collapse>
-                <Button variant="contained" onClick={handleTranscript}>
-                  {transcriptOn ? 'Hide Transcript' : 'Show Transcript'}
-                </Button>
-              </>
-            )}
+    <div className={classes.root} aria-label={bgImg && bgImgAlt}>
+      <Grid
+        className={classes.content}
+        container
+        direction="column"
+        alignItems="center"
+        wrap="nowrap"
+        justify="center"
+      >
+        <a
+          href="#skipToMain"
+          data-testid="skipLink"
+          className={classes.skipLink}
+        >
+          <Typography>Skip to Navigation</Typography>
+        </a>
+        <Typography className={classes.heading} variant="h1">
+          {heading}
+        </Typography>
+        <Grid container justify="center" item spacing={8}>
+          {(videoURL || img) && (
+            <Grid
+              item
+              xs={12}
+              lg={6}
+              container
+              direction="column"
+              alignItems="center"
+              justify="center"
+            >
+              {img && <img src={img} alt={imgAlt} />}
+              {videoURL && (
+                <>
+                  <div className={classes.playerContainer}>
+                    <ReactPlayer
+                      className={classes.player}
+                      url={videoURL}
+                      controls
+                      width="100%"
+                      height="100%"
+                    />
+                  </div>
+                  <Collapse className={classes.transcript} in={transcriptOn}>
+                    <Typography ref={transcriptRef} tabIndex="-1">
+                      {transcript}
+                    </Typography>
+                  </Collapse>
+                  <Button variant="contained" onClick={handleTranscript}>
+                    {transcriptOn ? 'Hide Transcript' : 'Show Transcript'}
+                  </Button>
+                </>
+              )}
+            </Grid>
+          )}
+          <Grid item xs={12} lg={videoURL || img ? 6 : 12}>
+            {children}
           </Grid>
-        )}
-        <Grid item xs={12} lg={videoURL || img ? 6 : 12}>
-          {children}
         </Grid>
       </Grid>
-    </Grid>
+    </div>
   )
 }

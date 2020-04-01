@@ -5,11 +5,8 @@ var useStyles = makeStyles(theme => ({
   root: props => {
     let styles = {
       // minHeight: '93vh',
-      padding: theme.spacing(16),
       width: '100%',
       textAlign: 'center',
-      paddingLeft: theme.spacing(8),
-      paddingRight: theme.spacing(8),
       borderRadius: '0px',
       color: theme.palette.components[props.color].textColor,
       backgroundColor: theme.palette.components[props.color].bgColor,
@@ -28,6 +25,12 @@ var useStyles = makeStyles(theme => ({
       }
     }
     return styles
+  },
+  content: {
+    width: '84%',
+    margin: 'auto',
+    paddingTop: theme.spacing(12),
+    paddingBottom: theme.spacing(12),
   },
   skipLink: props => ({
     alignSelf: 'flex-end',
