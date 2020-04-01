@@ -4,6 +4,7 @@ import { Helmet } from 'react-helmet'
 import { makeStyles } from '@material-ui/core/styles'
 
 import Header from '../header/header'
+import Footer from '../footer/footer'
 import Theme from '../theme/theme'
 
 import './layout.css'
@@ -40,6 +41,7 @@ export default function Layout({ children, title }) {
       <main className={classes.main} ref={mainContent} tabIndex="-1">
         {children}
       </main>
+      <Footer />
     </Theme>
   )
 }

@@ -7,16 +7,26 @@ import Section from '../components/section/section'
 
 export var IMAGES_QUERY = graphql`
   query {
-    allFile(filter: { sourceInstanceName: { eq: "images" } }) {
-      edges {
-        node {
-          childImageSharp {
-            fluid {
-              originalName
-              originalImg
-              src
-              srcSet
-            }
+    mountain: allFile(filter: { name: { eq: "mountain" } }) {
+      nodes {
+        childImageSharp {
+          fluid {
+            originalName
+            originalImg
+            src
+            srcSet
+          }
+        }
+      }
+    }
+    tools: allFile(filter: { name: { eq: "tools" } }) {
+      nodes {
+        childImageSharp {
+          fluid {
+            originalName
+            originalImg
+            src
+            srcSet
           }
         }
       }
@@ -25,21 +35,23 @@ export var IMAGES_QUERY = graphql`
 `
 
 export default function Index({ data }) {
-  var images = data.allFile.edges.map(edge => {
-    console.log(edge)
-    let srcArr = edge.node.childImageSharp.fluid.srcSet.split(',\n')
-    let srcObj = srcArr.reduce(function reducer(srcSet, src) {
+  var images = Object.keys(data).reduce(function dataReducer(imageSet, key) {
+    let image = data[key].nodes[0].childImageSharp.fluid
+    let srcArr = image.srcSet.split(',\n')
+    let srcObj = srcArr.reduce(function srcReducer(srcSet, src) {
       let splitSrc = src.split(' ')
       return { ...srcSet, [splitSrc[1]]: splitSrc[0] }
     }, {})
-    let image = {
-      name: edge.node.childImageSharp.fluid.originalName,
-      originalImg: edge.node.childImageSharp.fluid.originalImg,
-      src: edge.node.childImageSharp.fluid.src,
+    let result = {
+      name: image.originalName,
+      originalImg: image.originalImg,
+      src: image.src,
       srcSet: srcObj,
     }
-    return image
-  })
+    return { ...imageSet, [key]: result }
+  }, {})
+
+  console.log(images)
 
   var lipsum = (
     <>
@@ -55,14 +67,6 @@ export default function Index({ data }) {
         eleifend. Mauris gravida est diam, a laoreet eros vestibulum ac.
         Vestibulum ut cursus dui. Quisque eget consequat tellus. Duis orci
         libero, euismod sit amet justo nec, ultrices aliquet quam.
-      </p>
-      <p>
-        Phasellus non feugiat lorem, id tempus nulla. Maecenas molestie magna
-        enim, a gravida mauris ultricies porttitor. Phasellus tincidunt egestas
-        tortor at congue. Sed suscipit lacus quis porta egestas. Donec ac
-        consequat velit. Integer viverra turpis eget malesuada vulputate.
-        Integer pellentesque suscipit arcu, sit amet scelerisque nibh venenatis
-        in.
       </p>
       <p>
         Fusce blandit nisi justo, eu varius tortor feugiat ac. Praesent sit amet
@@ -81,11 +85,21 @@ export default function Index({ data }) {
     <Layout title="cross.team - Home">
       <Grid container direction="column">
         <Grid item>
-          <Section heading="Dark">
-            <Typography>{lipsum}</Typography>
+          <Section heading="The best products start with cross.team">
+            <Typography>
+              Create, prototype, collaborate and turn your ideas into incredible
+              products with the definitive platform for digital design.
+            </Typography>
           </Section>
-          <Section heading="Light" color="light">
-            <Typography>{lipsum}</Typography>
+          <Section
+            heading="A native Mac app, built for designers like you"
+            color="light"
+          >
+            <Typography>
+              Create your best work with essential tools that speed up your
+              workflow and game-changing features that take your designs to the
+              next level.
+            </Typography>
           </Section>
           <Section heading="Blue" color="blue">
             <Typography>{lipsum}</Typography>
@@ -93,14 +107,14 @@ export default function Index({ data }) {
           <Section
             heading="Light with Image"
             color="light"
-            img={images[1].srcSet['400w']}
+            img={images.tools.srcSet['400w']}
           >
             <Typography>{lipsum}</Typography>
           </Section>
           <Section
             heading="Blue with Background Image"
             color="blue"
-            bgImg={images[0].originalImg}
+            bgImg={images.mountain.originalImg}
           >
             <Typography>{lipsum}</Typography>
           </Section>
@@ -112,7 +126,7 @@ export default function Index({ data }) {
           </Section>
           <Section
             heading="Video & Background Image"
-            bgImg={images[0].originalImg}
+            bgImg={images.mountain.originalImg}
             videoURL="https://www.youtube.com/watch?v=20SHvU2PKsM"
           >
             <Typography>{lipsum}</Typography>

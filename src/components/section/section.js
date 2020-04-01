@@ -36,12 +36,15 @@ export default function Section({
       direction="column"
       alignItems="center"
       wrap="nowrap"
+      justify="center"
       aria-label={bgImg && bgImgAlt}
     >
       <a href="#skipToMain" data-testid="skipLink" className={classes.skipLink}>
         <Typography>Skip to Navigation</Typography>
       </a>
-      <Typography variant="h1">{heading}</Typography>
+      <Typography className={classes.heading} variant="h1">
+        {heading}
+      </Typography>
       <Grid container justify="center" item spacing={8}>
         {(videoURL || img) && (
           <Grid

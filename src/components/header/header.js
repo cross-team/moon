@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
@@ -18,6 +18,7 @@ var useStyles = makeStyles(theme => ({
     width: '80px',
   },
   divider: {
+    width: '2px',
     height: '60px',
     alignSelf: 'center',
   },
@@ -48,7 +49,7 @@ export default function Header({ mainContent }) {
   }
 
   return (
-    <AppBar position="sticky">
+    <AppBar position="static">
       <Toolbar className={classes.toolbar}>
         <NavLink>
           <img className={classes.logo} src={Logo} alt="cross.team logo" />
@@ -80,6 +81,9 @@ export default function Header({ mainContent }) {
         </NavLink>
         <NavLink>
           <Typography>Resources</Typography>
+        </NavLink>
+        <NavLink>
+          <Typography>Contact Us</Typography>
         </NavLink>
       </Toolbar>
     </AppBar>
