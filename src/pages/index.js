@@ -4,6 +4,7 @@ import Grid from '@material-ui/core/Grid'
 import { graphql } from 'gatsby'
 import Layout from '../components/layout/layout'
 import Section from '../components/section/section'
+import LinkCard from '../components/linkCard/linkCard'
 
 export var IMAGES_QUERY = graphql`
   query {
@@ -101,8 +102,53 @@ export default function Index({ data }) {
               next level.
             </Typography>
           </Section>
-          <Section heading="Blue" color="blue">
-            <Typography>{lipsum}</Typography>
+          <Section heading="Blog Posts or Case Studies" color="blue">
+            <Grid container alignItems="center" justify="center" spacing={4}>
+              <Grid item xs={4}>
+                <LinkCard
+                  image={images.tools.src}
+                  tags={['Beta']}
+                  title="Cloud Inspector"
+                  content={
+                    <p>
+                      Move from design to development in just a few clicks.
+                      Inspect elements, copy attributes and measure between
+                      layers, right in the browser. Developer Handoff is here —
+                      and for developers, it's free.
+                    </p>
+                  }
+                />
+              </Grid>
+              <Grid item xs={4}>
+                <LinkCard
+                  image={images.tools.src}
+                  tags={['New']}
+                  title="Smart Layout gets smarter"
+                  content={
+                    <p>
+                      Create responsive, reusable components that automatically
+                      resize to fit their content. And now — get even more
+                      control with the option to set minimum dimensions for
+                      Smart Layout Symbols.
+                    </p>
+                  }
+                />
+              </Grid>
+              <Grid item xs={4}>
+                <LinkCard
+                  image={images.tools.src}
+                  tags={['Free Trial', 'services']}
+                  title="Try out Sketch for Teams"
+                  content={
+                    <p>
+                      Share prototypes, provide feedback and collaborate in a
+                      single shared workspace. Get powerful team management, Mac
+                      App access unlimited storage for a single, simple price.
+                    </p>
+                  }
+                />
+              </Grid>
+            </Grid>
           </Section>
           <Section
             heading="Light with Image"

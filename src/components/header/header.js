@@ -27,10 +27,6 @@ var useStyles = makeStyles(theme => ({
 export default function Header({ mainContent }) {
   var classes = useStyles()
 
-  function handleChange(event, newValue) {
-    setTab(newValue)
-  }
-
   function getFirstFocusableChild(children) {
     for (let child of children) {
       if (child.tabIndex == 0) return child
