@@ -51,7 +51,7 @@ export default function LinkCard({
             ))}
           </Grid>
         )}
-        <Typography variant="h3">{title}</Typography>
+        <Typography variant="h2">{title}</Typography>
         <Typography>{content}</Typography>
       </CardContent>
     </Card>

@@ -78,7 +78,7 @@ export default function Header({ mainContent }) {
         <NavLink>
           <Typography>Resources</Typography>
         </NavLink>
-        <NavLink>
+        <NavLink to="/contact">
           <Typography>Contact Us</Typography>
         </NavLink>
       </Toolbar>

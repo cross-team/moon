@@ -1,8 +1,8 @@
 import React, { useRef } from 'react'
 import ReactDOM from 'react-dom'
-import { Helmet } from 'react-helmet'
 import { makeStyles } from '@material-ui/core/styles'
 
+import SEO from '../SEO/SEO'
 import Header from '../header/header'
 import Footer from '../footer/footer'
 import Theme from '../theme/theme'
@@ -28,15 +28,7 @@ export default function Layout({ children, title }) {
 
   return (
     <Theme>
-      <Helmet>
-        <html lang="en" />
-        <meta charSet="utf-8" />
-        <title>{title}</title>
-        <link
-          href="https://fonts.googleapis.com/css?family=Miriam+Libre&display=swap"
-          rel="stylesheet"
-        ></link>
-      </Helmet>
+      <SEO title={title} />
       <Header mainContent={mainContent} />
       <main className={classes.main} ref={mainContent} tabIndex="-1">
         {children}

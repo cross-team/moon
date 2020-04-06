@@ -1,4 +1,12 @@
 module.exports = {
+  siteMetadata: {
+    title: 'Home',
+    titleTemplate: '%s - cross.team',
+    description: '',
+    url: 'https://serene-williams-fb31b8.netlify.com/',
+    image: '',
+    twitterUsername: '',
+  },
   plugins: [
     {
       resolve: 'gatsby-plugin-react-axe',
