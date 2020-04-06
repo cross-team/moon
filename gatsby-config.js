@@ -40,7 +40,32 @@ module.exports = {
         perPage: 100,
       },
     },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `images`,
+        path: `${__dirname}/src/assets/images/`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `svgs`,
+        path: `${__dirname}/src/assets/svgs/`,
+      },
+    },
+    {
+      resolve: `gatsby-plugin-sharp`,
+      options: {
+        useMozJpeg: false,
+        stripMetadata: true,
+        defaultQuality: 75,
+      },
+    },
+
+    'gatsby-transformer-sharp',
     'gatsby-plugin-material-ui',
     'gatsby-plugin-react-helmet',
+    'gatsby-plugin-react-axe',
   ],
 }

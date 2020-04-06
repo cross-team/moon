@@ -4,20 +4,44 @@ import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles'
 var theme = createMuiTheme({
   palette: {
     primary: {
-      light: '#424242',
+      light: '#fefefe',
       main: '#222',
       dark: '#000',
-      contrastText: '#fff',
+      contrastText: '#fefefe',
     },
     secondary: {
-      light: '#8bbcf4',
-      main: '#1673DF',
-      dark: '#1054a2',
-      contrastText: '#fff',
+      light: '#80a2ff',
+      main: '#04f',
+      dark: '#0030b3',
+      contrastText: '#fefefe',
+    },
+    divider: 'rgba(254, 254, 254, .5)',
+    components: {
+      dark: {
+        bgColor: '#222',
+        textColor: '#fefefe',
+        focusColor: '#04f',
+        linkColor: '#ffec00',
+      },
+      light: {
+        bgColor: '#fefefe',
+        textColor: '#222',
+        focusColor: '#f00',
+        linkColor: '#04f',
+      },
+      blue: {
+        bgColor: '#04f',
+        textColor: '#fefefe',
+        focusColor: '#f00',
+        linkColor: '#ffec00',
+      },
     },
   },
   typography: {
     fontFamily: "'Miriam Libre', 'Helvetica', 'Arial', sans-serif",
+    body1: {
+      fontSize: '1.25rem',
+    },
   },
   shadows: [
     'none',
