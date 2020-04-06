@@ -83,7 +83,7 @@ export default function Index({ data }) {
   )
 
   return (
-    <Layout title="cross.team - Home">
+    <Layout title="Home">
       <Grid container direction="column">
         <Grid item>
           <Section heading="The best products start with cross.team">
@@ -104,7 +104,7 @@ export default function Index({ data }) {
           </Section>
           <Section heading="Blog Posts or Case Studies" color="blue">
             <Grid container alignItems="center" justify="center" spacing={4}>
-              <Grid item xs={4}>
+              <Grid item xs={12} md={4}>
                 <LinkCard
                   image={images.tools.src}
                   tags={['Beta']}
@@ -119,7 +119,7 @@ export default function Index({ data }) {
                   }
                 />
               </Grid>
-              <Grid item xs={4}>
+              <Grid item xs={12} md={4}>
                 <LinkCard
                   image={images.tools.src}
                   tags={['New']}
@@ -134,7 +134,7 @@ export default function Index({ data }) {
                   }
                 />
               </Grid>
-              <Grid item xs={4}>
+              <Grid item xs={12} md={4}>
                 <LinkCard
                   image={images.tools.src}
                   tags={['Free Trial', 'services']}
