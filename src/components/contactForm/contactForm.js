@@ -63,6 +63,7 @@ export default function ContactForm() {
           <TextField
             className={classes.textfield}
             required
+            id="first-name"
             label="First Name"
             variant="filled"
             handleChange={handleChange}
@@ -72,6 +73,7 @@ export default function ContactForm() {
           <TextField
             className={classes.textfield}
             required
+            id="last-name"
             label="Last Name"
             variant="filled"
             handleChange={handleChange}
@@ -81,6 +83,7 @@ export default function ContactForm() {
           <TextField
             className={classes.textfield}
             required
+            id="email"
             label="Email"
             variant="filled"
             handleChange={handleChange}
@@ -89,6 +92,7 @@ export default function ContactForm() {
         <Grid item>
           <TextField
             className={classes.textfield}
+            id="company"
             label="Company"
             variant="filled"
             handleChange={handleChange}
