@@ -70,7 +70,12 @@ module.exports = {
         defaultQuality: 75,
       },
     },
-
+    {
+      resolve: `gatsby-source-medium`,
+      options: {
+        username: `cross-team`,
+      },
+    },
     'gatsby-transformer-sharp',
     'gatsby-plugin-material-ui',
     'gatsby-plugin-react-helmet',
