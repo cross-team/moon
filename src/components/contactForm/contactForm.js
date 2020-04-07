@@ -44,7 +44,10 @@ export default function ContactForm() {
         ...state,
       }),
     })
-      .then(() => navigate('/contact'))
+      .then(() => {
+        console.log(state)
+        navigate('/')
+      })
       .catch(error => alert(error))
   }
 
@@ -63,6 +66,7 @@ export default function ContactForm() {
           <TextField
             className={classes.textfield}
             required
+            name="first-name"
             id="first-name"
             label="First Name"
             variant="filled"
@@ -73,6 +77,7 @@ export default function ContactForm() {
           <TextField
             className={classes.textfield}
             required
+            name="last-name"
             id="last-name"
             label="Last Name"
             variant="filled"
@@ -83,6 +88,7 @@ export default function ContactForm() {
           <TextField
             className={classes.textfield}
             required
+            name="email"
             id="email"
             label="Email"
             variant="filled"
@@ -92,6 +98,7 @@ export default function ContactForm() {
         <Grid item>
           <TextField
             className={classes.textfield}
+            name="company"
             id="company"
             label="Company"
             variant="filled"
