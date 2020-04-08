@@ -26,10 +26,15 @@ function encode(data) {
 
 export default function ContactForm() {
   var classes = useStyles()
-
-  var [state, setState] = React.useState({})
+  var [state, setState] = React.useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    company: '',
+  })
 
   function handleChange(e) {
+    console.log(e.target)
     setState({ ...state, [e.target.name]: e.target.value })
   }
 
@@ -66,22 +71,24 @@ export default function ContactForm() {
           <TextField
             className={classes.textfield}
             required
-            name="first-name"
-            id="first-name"
+            name="firstName"
+            value={state.firstName}
+            id="firstName"
             label="First Name"
             variant="filled"
-            handleChange={handleChange}
+            onChange={handleChange}
           />
         </Grid>
         <Grid item>
           <TextField
             className={classes.textfield}
             required
-            name="last-name"
-            id="last-name"
+            name="lastName"
+            value={state.lastName}
+            id="lastName"
             label="Last Name"
             variant="filled"
-            handleChange={handleChange}
+            onChange={handleChange}
           />
         </Grid>
         <Grid item>
@@ -89,20 +96,22 @@ export default function ContactForm() {
             className={classes.textfield}
             required
             name="email"
+            value={state.email}
             id="email"
             label="Email"
             variant="filled"
-            handleChange={handleChange}
+            onChange={handleChange}
           />
         </Grid>
         <Grid item>
           <TextField
             className={classes.textfield}
             name="company"
+            value={state.company}
             id="company"
             label="Company"
             variant="filled"
-            handleChange={handleChange}
+            onChange={handleChange}
           />
         </Grid>
         <Grid item>
