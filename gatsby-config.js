@@ -5,7 +5,7 @@ module.exports = {
     description: '',
     url: 'https://serene-williams-fb31b8.netlify.com/',
     image: '',
-    twitterUsername: '',
+    twitterUsername: '@xcrossteam',
   },
   plugins: [
     {
@@ -81,5 +81,6 @@ module.exports = {
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-react-axe',
     `gatsby-plugin-offline`,
+    `gatsby-plugin-resolve-src`,
   ],
 }
