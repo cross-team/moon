@@ -34,7 +34,6 @@ export default function ContactForm() {
   })
 
   function handleChange(e) {
-    console.log(e.target)
     setState({ ...state, [e.target.name]: e.target.value })
   }
 

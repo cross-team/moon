@@ -2,10 +2,10 @@ import React, { useRef } from 'react'
 import ReactDOM from 'react-dom'
 import { makeStyles } from '@material-ui/core/styles'
 
-import SEO from '../SEO/SEO'
-import Header from '../header/header'
-import Footer from '../footer/footer'
-import Theme from '../theme/theme'
+import SEO from 'components/SEO/SEO'
+import Header from 'components/header/header'
+import Footer from 'components/footer/footer'
+import Theme from 'components/theme/theme'
 
 import './layout.css'
 

@@ -2,9 +2,9 @@ import React from 'react'
 import Typography from '@material-ui/core/Typography'
 import Grid from '@material-ui/core/Grid'
 import { graphql } from 'gatsby'
-import Layout from '../components/layout/layout'
-import Section from '../components/section/section'
-import LinkCard from '../components/linkCard/linkCard'
+import Layout from 'components/layout/layout'
+import Section from 'components/section/section'
+import LinkCard from 'components/linkCard/linkCard'
 
 export var IMAGES_QUERY = graphql`
   query {
