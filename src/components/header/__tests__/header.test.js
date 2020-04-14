@@ -3,8 +3,8 @@ import { render, fireEvent } from '@testing-library/react'
 import { toBeInTheDocument } from '@testing-library/jest-dom'
 
 import Header from '../header'
-import MockLayout1 from '../mockLayout1'
-import MockLayout2 from '../mockLayout2'
+import MockLayout1 from '../mock-layout1'
+import MockLayout2 from '../mock-layout2'
 
 describe('Header', () => {
   it('renders the skip link', () => {

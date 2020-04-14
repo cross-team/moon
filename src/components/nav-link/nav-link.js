@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'gatsby'
 import { makeStyles } from '@material-ui/core/styles'
 import Grid from '@material-ui/core/Grid'
+import Typography from '@material-ui/core/Typography'
 
 var useStyles = makeStyles(theme => ({
   root: {
@@ -20,8 +21,8 @@ var useStyles = makeStyles(theme => ({
 }))
 
 export default function NavLink({
-  to = '/',
-  ariaLabel,
+  label = '',
+  to = '#',
   onClick,
   id,
   children,
@@ -32,10 +33,12 @@ export default function NavLink({
     <Grid item className={classes.root} onClick={onClick && onClick}>
       {to.charAt(0) === '/' ? (
         <Link className={classes.link} to={to} id={id && id}>
+          {label && <Typography>{label}</Typography>}
           {children}
         </Link>
       ) : (
         <a className={classes.link} href={to} id={id && id}>
+          {label && <Typography>{label}</Typography>}
           {children}
         </a>
       )}

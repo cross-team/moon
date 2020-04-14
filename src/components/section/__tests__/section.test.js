@@ -3,7 +3,7 @@ import { render, fireEvent } from '@testing-library/react'
 import { toBeInTheDocument } from '@testing-library/jest-dom'
 
 import Section from 'components/section/section'
-import Theme from 'components/theme/theme'
+import Theme from 'providers/theme'
 
 describe('Section', () => {
   it('renders the skip link', () => {

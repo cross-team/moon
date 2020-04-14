@@ -38,6 +38,7 @@ export default function ContactForm() {
   }
 
   function handleSubmit(e) {
+    console.log('handleSubmit called')
     e.preventDefault()
     let form = e.target
     fetch('/', {
@@ -94,6 +95,7 @@ export default function ContactForm() {
           <TextField
             className={classes.textfield}
             required
+            type="email"
             name="email"
             value={state.email}
             id="email"

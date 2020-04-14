@@ -4,7 +4,7 @@ import Grid from '@material-ui/core/Grid'
 import { graphql } from 'gatsby'
 import Layout from 'components/layout/layout'
 import Section from 'components/section/section'
-import LinkCard from 'components/linkCard/linkCard'
+import LinkCard from 'components/link-card/link-card'
 
 export var IMAGES_QUERY = graphql`
   query {

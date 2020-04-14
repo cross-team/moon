@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
@@ -7,8 +7,9 @@ import Divider from '@material-ui/core/Divider'
 
 import './header.css'
 
+import ContactContext from 'providers/contact-context'
 import Logo from 'assets/svgs/cross-team-light.svg'
-import NavLink from 'components/navLink/navLink'
+import NavLink from 'components/nav-link/nav-link'
 
 var useStyles = makeStyles(theme => ({
   toolbar: {
@@ -28,6 +29,7 @@ var useStyles = makeStyles(theme => ({
 
 export default function Header({ mainContent }) {
   var classes = useStyles()
+  var contactContext = useContext(ContactContext)
 
   function getFirstFocusableChild(children) {
     for (let child of children) {
@@ -49,7 +51,7 @@ export default function Header({ mainContent }) {
   return (
     <AppBar position="static">
       <Toolbar className={classes.toolbar}>
-        <NavLink>
+        <NavLink to="/">
           <img className={classes.logo} src={Logo} alt="cross.team logo" />
         </NavLink>
 
@@ -60,7 +62,7 @@ export default function Header({ mainContent }) {
           flexItem
         />
 
-        <NavLink to="#" onClick={skipToMain} id="skipToMain">
+        <NavLink onClick={skipToMain} id="skipToMain">
           <Typography>Skip to Main Content</Typography>
         </NavLink>
 
@@ -71,18 +73,13 @@ export default function Header({ mainContent }) {
           flexItem
         />
 
-        <NavLink>
-          <Typography>About Us</Typography>
-        </NavLink>
-        <NavLink>
-          <Typography>Blog</Typography>
-        </NavLink>
-        <NavLink>
-          <Typography>Resources</Typography>
-        </NavLink>
-        <NavLink to="/contact">
-          <Typography>Contact Us</Typography>
-        </NavLink>
+        <NavLink label="About Us" />
+        <NavLink label="Blog" />
+        <NavLink label="Resources" />
+        <NavLink
+          label="Contact Us"
+          onClick={() => contactContext.setOpen(true)}
+        />
       </Toolbar>
     </AppBar>
   )

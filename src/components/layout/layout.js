@@ -5,7 +5,10 @@ import { makeStyles } from '@material-ui/core/styles'
 import SEO from 'components/SEO/SEO'
 import Header from 'components/header/header'
 import Footer from 'components/footer/footer'
-import Theme from 'components/theme/theme'
+import ContactModal from 'components/contact-modal/contact-modal'
+
+import Theme from 'providers/theme'
+import { ContactController } from 'providers/contact-context'
 
 import './layout.css'
 
@@ -29,10 +32,13 @@ export default function Layout({ children, title }) {
   return (
     <Theme>
       <SEO title={title} />
-      <Header mainContent={mainContent} />
-      <main className={classes.main} ref={mainContent} tabIndex="-1">
-        {children}
-      </main>
+      <ContactController>
+        <Header mainContent={mainContent} />
+        <main className={classes.main} ref={mainContent} tabIndex="-1">
+          <ContactModal />
+          {children}
+        </main>
+      </ContactController>
       <Footer />
     </Theme>
   )
