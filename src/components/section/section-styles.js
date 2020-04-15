@@ -1,5 +1,5 @@
-import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
+import { hexToRgbA } from 'utils/functions'
 
 var useStyles = makeStyles(theme => ({
   root: props => {
@@ -61,18 +61,5 @@ var useStyles = makeStyles(theme => ({
     textAlign: 'left',
   },
 }))
-
-function hexToRgbA(hex, opacity = '1') {
-  var c
-  if (/^#([A-Fa-f0-9]{3}){1,2}$/.test(hex)) {
-    c = hex.substring(1).split('')
-    if (c.length == 3) {
-      c = [c[0], c[0], c[1], c[1], c[2], c[2]]
-    }
-    c = '0x' + c.join('')
-    return `rgba(${(c >> 16) & 255}, ${(c >> 8) & 255}, ${c & 255}, ${opacity})`
-  }
-  throw new Error('Bad Hex')
-}
 
 export default useStyles

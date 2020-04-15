@@ -5,17 +5,6 @@ import { toBeInTheDocument } from '@testing-library/jest-dom'
 import Layout from '../layout'
 import SelectInput from '@material-ui/core/Select/SelectInput'
 
-var timeout = 1
-
-function sleep(milliseconds) {
-  var start = new Date().getTime()
-  for (var i = 0; i < 1e7; i++) {
-    if (new Date().getTime() - start > milliseconds) {
-      break
-    }
-  }
-}
-
 describe('Layout', () => {
   it('skip to main sends focus to main content container when main content has no focusble children', () => {
     let { getByText, getByTestId } = render(<Layout />)
@@ -23,7 +12,6 @@ describe('Layout', () => {
     let mainContent = getByTestId('mainContent')
 
     fireEvent.click(skipLink)
-    sleep(timeout)
 
     expect(mainContent).toHaveFocus()
   })
@@ -39,7 +27,6 @@ describe('Layout', () => {
     let firstFocusableElement = getByTestId('firstFocusableElement')
 
     fireEvent.click(skipLink)
-    sleep(timeout)
 
     expect(firstFocusableElement).toHaveFocus()
   })
@@ -48,13 +35,11 @@ describe('Layout', () => {
     let modalButton = getAllByText('Contact Us')
 
     fireEvent.click(modalButton[0])
-    sleep(timeout)
 
     let field = getByLabelText('first name', { exact: false })
     expect(field).toBeInTheDocument()
 
     fireEvent.keyPress(field, { key: 'Escape', code: 'Escape' })
-    sleep(timeout)
 
     // expect(field).not.toBeInTheDocument()
   })
