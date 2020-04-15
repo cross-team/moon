@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/core/styles'
 var useStyles = makeStyles(theme => ({
   root: props => {
     let styles = {
-      // minHeight: '93vh',
+      height: props.height,
       width: '100%',
       textAlign: 'center',
       borderRadius: '0px',
@@ -56,6 +56,9 @@ var useStyles = makeStyles(theme => ({
   heading: {
     textAlign: 'center',
     margin: theme.spacing(4),
+  },
+  children: {
+    textAlign: 'left',
   },
 }))
 

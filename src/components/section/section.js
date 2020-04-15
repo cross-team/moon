@@ -16,8 +16,9 @@ export default function Section({
   imgAlt = 'Image Needs Proper Alt Text',
   videoURL = '',
   transcript = 'Video Needs Proper Transcript',
+  height,
 }) {
-  var classes = useStyles({ color, bgImg })
+  var classes = useStyles({ color, bgImg, height })
   var [transcriptOn, setTranscriptOn] = useState(false)
   var transcriptRef = useRef(null)
 
@@ -84,7 +85,12 @@ export default function Section({
               )}
             </Grid>
           )}
-          <Grid item xs={12} lg={videoURL || img ? 6 : 12}>
+          <Grid
+            className={classes.children}
+            item
+            xs={12}
+            lg={videoURL || img ? 6 : 12}
+          >
             {children}
           </Grid>
         </Grid>
