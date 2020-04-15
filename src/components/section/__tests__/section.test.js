@@ -16,17 +16,17 @@ describe('Section', () => {
 
     expect(skipLink).toBeInTheDocument()
   })
-  it('has a skip link that sends focus back to the skip to main link in the header', () => {
+  it('has a skip link that sends focus back to the skip to main link in the header', async () => {
     let { getByText } = render(
       <Theme>
-        <a id>Skip to Main Content</a>
+        <a>Skip to Main Content</a>
         <Section />
       </Theme>
     )
     let skipToMain = getByText('Skip to Main Content')
-    let skipLink = getByText('Skip to Navigation')
+    let skipToNav = getByText('Skip to Navigation')
 
-    fireEvent.click(skipLink)
+    fireEvent.click(skipToNav)
 
     setTimeout(() => {
       expect(skipToMain).toHaveFocus()

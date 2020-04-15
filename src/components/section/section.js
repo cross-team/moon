@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react'
+import withWidth from '@material-ui/core/withWidth'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button'
@@ -6,7 +7,9 @@ import Collapse from '@material-ui/core/Collapse'
 import ReactPlayer from 'react-player'
 import useStyles from './section-styles'
 
-export default function Section({
+import './section.css'
+
+function Section({
   children,
   color = 'dark',
   heading = '',
@@ -17,6 +20,7 @@ export default function Section({
   videoURL = '',
   transcript = 'Video Needs Proper Transcript',
   height,
+  width,
 }) {
   var classes = useStyles({ color, bgImg, height })
   var [transcriptOn, setTranscriptOn] = useState(false)
@@ -47,7 +51,11 @@ export default function Section({
         >
           <Typography>Skip to Navigation</Typography>
         </a>
-        <Typography className={classes.heading} variant="h1">
+        <Typography
+          className={classes.heading}
+          variant={width === 'xs' ? 'h2' : 'h1'}
+          component="h1"
+        >
           {heading}
         </Typography>
         <Grid container justify="center" item spacing={8}>
@@ -86,7 +94,7 @@ export default function Section({
             </Grid>
           )}
           <Grid
-            className={classes.children}
+            className={`${classes.children} section-children`}
             item
             xs={12}
             lg={videoURL || img ? 6 : 12}
@@ -98,3 +106,5 @@ export default function Section({
     </div>
   )
 }
+
+export default withWidth()(Section)

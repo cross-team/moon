@@ -1,5 +1,6 @@
 import React, { useContext } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
+import withWidth from '@material-ui/core/withWidth'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
@@ -7,16 +8,18 @@ import Divider from '@material-ui/core/Divider'
 
 import './header.css'
 
+import { getFirstFocusableChild } from 'utils/functions'
 import ContactContext from 'providers/contact-context'
 import Logo from 'assets/svgs/cross-team-light.svg'
 import NavLink from 'components/nav-link/nav-link'
 
 var useStyles = makeStyles(theme => ({
-  toolbar: {
+  toolbar: props => ({
     display: 'flex',
-    justifyContent: 'flex-start',
+    justifyContent:
+      props.width === 'xs' || props.width === 'sm' ? 'center' : 'flex-start',
     height: '100%',
-  },
+  }),
   logo: {
     width: '80px',
   },
@@ -27,20 +30,9 @@ var useStyles = makeStyles(theme => ({
   },
 }))
 
-export default function Header({ mainContent }) {
-  var classes = useStyles()
+function Header({ mainContent, width }) {
+  var classes = useStyles({ width })
   var contactContext = useContext(ContactContext)
-
-  function getFirstFocusableChild(children) {
-    for (let child of children) {
-      if (child.tabIndex == 0) return child
-      if (child.children !== []) {
-        let result = getFirstFocusableChild(child.children)
-        if (result !== null) return result
-      }
-    }
-    return null
-  }
 
   function skipToMain() {
     let child = getFirstFocusableChild(mainContent.current.children)
@@ -72,15 +64,20 @@ export default function Header({ mainContent }) {
           variant="middle"
           flexItem
         />
-
-        <NavLink label="About Us" />
-        <NavLink label="Blog" />
-        <NavLink label="Resources" />
-        <NavLink
-          label="Contact Us"
-          onClick={() => contactContext.setOpen(true)}
-        />
+        {width === 'xs' || width === 'sm' ? null : (
+          <>
+            <NavLink label="About Us" />
+            <NavLink label="Blog" />
+            <NavLink label="Resources" />
+            <NavLink
+              label="Contact Us"
+              onClick={() => contactContext.setOpen(true)}
+            />
+          </>
+        )}
       </Toolbar>
     </AppBar>
   )
 }
+
+export default withWidth()(Header)
