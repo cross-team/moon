@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'gatsby'
 import { makeStyles } from '@material-ui/core/styles'
+import withWidth from '@material-ui/core/withWidth'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 
@@ -11,8 +12,11 @@ var useStyles = makeStyles(theme => ({
   container: {
     color: theme.palette.primary.contrastText,
     width: '72%',
-    paddingBottom: theme.spacing(8),
+    paddingBottom: theme.spacing(4),
     margin: 'auto',
+  },
+  linkGroup: {
+    marginBottom: theme.spacing(4),
   },
   heading: {
     fontSize: '1.25rem',
@@ -28,14 +32,29 @@ var useStyles = makeStyles(theme => ({
   },
 }))
 
-export default function Footer() {
+function Footer({ width }) {
   var classes = useStyles()
 
   return (
     <footer className={classes.root}>
-      <Grid className={classes.container} container justify="space-around">
-        <Grid item xs={3} container direction="column">
-          <Typography className={classes.heading} variant="overline">
+      <Grid
+        className={classes.container}
+        container
+        justify="space-around"
+        direction={width === 'xs' || width === 'sm' ? 'column' : 'row'}
+      >
+        <Grid
+          className={classes.linkGroup}
+          item
+          xs={3}
+          container
+          direction="column"
+        >
+          <Typography
+            className={classes.heading}
+            variant="overline"
+            noWrap={true}
+          >
             cross.team
           </Typography>
           <Link className={classes.link} to="/">
@@ -48,8 +67,18 @@ export default function Footer() {
             <Typography>Item 3</Typography>
           </Link>
         </Grid>
-        <Grid item xs={3} container direction="column">
-          <Typography className={classes.heading} variant="overline">
+        <Grid
+          className={classes.linkGroup}
+          item
+          xs={3}
+          container
+          direction="column"
+        >
+          <Typography
+            className={classes.heading}
+            variant="overline"
+            noWrap={true}
+          >
             Blog
           </Typography>
           <Link className={classes.link} to="/">
@@ -62,8 +91,18 @@ export default function Footer() {
             <Typography>Item 3</Typography>
           </Link>
         </Grid>
-        <Grid item xs={3} container direction="column">
-          <Typography className={classes.heading} variant="overline">
+        <Grid
+          className={classes.linkGroup}
+          item
+          xs={3}
+          container
+          direction="column"
+        >
+          <Typography
+            className={classes.heading}
+            variant="overline"
+            noWrap={true}
+          >
             Resources
           </Typography>
           <Link className={classes.link} to="/">
@@ -76,8 +115,18 @@ export default function Footer() {
             <Typography>Item 3</Typography>
           </Link>
         </Grid>
-        <Grid item xs={3} container direction="column">
-          <Typography className={classes.heading} variant="overline">
+        <Grid
+          className={classes.linkGroup}
+          item
+          xs={3}
+          container
+          direction="column"
+        >
+          <Typography
+            className={classes.heading}
+            variant="overline"
+            noWrap={true}
+          >
             Contact Us
           </Typography>
           <Link className={classes.link} to="/">
@@ -94,3 +143,5 @@ export default function Footer() {
     </footer>
   )
 }
+
+export default withWidth()(Footer)
