@@ -1,10 +1,13 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import withWidth from '@material-ui/core/withWidth'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 import Divider from '@material-ui/core/Divider'
+import Menu from '@material-ui/core/Menu'
+import MenuItem from '@material-ui/core/MenuItem'
+import MenuIcon from '@material-ui/icons/Menu'
 
 import './header.css'
 
@@ -33,11 +36,16 @@ var useStyles = makeStyles(theme => ({
 function Header({ mainContent, width }) {
   var classes = useStyles({ width })
   var contactContext = useContext(ContactContext)
+  var [anchorEl, setAnchorEl] = useState(null)
 
   function skipToMain() {
     let child = getFirstFocusableChild(mainContent.current.children)
     if (child === null) mainContent.current.focus()
     else child.focus()
+  }
+
+  function handleMenu(event) {
+    setAnchorEl(event.currentTarget)
   }
 
   return (
@@ -64,7 +72,32 @@ function Header({ mainContent, width }) {
           variant="middle"
           flexItem
         />
-        {width === 'xs' || width === 'sm' ? null : (
+        {width === 'xs' || width === 'sm' ? (
+          <>
+            <NavLink aria-controls="site-menu" onClick={handleMenu}>
+              <MenuIcon />
+            </NavLink>
+            <Menu
+              id="site-menu"
+              anchorEl={anchorEl}
+              keepMounted
+              open={Boolean(anchorEl)}
+              onClose={() => setAnchorEl(null)}
+            >
+              <MenuItem onClose={() => setAnchorEl(null)}>About Us</MenuItem>
+              <MenuItem onClose={() => setAnchorEl(null)}>Blog</MenuItem>
+              <MenuItem onClose={() => setAnchorEl(null)}>Resources</MenuItem>
+              <MenuItem
+                onClose={() => {
+                  setAnchorEl(null)
+                  contactContext.setOpen(true)
+                }}
+              >
+                Contact Us
+              </MenuItem>
+            </Menu>
+          </>
+        ) : (
           <>
             <NavLink label="About Us" />
             <NavLink label="Blog" />
