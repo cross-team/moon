@@ -84,11 +84,11 @@ function Header({ mainContent, width }) {
               open={Boolean(anchorEl)}
               onClose={() => setAnchorEl(null)}
             >
-              <MenuItem onClose={() => setAnchorEl(null)}>About Us</MenuItem>
-              <MenuItem onClose={() => setAnchorEl(null)}>Blog</MenuItem>
-              <MenuItem onClose={() => setAnchorEl(null)}>Resources</MenuItem>
+              <MenuItem onClick={() => setAnchorEl(null)}>About Us</MenuItem>
+              <MenuItem onClick={() => setAnchorEl(null)}>Blog</MenuItem>
+              <MenuItem onClick={() => setAnchorEl(null)}>Resources</MenuItem>
               <MenuItem
-                onClose={() => {
+                onClick={() => {
                   setAnchorEl(null)
                   contactContext.setOpen(true)
                 }}
