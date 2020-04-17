@@ -60,7 +60,7 @@ export default function Index({ data }) {
     </Section>
   ))
 
-  window &&
+  typeof window !== 'undefined' &&
     window.addEventListener('scroll', function(e) {
       let scrollPosition = window.scrollY
       console.log(scrollPosition)
