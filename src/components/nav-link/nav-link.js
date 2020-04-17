@@ -33,12 +33,12 @@ export default function NavLink({
     <Grid item className={classes.root} onClick={onClick && onClick}>
       {to.charAt(0) === '/' ? (
         <Link className={classes.link} to={to} id={id && id}>
-          {label && <Typography>{label}</Typography>}
+          {label && <Typography component="span">{label}</Typography>}
           {children}
         </Link>
       ) : (
         <a className={classes.link} href={to} id={id && id}>
-          {label && <Typography>{label}</Typography>}
+          {label && <Typography component="span">{label}</Typography>}
           {children}
         </a>
       )}

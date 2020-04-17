@@ -49,7 +49,7 @@ function Header({ mainContent, width }) {
   }
 
   return (
-    <AppBar position="static">
+    <AppBar position="fixed">
       <Toolbar className={classes.toolbar}>
         <NavLink to="/">
           <img className={classes.logo} src={Logo} alt="cross.team logo" />
