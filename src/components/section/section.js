@@ -58,7 +58,7 @@ function Section({
           data-testid="skipLink"
           className={classes.skipLink}
         >
-          <Typography>Skip to Navigation</Typography>
+          <Typography component="span">Skip to Navigation</Typography>
         </a>
         <Typography
           className={classes.heading}

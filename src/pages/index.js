@@ -15,7 +15,7 @@ var useStyles = makeStyles(theme => ({
     marginBottom: theme.spacing(16),
   },
   logo: {
-    width: '40%',
+    width: '36%',
   },
   tagline: {
     color: theme.palette.primary.contrastText,
@@ -59,6 +59,20 @@ export default function Index({ data }) {
       <Typography dangerouslySetInnerHTML={{ __html: post.content }} />
     </Section>
   ))
+
+  typeof window !== 'undefined' &&
+    window.addEventListener('scroll', function(e) {
+      let scrollPosition = window.scrollY
+      console.log(scrollPosition)
+
+      if (scrollPosition > 500 && !headerContext.open) {
+        headerContext.setOpen(true)
+      }
+
+      if (scrollPosition < 500 && headerContext.open) {
+        headerContext.setOpen(false)
+      }
+    })
 
   return (
     <>
