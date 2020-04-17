@@ -60,18 +60,19 @@ export default function Index({ data }) {
     </Section>
   ))
 
-  window.addEventListener('scroll', function(e) {
-    let scrollPosition = window.scrollY
-    console.log(scrollPosition)
+  window &&
+    window.addEventListener('scroll', function(e) {
+      let scrollPosition = window.scrollY
+      console.log(scrollPosition)
 
-    if (scrollPosition > 500 && !headerContext.open) {
-      headerContext.setOpen(true)
-    }
+      if (scrollPosition > 500 && !headerContext.open) {
+        headerContext.setOpen(true)
+      }
 
-    if (scrollPosition < 500 && headerContext.open) {
-      headerContext.setOpen(false)
-    }
-  })
+      if (scrollPosition < 500 && headerContext.open) {
+        headerContext.setOpen(false)
+      }
+    })
 
   return (
     <>
