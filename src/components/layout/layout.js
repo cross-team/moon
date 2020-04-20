@@ -1,15 +1,16 @@
-import React, { useRef, useContext } from 'react'
+import React, { useRef, useEffect, useContext } from 'react'
 import ReactDOM from 'react-dom'
 import { makeStyles } from '@material-ui/core/styles'
-import Collapse from '@material-ui/core/Collapse'
+import Typography from '@material-ui/core/Typography'
 
 import Header from 'components/header/header'
 import Footer from 'components/footer/footer'
 import ContactModal from 'components/contact-modal/contact-modal'
 
+import { skipToMain } from 'utils/functions'
 import Theme from 'providers/theme'
 import { ContactController } from 'providers/contact-context'
-import HeaderContext from 'providers/header-context'
+import MainContentContext from 'providers/main-content-context'
 
 import './layout.css'
 
@@ -18,12 +19,21 @@ var useStyles = makeStyles(theme => ({
     width: '100%',
     margin: 'auto',
   },
+  skipLink: {
+    display: 'inline-block',
+    marginTop: theme.spacing(4),
+    marginLeft: theme.spacing(4),
+  },
 }))
 
 export default function Layout({ children }) {
   var classes = useStyles()
-  var headerContext = useContext(HeaderContext)
-  var mainContent = useRef(null)
+  var { mainContentRef } = useContext(MainContentContext)
+  var skipLinkRef = useRef(null)
+
+  useEffect(() => {
+    skipLinkRef.current.focus()
+  }, [])
 
   if (process.env.NODE_ENV !== 'production') {
     import('react-axe').then(axe => {
@@ -34,12 +44,18 @@ export default function Layout({ children }) {
   return (
     <Theme>
       <ContactController>
-        <Collapse in={headerContext.open}>
-          <Header mainContent={mainContent} />
-        </Collapse>
+        <Header />
+        <a
+          href="#"
+          onClick={() => skipToMain(mainContentRef)}
+          className={classes.skipLink}
+          ref={skipLinkRef}
+        >
+          <Typography>Skip to Main Content</Typography>
+        </a>
         <main
           className={classes.main}
-          ref={mainContent}
+          ref={mainContentRef}
           tabIndex="-1"
           data-testid="mainContent"
         >

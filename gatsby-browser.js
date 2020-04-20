@@ -1,6 +1,6 @@
 var React = require('react')
-var { HeaderController } = require('./src/providers/header-context')
+var { MainContentController } = require('./src/providers/main-content-context')
 
 exports.wrapRootElement = ({ element }) => {
-  return <HeaderController>{element}</HeaderController>
+  return <MainContentController>{element}</MainContentController>
 }

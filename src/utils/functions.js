@@ -24,3 +24,11 @@ export function hexToRgbA(hex, opacity = '1') {
   }
   throw new Error('Bad Hex')
 }
+
+// Takes a react ref and sends focus to the first focusable DOM child of the ref
+// If there are none, it sends focus to the ref itself
+export function skipToMain(ref) {
+  let child = getFirstFocusableChild(ref.current.children)
+  if (child === null) ref.current.focus()
+  else child.focus()
+}
