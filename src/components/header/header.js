@@ -11,8 +11,9 @@ import MenuIcon from '@material-ui/icons/Menu'
 
 import './header.css'
 
-import { getFirstFocusableChild } from 'utils/functions'
+import { skipToMain } from 'utils/functions'
 import ContactContext from 'providers/contact-context'
+import MainContentContext from 'providers/main-content-context'
 import Logo from 'assets/svgs/cross-team-light.svg'
 import NavLink from 'components/nav-link/nav-link'
 
@@ -33,23 +34,20 @@ var useStyles = makeStyles(theme => ({
   },
 }))
 
-function Header({ mainContent, width }) {
-  var classes = useStyles({ width })
+function Header({ width }) {
   var contactContext = useContext(ContactContext)
+  var { mainContentRef } = useContext(MainContentContext)
   var [anchorEl, setAnchorEl] = useState(null)
-
-  function skipToMain() {
-    let child = getFirstFocusableChild(mainContent.current.children)
-    if (child === null) mainContent.current.focus()
-    else child.focus()
-  }
+  var classes = useStyles({
+    width,
+  })
 
   function handleMenu(event) {
     setAnchorEl(event.currentTarget)
   }
 
   return (
-    <AppBar position="fixed">
+    <AppBar id="appbar" position="fixed">
       <Toolbar className={classes.toolbar}>
         <NavLink to="/">
           <img className={classes.logo} src={Logo} alt="cross.team logo" />
@@ -62,7 +60,7 @@ function Header({ mainContent, width }) {
           flexItem
         />
 
-        <NavLink onClick={skipToMain} id="skipToMain">
+        <NavLink onClick={() => skipToMain(mainContentRef)} id="skipToMain">
           <Typography>Skip to Main Content</Typography>
         </NavLink>
 

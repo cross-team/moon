@@ -8,7 +8,6 @@ import SEO from 'components/SEO/SEO'
 import Layout from 'components/layout/layout'
 import Section from 'components/section/section'
 import Logo from 'assets/svgs/cross-team-light.svg'
-import HeaderContext from 'providers/header-context'
 
 var useStyles = makeStyles(theme => ({
   logoContainer: {
@@ -35,7 +34,6 @@ export var POSTS_QUERY = graphql`
 
 export default function Index({ data }) {
   var classes = useStyles()
-  var headerContext = React.useContext(HeaderContext)
   // var images = Object.keys(data).reduce(function dataReducer(imageSet, key) {
   //   let image = data[key].nodes[0].childImageSharp.fluid
   //   let srcArr = image.srcSet.split(',\n')
@@ -53,26 +51,27 @@ export default function Index({ data }) {
   // }, {})
 
   var posts = data.allWordpressPost.nodes
-  console.log(posts)
   var sections = posts.map((post, index) => (
     <Section heading={post.title} color={index % 2 === 0 ? 'dark' : 'light'}>
       <Typography dangerouslySetInnerHTML={{ __html: post.content }} />
     </Section>
   ))
 
-  typeof window !== 'undefined' &&
-    window.addEventListener('scroll', function(e) {
-      let scrollPosition = window.scrollY
-      console.log(scrollPosition)
+  function handleScroll() {
+    console.log('handleScroll called')
+    if (
+      document.body.scrollTop > 500 ||
+      document.documentElement.scrollTop > 500
+    ) {
+      document.getElementById('appbar').style.top = '0'
+    } else {
+      document.getElementById('appbar').style.top = '-80px'
+    }
+  }
 
-      if (scrollPosition > 500 && !headerContext.open) {
-        headerContext.setOpen(true)
-      }
-
-      if (scrollPosition < 500 && headerContext.open) {
-        headerContext.setOpen(false)
-      }
-    })
+  if (typeof window !== 'undefined') {
+    window.onscroll = handleScroll
+  }
 
   return (
     <>

@@ -1,3 +1,8 @@
 a {
   color: #fff;
 }
+
+#appbar {
+  top: -80px;
+  transition: top 0.3s;
+}
