@@ -1,5 +1,6 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
+import withWidth from '@material-ui/core/withWidth'
 import Typography from '@material-ui/core/Typography'
 import Grid from '@material-ui/core/Grid'
 import { graphql } from 'gatsby'
@@ -32,7 +33,7 @@ export var POSTS_QUERY = graphql`
   }
 `
 
-export default function Index({ data }) {
+function Index({ data, width }) {
   var classes = useStyles()
   // var images = Object.keys(data).reduce(function dataReducer(imageSet, key) {
   //   let image = data[key].nodes[0].childImageSharp.fluid
@@ -58,7 +59,6 @@ export default function Index({ data }) {
   ))
 
   function handleScroll() {
-    console.log('handleScroll called')
     if (
       document.body.scrollTop > 500 ||
       document.documentElement.scrollTop > 500
@@ -71,6 +71,11 @@ export default function Index({ data }) {
 
   if (typeof window !== 'undefined') {
     window.onscroll = handleScroll
+  }
+
+  var taglineSize = 'h1'
+  if (width === 'xs' || width === 'sm') {
+    taglineSize = 'h2'
   }
 
   return (
@@ -87,7 +92,11 @@ export default function Index({ data }) {
             onScroll={() => console.log('onScroll triggered!')}
           >
             <img className={classes.logo} src={Logo} alt="cross.team logo" />
-            <Typography className={classes.tagline} variant="h1">
+            <Typography
+              className={classes.tagline}
+              variant={taglineSize}
+              component="h1"
+            >
               Tagline here
             </Typography>
           </Grid>
@@ -97,3 +106,5 @@ export default function Index({ data }) {
     </>
   )
 }
+
+export default withWidth()(Index)
