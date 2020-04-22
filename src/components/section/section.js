@@ -25,14 +25,12 @@ function Section({
   var classes = useStyles({ color, bgImg, height })
   var [transcriptOn, setTranscriptOn] = useState(false)
   var transcriptRef = useRef(null)
-  var headingSize
 
+  var headingSize = 'h1'
   if (width === 'xs' || width === 'sm') {
     headingSize = 'h3'
   } else if (width === 'md') {
     headingSize = 'h2'
-  } else {
-    headingSize = 'h1'
   }
 
   useEffect(() => {
@@ -63,7 +61,7 @@ function Section({
         <Typography
           className={classes.heading}
           variant={headingSize}
-          component="h1"
+          component="h2"
         >
           {heading}
         </Typography>
