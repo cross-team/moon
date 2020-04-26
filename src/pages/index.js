@@ -37,6 +37,7 @@ export var POSTS_QUERY = graphql`
 function Index({ data }) {
   var classes = useStyles()
   var theme = useTheme()
+  var smallScreen = useMediaQuery(theme.breakpoints.down('sm'))
   // var images = Object.keys(data).reduce(function dataReducer(imageSet, key) {
   //   let image = data[key].nodes[0].childImageSharp.fluid
   //   let srcArr = image.srcSet.split(',\n')
@@ -76,7 +77,7 @@ function Index({ data }) {
   }
 
   var taglineSize = 'h1'
-  if (useMediaQuery(theme.breakpoints.up('sm'))) {
+  if (smallScreen) {
     taglineSize = 'h2'
   }
 

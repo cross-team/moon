@@ -36,6 +36,7 @@ var useStyles = makeStyles(theme => ({
 function Footer() {
   var classes = useStyles()
   var theme = useTheme()
+  var smallScreen = useMediaQuery(theme.breakpoints.down('sm'))
 
   return (
     <footer className={classes.root}>
@@ -43,7 +44,7 @@ function Footer() {
         className={classes.container}
         container
         justify="space-around"
-        direction={useMediaQuery(theme.breakpoints.up('sm')) ? 'column' : 'row'}
+        direction={smallScreen ? 'column' : 'row'}
       >
         <Grid
           className={classes.linkGroup}

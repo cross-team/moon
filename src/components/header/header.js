@@ -42,6 +42,7 @@ function Header() {
   var [anchorEl, setAnchorEl] = useState(null)
   var classes = useStyles()
   var theme = useTheme()
+  var smallScreen = useMediaQuery(theme.breakpoints.down('sm'))
 
   function handleMenu(event) {
     setAnchorEl(event.currentTarget)
@@ -71,7 +72,7 @@ function Header() {
           variant="middle"
           flexItem
         />
-        {useMediaQuery(theme.breakpoints.up('sm')) ? (
+        {smallScreen ? (
           <>
             <NavLink aria-controls="site-menu" onClick={handleMenu}>
               <MenuIcon />

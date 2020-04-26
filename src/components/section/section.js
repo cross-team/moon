@@ -24,13 +24,16 @@ function Section({
 }) {
   var classes = useStyles({ color, bgImg, height })
   var theme = useTheme()
+  var smallScreen = useMediaQuery(theme.breakpoints.down('sm'))
+  var mediumScreen = useMediaQuery(theme.breakpoints.down('md'))
+
   var [transcriptOn, setTranscriptOn] = useState(false)
   var transcriptRef = useRef(null)
 
   var headingSize = 'h1'
-  if (useMediaQuery(theme.breakpoints.down('sm'))) {
+  if (smallScreen) {
     headingSize = 'h3'
-  } else if (useMediaQuery(theme.breakpoints.down('md'))) {
+  } else if (mediumScreen) {
     headingSize = 'h2'
   }
 
