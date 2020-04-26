@@ -8,20 +8,20 @@ import SelectInput from '@material-ui/core/Select/SelectInput'
 
 describe('Layout', () => {
   it('skip to main sends focus to main content container when main content has no focusble children', () => {
-    let { getByText, getByTestId } = render(
+    let { getAllByText, getByTestId } = render(
       <MainContentController>
         <Layout />
       </MainContentController>
     )
-    let skipLink = getByText('Skip to Main Content')
+    let skipLink = getAllByText('Skip to Main Content')
     let mainContent = getByTestId('mainContent')
 
-    fireEvent.click(skipLink)
+    fireEvent.click(skipLink[0])
 
     expect(mainContent).toHaveFocus()
   })
   it('skip to main sends focus to first focusable element inside the main content container', () => {
-    let { getByText, getByTestId } = render(
+    let { getAllByText, getByTestId } = render(
       <MainContentController>
         <Layout noSQL={true}>
           <a href="#" data-testid="firstFocusableElement">
@@ -30,10 +30,10 @@ describe('Layout', () => {
         </Layout>
       </MainContentController>
     )
-    let skipLink = getByText('Skip to Main Content')
+    let skipLink = getAllByText('Skip to Main Content')
     let firstFocusableElement = getByTestId('firstFocusableElement')
 
-    fireEvent.click(skipLink)
+    fireEvent.click(skipLink[0])
 
     expect(firstFocusableElement).toHaveFocus()
   })
