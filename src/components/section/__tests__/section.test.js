@@ -6,7 +6,7 @@ import Section from 'components/section/section'
 import Theme from 'providers/theme'
 
 describe('Section', () => {
-  it('renders the skip link', () => {
+  it.only('renders the skip link', () => {
     let { getByText } = render(
       <Theme>
         <Section />

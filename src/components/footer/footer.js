@@ -1,7 +1,8 @@
 import React from 'react'
 import { Link } from 'gatsby'
 import { makeStyles } from '@material-ui/core/styles'
-import withWidth from '@material-ui/core/withWidth'
+import { useTheme } from '@material-ui/core/styles'
+import useMediaQuery from '@material-ui/core/useMediaQuery'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 
@@ -32,8 +33,10 @@ var useStyles = makeStyles(theme => ({
   },
 }))
 
-function Footer({ width }) {
+function Footer() {
   var classes = useStyles()
+  var theme = useTheme()
+  var smallScreen = useMediaQuery(theme.breakpoints.down('sm'))
 
   return (
     <footer className={classes.root}>
@@ -41,7 +44,7 @@ function Footer({ width }) {
         className={classes.container}
         container
         justify="space-around"
-        direction={width === 'xs' || width === 'sm' ? 'column' : 'row'}
+        direction={smallScreen ? 'column' : 'row'}
       >
         <Grid
           className={classes.linkGroup}
@@ -144,4 +147,4 @@ function Footer({ width }) {
   )
 }
 
-export default withWidth()(Footer)
+export default Footer

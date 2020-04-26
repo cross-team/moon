@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
-import withWidth from '@material-ui/core/withWidth'
+import { useTheme } from '@material-ui/core/styles'
+import useMediaQuery from '@material-ui/core/useMediaQuery'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
@@ -20,8 +21,7 @@ import NavLink from 'components/nav-link/nav-link'
 var useStyles = makeStyles(theme => ({
   toolbar: props => ({
     display: 'flex',
-    justifyContent:
-      props.width === 'xs' || props.width === 'sm' ? 'center' : 'flex-start',
+    justifyContent: props.smallScreen ? 'center' : 'flex-start',
     height: '100%',
   }),
   logo: {
@@ -34,13 +34,13 @@ var useStyles = makeStyles(theme => ({
   },
 }))
 
-function Header({ width }) {
+function Header() {
   var contactContext = useContext(ContactContext)
   var { mainContentRef } = useContext(MainContentContext)
   var [anchorEl, setAnchorEl] = useState(null)
-  var classes = useStyles({
-    width,
-  })
+  var theme = useTheme()
+  var smallScreen = useMediaQuery(theme.breakpoints.down('sm'))
+  var classes = useStyles({ smallScreen })
 
   function handleMenu(event) {
     setAnchorEl(event.currentTarget)
@@ -70,7 +70,7 @@ function Header({ width }) {
           variant="middle"
           flexItem
         />
-        {width === 'xs' || width === 'sm' ? (
+        {smallScreen ? (
           <>
             <NavLink aria-controls="site-menu" onClick={handleMenu}>
               <MenuIcon />
@@ -111,4 +111,4 @@ function Header({ width }) {
   )
 }
 
-export default withWidth()(Header)
+export default Header
