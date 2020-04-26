@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react'
-import withWidth from '@material-ui/core/withWidth'
+import { useTheme } from '@material-ui/core/styles'
+import useMediaQuery from '@material-ui/core/useMediaQuery'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button'
@@ -20,16 +21,16 @@ function Section({
   videoURL = '',
   transcript = 'Video Needs Proper Transcript',
   height,
-  width,
 }) {
   var classes = useStyles({ color, bgImg, height })
+  var theme = useTheme()
   var [transcriptOn, setTranscriptOn] = useState(false)
   var transcriptRef = useRef(null)
 
   var headingSize = 'h1'
-  if (width === 'xs' || width === 'sm') {
+  if (useMediaQuery(theme.breakpoints.down('sm'))) {
     headingSize = 'h3'
-  } else if (width === 'md') {
+  } else if (useMediaQuery(theme.breakpoints.down('md'))) {
     headingSize = 'h2'
   }
 
@@ -114,4 +115,4 @@ function Section({
   )
 }
 
-export default withWidth()(Section)
+export default Section

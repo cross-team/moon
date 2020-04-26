@@ -1,6 +1,7 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
-import withWidth from '@material-ui/core/withWidth'
+import { useTheme } from '@material-ui/core/styles'
+import useMediaQuery from '@material-ui/core/useMediaQuery'
 import Typography from '@material-ui/core/Typography'
 import Grid from '@material-ui/core/Grid'
 import { graphql } from 'gatsby'
@@ -33,8 +34,9 @@ export var POSTS_QUERY = graphql`
   }
 `
 
-function Index({ data, width }) {
+function Index({ data }) {
   var classes = useStyles()
+  var theme = useTheme()
   // var images = Object.keys(data).reduce(function dataReducer(imageSet, key) {
   //   let image = data[key].nodes[0].childImageSharp.fluid
   //   let srcArr = image.srcSet.split(',\n')
@@ -74,7 +76,7 @@ function Index({ data, width }) {
   }
 
   var taglineSize = 'h1'
-  if (width === 'xs' || width === 'sm') {
+  if (useMediaQuery(theme.breakpoints.up('sm'))) {
     taglineSize = 'h2'
   }
 
@@ -107,4 +109,4 @@ function Index({ data, width }) {
   )
 }
 
-export default withWidth()(Index)
+export default Index
