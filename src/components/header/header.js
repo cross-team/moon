@@ -19,13 +19,11 @@ import Logo from 'assets/svgs/cross-team-light.svg'
 import NavLink from 'components/nav-link/nav-link'
 
 var useStyles = makeStyles(theme => ({
-  toolbar: {
+  toolbar: props => ({
     display: 'flex',
-    justifyContent: useMediaQuery(theme.breakpoints.up('sm'))
-      ? 'center'
-      : 'flex-start',
+    justifyContent: props.smallScreen ? 'center' : 'flex-start',
     height: '100%',
-  },
+  }),
   logo: {
     width: '80px',
   },
@@ -40,9 +38,9 @@ function Header() {
   var contactContext = useContext(ContactContext)
   var { mainContentRef } = useContext(MainContentContext)
   var [anchorEl, setAnchorEl] = useState(null)
-  var classes = useStyles()
   var theme = useTheme()
   var smallScreen = useMediaQuery(theme.breakpoints.down('sm'))
+  var classes = useStyles({ smallScreen })
 
   function handleMenu(event) {
     setAnchorEl(event.currentTarget)
