@@ -47,8 +47,8 @@ function Header() {
   }
 
   return (
-    <AppBar id="appbar" position="fixed">
-      <Toolbar className={classes.toolbar}>
+    <AppBar position="fixed" id="appbar">
+      <Toolbar className={classes.toolbar} data-testid="header">
         <NavLink to="/">
           <img className={classes.logo} src={Logo} alt="cross.team logo" />
         </NavLink>

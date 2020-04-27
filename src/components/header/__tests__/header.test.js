@@ -19,4 +19,15 @@ describe('Header', () => {
 
     expect(skipLink).toBeInTheDocument()
   })
+  it('is the right height', () => {
+    let { getByTestId } = render(
+      <ContactController>
+        <MainContentController>
+          <Header />
+        </MainContentController>
+      </ContactController>
+    )
+    let header = getByTestId('header')
+    console.log(header)
+  })
 })
