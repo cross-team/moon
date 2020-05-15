@@ -22,7 +22,7 @@ var useStyles = makeStyles(theme => ({
     color: theme.palette.primary.contrastText,
   },
   section: {
-    textAlign: 'center',
+    // textAlign: 'center',
   },
   service: {
     fontStyle: 'italic',
