@@ -33,7 +33,7 @@ module.exports = {
          * The base URL of the WordPress site without the trailingslash and the protocol. This is required.
          * Example : 'demo.wp-api.org' or 'www.example-site.com'
          */
-        baseUrl: 'lenza.co',
+        baseUrl: 'cross.team',
         // The protocol. This can be http or https.
         protocol: 'https',
         // Indicates whether the site is hosted on wordpress.com.
