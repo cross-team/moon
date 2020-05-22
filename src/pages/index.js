@@ -36,6 +36,7 @@ export var POSTS_QUERY = graphql`
   query {
     allWordpressPost(
       filter: { categories: { elemMatch: { name: { eq: "home" } } } }
+      sort: { fields: title, order: ASC }
     ) {
       nodes {
         title
