@@ -57,9 +57,12 @@ var useStyles = makeStyles(theme => ({
     textAlign: 'center',
     margin: theme.spacing(4),
   },
-  children: {
+  children: props => ({
     textAlign: 'left',
-  },
+    '& a': {
+      color: theme.palette.components[props.color].linkColor,
+    },
+  }),
 }))
 
 export default useStyles
