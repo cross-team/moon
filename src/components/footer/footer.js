@@ -31,6 +31,11 @@ var useStyles = makeStyles(theme => ({
       color: theme.palette.secondary.main,
     },
   },
+  copyright: {
+    color: theme.palette.primary.contrastText,
+    marginBottom: theme.spacing(8),
+    marginLeft: theme.spacing(8),
+  },
 }))
 
 function Footer() {
@@ -143,6 +148,9 @@ function Footer() {
           </Link>
         </Grid>
       </Grid>
+      <Typography className={classes.copyright}>
+        © 2020 Cross.Team, Inc.
+      </Typography>
     </footer>
   )
 }
