@@ -15,7 +15,7 @@ var theme = createMuiTheme({
       dark: '#0030b3',
       contrastText: '#fefefe',
     },
-    divider: 'rgba(254, 254, 254, .5)',
+    divider: '#fefefe',
     components: {
       dark: {
         bgColor: '#222',
@@ -38,9 +38,10 @@ var theme = createMuiTheme({
     },
   },
   typography: {
-    fontFamily: "'Miriam Libre', 'Helvetica', 'Arial', sans-serif",
+    fontFamily: "'Roboto', sans-serif",
     body1: {
       fontSize: '1.25rem',
+      fontFamily: "'Miriam Libre', 'Helvetica', 'Arial', sans-serif",
     },
   },
   shadows: [

@@ -1,9 +1,9 @@
 import React, { useRef, useEffect, useContext } from 'react'
 import ReactDOM from 'react-dom'
 import { makeStyles } from '@material-ui/core/styles'
-import Typography from '@material-ui/core/Typography'
 
 import Header from 'components/header/header'
+import TopHeader from 'components/top-header/top-header'
 import Footer from 'components/footer/footer'
 import ContactModal from 'components/contact-modal/contact-modal'
 
@@ -29,11 +29,6 @@ var useStyles = makeStyles(theme => ({
 export default function Layout({ children }) {
   var classes = useStyles()
   var { mainContentRef } = useContext(MainContentContext)
-  var skipLinkRef = useRef(null)
-
-  useEffect(() => {
-    skipLinkRef.current.focus()
-  }, [])
 
   if (process.env.NODE_ENV !== 'production') {
     import('react-axe').then(axe => {
@@ -45,14 +40,7 @@ export default function Layout({ children }) {
     <Theme>
       <ContactController>
         <Header />
-        <a
-          href="#"
-          onClick={() => skipToMain(mainContentRef)}
-          className={classes.skipLink}
-          ref={skipLinkRef}
-        >
-          <Typography>Skip to Main Content</Typography>
-        </a>
+        <TopHeader />
         <main
           className={classes.main}
           ref={mainContentRef}
