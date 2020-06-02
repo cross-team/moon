@@ -169,7 +169,7 @@ function Index({ data }) {
   var posts = data.allWordpressPost.nodes
   var sections = posts.map((post, index) => {
     return (
-      <Section color={index % 2 === 0 ? 'dark' : 'light'}>
+      <Section color={index % 2 === 0 ? 'light' : 'dark'}>
         <div
           className={classes.section}
           dangerouslySetInnerHTML={{ __html: post.content }}
