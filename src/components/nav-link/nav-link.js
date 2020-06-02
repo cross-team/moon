@@ -6,15 +6,15 @@ import Typography from '@material-ui/core/Typography'
 
 var useStyles = makeStyles(theme => ({
   root: {
+    borderRadius: '2px',
     '&:hover': {
       backgroundColor: theme.palette.secondary.main,
     },
   },
   link: {
+    padding: theme.spacing(1),
     display: 'flex',
     alignItems: 'center',
-    paddingLeft: theme.spacing(1),
-    paddingRight: theme.spacing(1),
   },
 }))
 

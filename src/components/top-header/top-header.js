@@ -17,6 +17,8 @@ var useStyles = makeStyles(theme => ({
     height: '60px',
   },
   skipLink: {
+    borderRadius: '2px',
+    padding: theme.spacing(1),
     '&:hover': {
       backgroundColor: theme.palette.secondary.main,
     },

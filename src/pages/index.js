@@ -186,7 +186,7 @@ function Index({ data }) {
     ) {
       document.getElementById('appbar').style.top = '0'
     } else {
-      document.getElementById('appbar').style.top = '-80px'
+      document.getElementById('appbar').style.top = '-96px'
     }
   }
 
