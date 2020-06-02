@@ -38,9 +38,10 @@ var theme = createMuiTheme({
     },
   },
   typography: {
-    fontFamily: "'Miriam Libre', 'Helvetica', 'Arial', sans-serif",
+    fontFamily: "'Roboto', sans-serif",
     body1: {
       fontSize: '1.25rem',
+      fontFamily: "'Miriam Libre', 'Helvetica', 'Arial', sans-serif",
     },
   },
   shadows: [
