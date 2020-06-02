@@ -18,9 +18,6 @@ var useStyles = makeStyles(theme => ({
   logo: {
     width: '36%',
   },
-  tagline: {
-    color: theme.palette.primary.contrastText,
-  },
   section: {
     // textAlign: 'center',
   },
@@ -34,13 +31,15 @@ var useStyles = makeStyles(theme => ({
 
 export var POSTS_QUERY = graphql`
   query {
-    allWordpressPost(
-      filter: { categories: { elemMatch: { name: { eq: "home" } } } }
-      sort: { fields: title, order: ASC }
+    allMarkdownRemark(
+      filter: { frontmatter: { tag: { eq: "home" } } }
+      sort: { fields: frontmatter___title }
     ) {
       nodes {
-        title
-        content
+        frontmatter {
+          title
+        }
+        html
       }
     }
   }
@@ -166,15 +165,15 @@ function Index({ data }) {
     </Grid>
   )
 
-  var posts = data.allWordpressPost.nodes
-  var sections = posts.map((post, index) => {
+  var nodes = data.allMarkdownRemark.nodes
+  var sections = nodes.map((node, index) => {
     return (
       <Section color={index % 2 === 0 ? 'light' : 'dark'}>
         <div
           className={classes.section}
-          dangerouslySetInnerHTML={{ __html: post.content }}
+          dangerouslySetInnerHTML={{ __html: node.html }}
         />
-        {post.title.includes('Our Services') && services}
+        {node.frontmatter.title.includes('Our Services') && services}
       </Section>
     )
   })
@@ -194,13 +193,6 @@ function Index({ data }) {
     window.onscroll = handleScroll
   }
 
-  var titleeSize = 'h1'
-  var taglineSize = 'h2'
-  if (smallScreen) {
-    titleeSize = 'h2'
-    taglineSize = 'h3'
-  }
-
   return (
     <>
       <SEO title="Home" />
@@ -214,21 +206,7 @@ function Index({ data }) {
             direction="column"
             onScroll={() => console.log('onScroll triggered!')}
           >
-            <Typography
-              className={classes.tagline}
-              variant={titleeSize}
-              component="h1"
-            >
-              Cross.Team
-            </Typography>
             <img className={classes.logo} src={Logo} alt="cross.team logo" />
-            <Typography
-              className={classes.tagline}
-              variant={taglineSize}
-              component="h2"
-            >
-              Designing solutions with accessibility in mind
-            </Typography>
           </Grid>
           {sections}
         </Grid>

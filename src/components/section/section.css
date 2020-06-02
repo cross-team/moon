@@ -1,5 +1,5 @@
 .section-children {
-  font-family: 'Miriam Libre', 'Helvetica', 'Arial', sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-size: 14;
 }
 
@@ -46,6 +46,7 @@
 }
 
 .section-children p {
+  font-family: 'Miriam Libre', 'Helvetica', 'Arial', sans-serif;
   font-weight: 400;
   font-size: 1.25rem;
   line-height: 1.5;
