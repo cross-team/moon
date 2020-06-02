@@ -6,6 +6,7 @@ import Divider from '@material-ui/core/Divider'
 
 import { skipToMain } from 'utils/functions'
 import MainContentContext from 'providers/main-content-context'
+import ContactContext from 'providers/contact-context'
 import NavLink from 'components/nav-link/nav-link'
 
 var useStyles = makeStyles(theme => ({
@@ -27,6 +28,7 @@ var useStyles = makeStyles(theme => ({
 
 export default function TopHeader() {
   var classes = useStyles()
+  var contactContext = useContext(ContactContext)
   var { mainContentRef } = useContext(MainContentContext)
   var skipLinkRef = useRef(null)
 
