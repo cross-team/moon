@@ -11,6 +11,24 @@ import Layout from 'components/layout/layout'
 import Section from 'components/section/section'
 import Logo from 'assets/svgs/cross-team-light.svg'
 
+import thomsonDark from 'assets/svgs/dark/Thomson_Reuters.svg'
+import franklinDark from 'assets/svgs/dark/franklin-templeton-investments.svg'
+import safrapayDark from 'assets/svgs/dark/safrapay.svg'
+import deustcheDark from 'assets/svgs/dark/Deutsche_Bank.svg'
+import verizonDark from 'assets/svgs/dark/Verizon.svg'
+import aolDark from 'assets/svgs/dark/AOL.svg'
+import uberDark from 'assets/svgs/dark/Uber.svg'
+import siemensDark from 'assets/svgs/dark/Siemens.svg'
+
+import thomsonLight from 'assets/svgs/light/Thomson_Reuters.svg'
+import franklinLight from 'assets/svgs/light/franklin-templeton-investments_white.svg'
+import safrapayLight from 'assets/svgs/light/safrapay.svg'
+import deustcheLight from 'assets/svgs/light/Deutsche_Bank.svg'
+import verizonLight from 'assets/svgs/light/Verizon.svg'
+import aolLight from 'assets/svgs/light/AOL.svg'
+import uberLight from 'assets/svgs/light/Uber.svg'
+import siemensLight from 'assets/svgs/light/Siemens.svg'
+
 var useStyles = makeStyles(theme => ({
   logoContainer: {
     marginBottom: theme.spacing(16),
@@ -26,6 +44,9 @@ var useStyles = makeStyles(theme => ({
   },
   services: {
     marginTop: theme.spacing(4),
+  },
+  brandLogo: {
+    width: '10%',
   },
 }))
 
@@ -165,15 +186,86 @@ function Index({ data }) {
     </Grid>
   )
 
+  function brandLogos(background) {
+    if (background === 'dark') {
+      return (
+        <Grid container alignItems="center" justify="space-around">
+          <img
+            className={classes.brandLogo}
+            src={thomsonLight}
+            alt="Thomson Reuters"
+          />
+          <img
+            className={classes.brandLogo}
+            src={franklinLight}
+            alt="Franklin Templeton Investments"
+          />
+          <img
+            className={classes.brandLogo}
+            src={safrapayLight}
+            alt="Safrapay"
+          />
+          <img
+            className={classes.brandLogo}
+            src={deustcheLight}
+            alt="Deutsche Bank"
+          />
+          <img className={classes.brandLogo} src={verizonLight} alt="Verizon" />
+          <img className={classes.brandLogo} src={aolLight} alt="AOL" />
+          <img className={classes.brandLogo} src={uberLight} alt="Uber" />
+          <img className={classes.brandLogo} src={siemensLight} alt="Siemens" />
+        </Grid>
+      )
+    }
+    if (background === 'light') {
+      return (
+        <Grid container alignItems="center" justify="space-around">
+          <img
+            className={classes.brandLogo}
+            src={thomsonDark}
+            alt="Thomson Reuters"
+          />
+          <img
+            className={classes.brandLogo}
+            src={franklinDark}
+            alt="Franklin Templeton Investments"
+          />
+          <img
+            className={classes.brandLogo}
+            src={safrapayDark}
+            alt="Safrapay"
+          />
+          <img
+            className={classes.brandLogo}
+            src={deustcheDark}
+            alt="Deutsche Bank"
+          />
+          <img className={classes.brandLogo} src={verizonDark} alt="Verizon" />
+          <img className={classes.brandLogo} src={aolDark} alt="AOL" />
+          <img className={classes.brandLogo} src={uberDark} alt="Uber" />
+          <img className={classes.brandLogo} src={siemensDark} alt="Siemens" />
+        </Grid>
+      )
+    }
+    return null
+  }
+
   var nodes = data.allMarkdownRemark.nodes
   var sections = nodes.map((node, index) => {
+    let sectionTheme = ''
+    if (index % 2 === 0) {
+      sectionTheme = 'light'
+    } else {
+      sectionTheme = 'dark'
+    }
     return (
-      <Section color={index % 2 === 0 ? 'light' : 'dark'}>
+      <Section color={sectionTheme}>
         <div
           className={classes.section}
           dangerouslySetInnerHTML={{ __html: node.html }}
         />
         {node.frontmatter.title.includes('Our Services') && services}
+        {node.frontmatter.title.includes('brands') && brandLogos(sectionTheme)}
       </Section>
     )
   })
