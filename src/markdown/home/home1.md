@@ -1,5 +1,5 @@
 ---
-title: Home 1 (We are a select group...)
+title: Home 1 (We are a select group... brands)
 tag: home
 ---
 
