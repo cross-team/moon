@@ -45,8 +45,16 @@ var useStyles = makeStyles(theme => ({
   services: {
     marginTop: theme.spacing(4),
   },
-  brandLogo: {
-    width: '10%',
+  brandLogo: props => {
+    let logoWidth = '10%'
+    if (props.mediumScreen) logoWidth = '20%'
+    if (props.smallScreen) logoWidth = '36%'
+    return {
+      width: logoWidth,
+    }
+  },
+  brandContainer: {
+    minHeight: '30vw',
   },
 }))
 
@@ -67,9 +75,10 @@ export var POSTS_QUERY = graphql`
 `
 
 function Index({ data }) {
-  var classes = useStyles()
   var theme = useTheme()
+  var mediumScreen = useMediaQuery(theme.breakpoints.down('md'))
   var smallScreen = useMediaQuery(theme.breakpoints.down('sm'))
+  var classes = useStyles({ mediumScreen, smallScreen })
   // var images = Object.keys(data).reduce(function dataReducer(imageSet, key) {
   //   let image = data[key].nodes[0].childImageSharp.fluid
   //   let srcArr = image.srcSet.split(',\n')
@@ -186,68 +195,133 @@ function Index({ data }) {
     </Grid>
   )
 
-  function brandLogos(background) {
-    if (background === 'dark') {
+  var lightBrandLogos = [
+    { src: thomsonLight, alt: 'Thomson Reuters' },
+    { src: franklinLight, alt: 'Franklin Templeton Investments' },
+    { src: safrapayLight, alt: 'Safrapay' },
+    { src: deustcheLight, alt: 'Deutsche Bank' },
+    { src: verizonLight, alt: 'Verizon' },
+    { src: aolLight, alt: 'AOL' },
+    { src: uberLight, alt: 'Uber' },
+    { src: siemensLight, alt: 'Siemens' },
+  ]
+  var darkBrandLogos = [
+    { src: thomsonDark, alt: 'Thomson Reuters' },
+    { src: franklinDark, alt: 'Franklin Templeton Investments' },
+    { src: safrapayDark, alt: 'Safrapay' },
+    { src: deustcheDark, alt: 'Deutsche Bank' },
+    { src: verizonDark, alt: 'Verizon' },
+    { src: aolDark, alt: 'AOL' },
+    { src: uberDark, alt: 'Uber' },
+    { src: siemensDark, alt: 'Siemens' },
+  ]
+
+  function renderBrandLogos(theme) {
+    let logos
+    if (theme === 'light') {
+      logos = darkBrandLogos
+    } else if (theme === 'dark') {
+      logos = lightBrandLogos
+    } else {
+      return null
+    }
+
+    if (smallScreen) {
       return (
-        <Grid container alignItems="center" justify="space-around">
-          <img
-            className={classes.brandLogo}
-            src={thomsonLight}
-            alt="Thomson Reuters"
-          />
-          <img
-            className={classes.brandLogo}
-            src={franklinLight}
-            alt="Franklin Templeton Investments"
-          />
-          <img
-            className={classes.brandLogo}
-            src={safrapayLight}
-            alt="Safrapay"
-          />
-          <img
-            className={classes.brandLogo}
-            src={deustcheLight}
-            alt="Deutsche Bank"
-          />
-          <img className={classes.brandLogo} src={verizonLight} alt="Verizon" />
-          <img className={classes.brandLogo} src={aolLight} alt="AOL" />
-          <img className={classes.brandLogo} src={uberLight} alt="Uber" />
-          <img className={classes.brandLogo} src={siemensLight} alt="Siemens" />
-        </Grid>
+        <>
+          <Grid
+            className={classes.brandContainer}
+            container
+            alignItems="center"
+            justify="space-around"
+          >
+            {logos.slice(0, 2).map(logo => (
+              <img
+                className={classes.brandLogo}
+                src={logo.src}
+                alt={logo.alt}
+              />
+            ))}
+          </Grid>
+          <Grid
+            className={classes.brandContainer}
+            container
+            alignItems="center"
+            justify="space-around"
+          >
+            {logos.slice(2, 4).map(logo => (
+              <img
+                className={classes.brandLogo}
+                src={logo.src}
+                alt={logo.alt}
+              />
+            ))}
+          </Grid>
+          <Grid
+            className={classes.brandContainer}
+            container
+            alignItems="center"
+            justify="space-around"
+          >
+            {logos.slice(4, 6).map(logo => (
+              <img
+                className={classes.brandLogo}
+                src={logo.src}
+                alt={logo.alt}
+              />
+            ))}
+          </Grid>
+          <Grid
+            className={classes.brandContainer}
+            container
+            alignItems="center"
+            justify="space-around"
+          >
+            {logos.slice(6, 8).map(logo => (
+              <img
+                className={classes.brandLogo}
+                src={logo.src}
+                alt={logo.alt}
+              />
+            ))}
+          </Grid>
+        </>
       )
     }
-    if (background === 'light') {
+
+    if (mediumScreen) {
       return (
-        <Grid container alignItems="center" justify="space-around">
-          <img
-            className={classes.brandLogo}
-            src={thomsonDark}
-            alt="Thomson Reuters"
-          />
-          <img
-            className={classes.brandLogo}
-            src={franklinDark}
-            alt="Franklin Templeton Investments"
-          />
-          <img
-            className={classes.brandLogo}
-            src={safrapayDark}
-            alt="Safrapay"
-          />
-          <img
-            className={classes.brandLogo}
-            src={deustcheDark}
-            alt="Deutsche Bank"
-          />
-          <img className={classes.brandLogo} src={verizonDark} alt="Verizon" />
-          <img className={classes.brandLogo} src={aolDark} alt="AOL" />
-          <img className={classes.brandLogo} src={uberDark} alt="Uber" />
-          <img className={classes.brandLogo} src={siemensDark} alt="Siemens" />
-        </Grid>
+        <>
+          <Grid container alignItems="center" justify="space-around">
+            {logos.slice(0, 4).map(logo => (
+              <img
+                className={classes.brandLogo}
+                src={logo.src}
+                alt={logo.alt}
+              />
+            ))}
+          </Grid>
+          <Grid container alignItems="center" justify="space-around">
+            {logos.slice(4, 8).map(logo => (
+              <img
+                className={classes.brandLogo}
+                src={logo.src}
+                alt={logo.alt}
+              />
+            ))}
+          </Grid>
+        </>
       )
     }
-    return null
+
+    let images = logos.map(logo => (
+      <img className={classes.brandLogo} src={logo.src} alt={logo.alt} />
+    ))
+    return (
+      <Grid container alignItems="center" justify="space-around">
+        {images}
+      </Grid>
+    )
   }
 
   var nodes = data.allMarkdownRemark.nodes
@@ -265,7 +339,8 @@ function Index({ data }) {
           dangerouslySetInnerHTML={{ __html: node.html }}
         />
         {node.frontmatter.title.includes('Our Services') && services}
-        {node.frontmatter.title.includes('brands') && brandLogos(sectionTheme)}
+        {node.frontmatter.title.includes('brands') &&
+          renderBrandLogos(sectionTheme)}
       </Section>
     )
   })
