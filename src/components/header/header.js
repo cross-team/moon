@@ -8,6 +8,7 @@ import Typography from '@material-ui/core/Typography'
 import Divider from '@material-ui/core/Divider'
 import Menu from '@material-ui/core/Menu'
 import MenuItem from '@material-ui/core/MenuItem'
+import Grid from '@material-ui/core/Grid'
 import MenuIcon from '@material-ui/icons/Menu'
 
 import './header.css'
@@ -19,6 +20,9 @@ import Logo from 'assets/svgs/cross-team-light.svg'
 import NavLink from 'components/nav-link/nav-link'
 
 var useStyles = makeStyles(theme => ({
+  root: {
+    padding: theme.spacing(2),
+  },
   toolbar: props => ({
     display: 'flex',
     justifyContent: props.smallScreen ? 'center' : 'flex-start',
@@ -34,7 +38,7 @@ var useStyles = makeStyles(theme => ({
   },
 }))
 
-function Header() {
+function Header({ hidden = false }) {
   var contactContext = useContext(ContactContext)
   var { mainContentRef } = useContext(MainContentContext)
   var [anchorEl, setAnchorEl] = useState(null)
@@ -46,68 +50,91 @@ function Header() {
     setAnchorEl(event.currentTarget)
   }
 
-  return (
-    <AppBar position="fixed" id="appbar">
-      <Toolbar className={classes.toolbar} data-testid="header">
-        <NavLink to="/">
-          <img className={classes.logo} src={Logo} alt="cross.team logo" />
-        </NavLink>
+  var content = (
+    <>
+      {hidden && (
+        <>
+          <NavLink to="/">
+            <img className={classes.logo} src={Logo} alt="cross.team logo" />
+          </NavLink>
 
-        <Divider
-          className={classes.divider}
-          orientation="vertical"
-          variant="middle"
-          flexItem
-        />
+          <Divider
+            className={classes.divider}
+            orientation="vertical"
+            variant="middle"
+            flexItem
+          />
+        </>
+      )}
 
-        <NavLink onClick={() => skipToMain(mainContentRef)} id="skipToMain">
-          <Typography>Skip to Main Content</Typography>
-        </NavLink>
+      <NavLink onClick={() => skipToMain(mainContentRef)} id="skipToMain">
+        <Typography>Skip to Main Content</Typography>
+      </NavLink>
 
-        <Divider
-          className={classes.divider}
-          orientation="vertical"
-          variant="middle"
-          flexItem
-        />
-        {smallScreen ? (
-          <>
-            <NavLink aria-controls="site-menu" onClick={handleMenu}>
-              <MenuIcon />
-            </NavLink>
-            <Menu
-              id="site-menu"
-              anchorEl={anchorEl}
-              keepMounted
-              open={Boolean(anchorEl)}
-              onClose={() => setAnchorEl(null)}
+      <Divider
+        className={classes.divider}
+        orientation="vertical"
+        variant="middle"
+        flexItem
+      />
+
+      {smallScreen ? (
+        <>
+          <NavLink aria-controls="site-menu" onClick={handleMenu}>
+            <MenuIcon />
+          </NavLink>
+          <Menu
+            id="site-menu"
+            anchorEl={anchorEl}
+            keepMounted
+            open={Boolean(anchorEl)}
+            onClose={() => setAnchorEl(null)}
+          >
+            <MenuItem onClick={() => setAnchorEl(null)}>About Us</MenuItem>
+            <MenuItem onClick={() => setAnchorEl(null)}>Blog</MenuItem>
+            <MenuItem onClick={() => setAnchorEl(null)}>Resources</MenuItem>
+            <MenuItem
+              onClick={() => {
+                setAnchorEl(null)
+                contactContext.setOpen(true)
+              }}
             >
-              <MenuItem onClick={() => setAnchorEl(null)}>About Us</MenuItem>
-              <MenuItem onClick={() => setAnchorEl(null)}>Blog</MenuItem>
-              <MenuItem onClick={() => setAnchorEl(null)}>Resources</MenuItem>
-              <MenuItem
-                onClick={() => {
-                  setAnchorEl(null)
-                  contactContext.setOpen(true)
-                }}
-              >
-                Contact Us
-              </MenuItem>
-            </Menu>
-          </>
-        ) : (
-          <>
-            <NavLink label="About Us" />
-            <NavLink label="Blog" />
-            <NavLink label="Resources" />
-            <NavLink
-              label="Contact Us"
-              onClick={() => contactContext.setOpen(true)}
-            />
-          </>
-        )}
-      </Toolbar>
-    </AppBar>
+              Contact Us
+            </MenuItem>
+          </Menu>
+        </>
+      ) : (
+        <>
+          <NavLink label="About Us" />
+          <NavLink label="Blog" />
+          <NavLink label="Resources" />
+          <NavLink
+            label="Contact Us"
+            onClick={() => contactContext.setOpen(true)}
+          />
+        </>
+      )}
+    </>
+  )
+
+  if (hidden)
+    return (
+      <AppBar position="fixed" id="appbar">
+        <Toolbar className={classes.toolbar} data-testid="header">
+          {content}
+        </Toolbar>
+      </AppBar>
+    )
+
+  return (
+    <Grid
+      className={classes.root}
+      container
+      alignItems="center"
+      justify={smallScreen ? 'space-evenly' : 'flex-start'}
+    >
+      {content}
+    </Grid>
   )
 }
 

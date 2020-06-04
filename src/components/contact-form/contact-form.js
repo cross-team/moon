@@ -7,14 +7,15 @@ import Button from '@material-ui/core/Button'
 
 var useStyles = makeStyles(theme => ({
   root: {
-    width: '40%',
-    padding: theme.spacing(4),
-    margin: theme.spacing(8),
+    width: '100%',
     backgroundColor: theme.palette.components.light.bgColor,
     borderRadius: '8px',
   },
-  textfield: {
+  itemContainer: {
     width: '100%',
+  },
+  textfield: {
+    width: '96%',
   },
 }))
 
@@ -66,8 +67,8 @@ export default function ContactForm() {
       onSubmit={handleSubmit}
     >
       <input type="hidden" name="form-name" value="contact" />
-      <Grid container direction="column" spacing={2}>
-        <Grid item>
+      <Grid container direction="column" alignItems="center" spacing={2}>
+        <Grid item className={classes.itemContainer} container justify="center">
           <TextField
             className={classes.textfield}
             required
@@ -79,7 +80,7 @@ export default function ContactForm() {
             onChange={handleChange}
           />
         </Grid>
-        <Grid item>
+        <Grid item className={classes.itemContainer} container justify="center">
           <TextField
             className={classes.textfield}
             required
@@ -91,7 +92,7 @@ export default function ContactForm() {
             onChange={handleChange}
           />
         </Grid>
-        <Grid item>
+        <Grid item className={classes.itemContainer} container justify="center">
           <TextField
             className={classes.textfield}
             required
@@ -104,7 +105,7 @@ export default function ContactForm() {
             onChange={handleChange}
           />
         </Grid>
-        <Grid item>
+        <Grid item className={classes.itemContainer} container justify="center">
           <TextField
             className={classes.textfield}
             name="company"
@@ -116,7 +117,12 @@ export default function ContactForm() {
           />
         </Grid>
         <Grid item>
-          <Button variant="contained" color="primary" type="submit">
+          <Button
+            size="large"
+            variant="contained"
+            color="primary"
+            type="submit"
+          >
             Submit
           </Button>
         </Grid>

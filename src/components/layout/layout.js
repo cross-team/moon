@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom'
 import { makeStyles } from '@material-ui/core/styles'
 
 import Header from 'components/header/header'
-import TopHeader from 'components/top-header/top-header'
 import Footer from 'components/footer/footer'
 import ContactModal from 'components/contact-modal/contact-modal'
 
@@ -39,12 +38,11 @@ export default function Layout({ children }) {
   return (
     <Theme>
       <ContactController>
+        <Header hidden={true} />
         <Header />
-        <TopHeader />
         <main
           className={classes.main}
           ref={mainContentRef}
-          tabIndex="-1"
           data-testid="mainContent"
         >
           <ContactModal />
