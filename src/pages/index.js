@@ -39,9 +39,6 @@ var useStyles = makeStyles(theme => ({
   section: {
     // textAlign: 'center',
   },
-  service: {
-    fontStyle: 'italic',
-  },
   services: {
     marginTop: theme.spacing(4),
   },
@@ -98,9 +95,7 @@ function Index({ data }) {
   var services = (
     <Grid container spacing={4} className={classes.services}>
       <Grid item xs={12} md={4}>
-        <Typography variant="h3" className={classes.service}>
-          Accessibility
-        </Typography>
+        <Typography variant="h3">Accessibility</Typography>
         <Typography>
           As the world changes to adjust to COVID-19, more than ever before,
           businesses need clear Accessibility and Procurement policies in place.
@@ -109,9 +104,7 @@ function Index({ data }) {
         </Typography>
       </Grid>
       <Grid item xs={12} md={4}>
-        <Typography variant="h3" className={classes.service}>
-          Workshops
-        </Typography>
+        <Typography variant="h3">Workshops</Typography>
         <Typography>
           Enterprise training approach combines in-person instruction and online
           learning with relevant content and an adaptive curriculum for User
@@ -119,27 +112,21 @@ function Index({ data }) {
         </Typography>
       </Grid>
       <Grid item xs={12} md={4}>
-        <Typography variant="h3" className={classes.service}>
-          User Research
-        </Typography>
+        <Typography variant="h3">User Research</Typography>
         <Typography>
           We partner with a network of usability pool of participants covering
           any demographic and disability needs.
         </Typography>
       </Grid>
       <Grid item xs={12} md={4}>
-        <Typography variant="h3" className={classes.service}>
-          Discovery
-        </Typography>
+        <Typography variant="h3">Discovery</Typography>
         <Typography>
           Dive into the idea, explore opportunities and assess the competitors
           through Design Thinking methodologies.
         </Typography>
       </Grid>
       <Grid item xs={12} md={4}>
-        <Typography variant="h3" className={classes.service}>
-          Design
-        </Typography>
+        <Typography variant="h3">Design</Typography>
         <Typography>
           Experts in building a product visual language, design token
           architecture and complete Design Systems. Expertly crafted bespoke
@@ -148,9 +135,7 @@ function Index({ data }) {
         </Typography>
       </Grid>
       <Grid item xs={12} md={4}>
-        <Typography variant="h3" className={classes.service}>
-          Development
-        </Typography>
+        <Typography variant="h3">Development</Typography>
         <Typography>
           Accessible front-end development ensures people with different
           abilities can access, understand, and navigate web content, regardless
@@ -160,9 +145,7 @@ function Index({ data }) {
         </Typography>
       </Grid>
       <Grid item xs={12} md={4}>
-        <Typography variant="h3" className={classes.service}>
-          Social Media
-        </Typography>
+        <Typography variant="h3">Social Media</Typography>
         <Typography>
           Digital Marketing is also maturing to become responsibly inclusive.
           Our Social Media strategy is based on best practices to ensure that
@@ -171,9 +154,7 @@ function Index({ data }) {
         </Typography>
       </Grid>
       <Grid item xs={12} md={4}>
-        <Typography variant="h3" className={classes.service}>
-          Online Reputation
-        </Typography>
+        <Typography variant="h3">Online Reputation</Typography>
         <Typography>
           The recent wave of web accessibility lawsuits and scandals have put
           organizations in reputation management crises and hefty legal
@@ -182,9 +163,7 @@ function Index({ data }) {
         </Typography>
       </Grid>
       <Grid item xs={12} md={4}>
-        <Typography variant="h3" className={classes.service}>
-          Influencer Marketing
-        </Typography>
+        <Typography variant="h3">Influencer Marketing</Typography>
         <Typography>
           Connecting your business with targeted audiences can be a waste of
           investment. We can connect you with the right people that influence
