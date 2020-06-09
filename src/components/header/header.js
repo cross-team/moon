@@ -20,9 +20,10 @@ import Logo from 'assets/svgs/cross-team-light.svg'
 import NavLink from 'components/nav-link/nav-link'
 
 var useStyles = makeStyles(theme => ({
-  root: {
+  root: props => ({
     padding: theme.spacing(2),
-  },
+    display: props.hidden ? 'none' : 'flex',
+  }),
   toolbar: props => ({
     display: 'flex',
     justifyContent: props.smallScreen ? 'center' : 'flex-start',
@@ -44,7 +45,7 @@ function Header({ hidden = false }) {
   var [anchorEl, setAnchorEl] = useState(null)
   var theme = useTheme()
   var smallScreen = useMediaQuery(theme.breakpoints.down('sm'))
-  var classes = useStyles({ smallScreen })
+  var classes = useStyles({ smallScreen, hidden })
 
   function handleMenu(event) {
     setAnchorEl(event.currentTarget)

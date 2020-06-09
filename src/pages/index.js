@@ -16,8 +16,6 @@ import franklinDark from 'assets/svgs/dark/franklin-templeton-investments.svg'
 import safrapayDark from 'assets/svgs/dark/safrapay.svg'
 import deustcheDark from 'assets/svgs/dark/Deutsche_Bank.svg'
 import verizonDark from 'assets/svgs/dark/Verizon.svg'
-import aolDark from 'assets/svgs/dark/AOL.svg'
-import uberDark from 'assets/svgs/dark/Uber.svg'
 import siemensDark from 'assets/svgs/dark/Siemens.svg'
 
 import thomsonLight from 'assets/svgs/light/Thomson_Reuters.svg'
@@ -25,17 +23,16 @@ import franklinLight from 'assets/svgs/light/franklin-templeton-investments_whit
 import safrapayLight from 'assets/svgs/light/safrapay.svg'
 import deustcheLight from 'assets/svgs/light/Deutsche_Bank.svg'
 import verizonLight from 'assets/svgs/light/Verizon.svg'
-import aolLight from 'assets/svgs/light/AOL.svg'
-import uberLight from 'assets/svgs/light/Uber.svg'
 import siemensLight from 'assets/svgs/light/Siemens.svg'
 
 var useStyles = makeStyles(theme => ({
   logoContainer: {
     marginBottom: theme.spacing(16),
+    height: 'calc(100vh - 124px)',
   },
-  logo: {
-    width: '36%',
-  },
+  logo: props => ({
+    width: props.smallScreen ? '80%' : '30%',
+  }),
   section: {
     // textAlign: 'center',
   },
@@ -180,8 +177,6 @@ function Index({ data }) {
     { src: safrapayLight, alt: 'Safrapay' },
     { src: deustcheLight, alt: 'Deutsche Bank' },
     { src: verizonLight, alt: 'Verizon' },
-    { src: aolLight, alt: 'AOL' },
-    { src: uberLight, alt: 'Uber' },
     { src: siemensLight, alt: 'Siemens' },
   ]
   var darkBrandLogos = [
@@ -190,8 +185,6 @@ function Index({ data }) {
     { src: safrapayDark, alt: 'Safrapay' },
     { src: deustcheDark, alt: 'Deutsche Bank' },
     { src: verizonDark, alt: 'Verizon' },
-    { src: aolDark, alt: 'AOL' },
-    { src: uberDark, alt: 'Uber' },
     { src: siemensDark, alt: 'Siemens' },
   ]
 
@@ -348,11 +341,16 @@ function Index({ data }) {
             item
             container
             className={classes.logoContainer}
+            justify="center"
             alignItems="center"
             direction="column"
             onScroll={() => console.log('onScroll triggered!')}
           >
-            <img className={classes.logo} src={Logo} alt="cross.team logo" />
+            <img
+              className={classes.logo}
+              src={Logo}
+              alt="The Cross.Team logo is illustrated as a Swiss Army knife, representing the effectiveness and agility of cross-functional teams."
+            />
           </Grid>
           {sections}
         </Grid>
