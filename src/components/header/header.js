@@ -22,7 +22,6 @@ import NavLink from 'components/nav-link/nav-link'
 var useStyles = makeStyles(theme => ({
   root: props => ({
     padding: theme.spacing(2),
-    display: props.hidden ? 'none' : 'flex',
   }),
   toolbar: props => ({
     display: 'flex',
@@ -37,15 +36,39 @@ var useStyles = makeStyles(theme => ({
     height: '60px',
     alignSelf: 'center',
   },
+  skipLinkContainer: {
+    border: `4px solid ${theme.palette.primary.main}`,
+    borderRadius: '4px',
+    '&:hover': {
+      backgroundColor: theme.palette.secondary.main,
+      borderRadius: '4px',
+    },
+    '&:focus-within': {
+      border: '4px solid white',
+      backgroundColor: theme.palette.secondary.main,
+    },
+  },
+  skipLink: {
+    padding: theme.spacing(1),
+    display: 'flex',
+    alignItems: 'center',
+    textDecoration: 'none',
+  },
 }))
 
 function Header({ hidden = false }) {
   var contactContext = useContext(ContactContext)
   var { mainContentRef } = useContext(MainContentContext)
   var [anchorEl, setAnchorEl] = useState(null)
+  var [isHidden, setIsHidden] = useState(true)
   var theme = useTheme()
   var smallScreen = useMediaQuery(theme.breakpoints.down('sm'))
   var classes = useStyles({ smallScreen, hidden })
+  var skipLinkRef = React.useRef(null)
+
+  React.useEffect(() => {
+    if (!hidden) skipLinkRef.current.focus()
+  }, [])
 
   function handleMenu(event) {
     setAnchorEl(event.currentTarget)
@@ -56,7 +79,11 @@ function Header({ hidden = false }) {
       {hidden && (
         <>
           <NavLink to="/">
-            <img className={classes.logo} src={Logo} alt="cross.team logo" />
+            <img
+              className={classes.logo}
+              src={Logo}
+              alt="The Cross.Team logo is illustrated as a Swiss Army knife, representing the effectiveness and agility of cross-functional teams."
+            />
           </NavLink>
 
           <Divider
@@ -68,9 +95,20 @@ function Header({ hidden = false }) {
         </>
       )}
 
-      <NavLink onClick={() => skipToMain(mainContentRef)} id="skipToMain">
-        <Typography>Skip to Main Content</Typography>
-      </NavLink>
+      <Grid
+        item
+        className={classes.skipLinkContainer}
+        onClick={() => skipToMain(mainContentRef)}
+      >
+        <a
+          className={classes.skipLink}
+          href="#"
+          id="skipToMain"
+          ref={skipLinkRef}
+        >
+          <Typography>Skip to Content</Typography>
+        </a>
+      </Grid>
 
       <Divider
         className={classes.divider}
@@ -118,14 +156,37 @@ function Header({ hidden = false }) {
     </>
   )
 
-  if (hidden)
+  function handleScroll() {
+    console.log('handleScroll called inside header!')
+    if (
+      document.body.scrollTop > 500 ||
+      document.documentElement.scrollTop > 500
+    ) {
+      document.getElementById('appbar').style.top = '0'
+      console.log('HEADER VISIBLE')
+      setIsHidden(false)
+    } else {
+      document.getElementById('appbar').style.top = '-96px'
+      setIsHidden(true)
+    }
+  }
+
+  if (hidden) {
+    if (typeof window !== 'undefined') {
+      window.onscroll = handleScroll
+    }
+
     return (
       <AppBar position="fixed" id="appbar">
-        <Toolbar className={classes.toolbar} data-testid="header">
+        <Toolbar
+          className={`${classes.toolbar} ${isHidden ? 'displayNone' : ''}`}
+          data-testid="header"
+        >
           {content}
         </Toolbar>
       </AppBar>
     )
+  }
 
   return (
     <Grid

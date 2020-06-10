@@ -17,7 +17,7 @@ describe('Layout', () => {
         </Layout>
       </MainContentController>
     )
-    let skipLink = getAllByText('Skip to Main Content')
+    let skipLink = getAllByText('Skip to Content')
     let firstFocusableElement = getByTestId('firstFocusableElement')
 
     fireEvent.click(skipLink[0])
