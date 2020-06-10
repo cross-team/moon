@@ -56,7 +56,11 @@ function Header({ hidden = false }) {
       {hidden && (
         <>
           <NavLink to="/">
-            <img className={classes.logo} src={Logo} alt="cross.team logo" />
+            <img
+              className={classes.logo}
+              src={Logo}
+              alt="The Cross.Team logo is illustrated as a Swiss Army knife, representing the effectiveness and agility of cross-functional teams."
+            />
           </NavLink>
 
           <Divider
@@ -69,7 +73,7 @@ function Header({ hidden = false }) {
       )}
 
       <NavLink onClick={() => skipToMain(mainContentRef)} id="skipToMain">
-        <Typography>Skip to Main Content</Typography>
+        <Typography>Skip to Content</Typography>
       </NavLink>
 
       <Divider
