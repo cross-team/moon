@@ -60,6 +60,7 @@ function Header({ hidden = false }) {
   var contactContext = useContext(ContactContext)
   var { mainContentRef } = useContext(MainContentContext)
   var [anchorEl, setAnchorEl] = useState(null)
+  var [isHidden, setIsHidden] = useState(true)
   var theme = useTheme()
   var smallScreen = useMediaQuery(theme.breakpoints.down('sm'))
   var classes = useStyles({ smallScreen, hidden })
@@ -155,14 +156,37 @@ function Header({ hidden = false }) {
     </>
   )
 
-  if (hidden)
+  function handleScroll() {
+    console.log('handleScroll called inside header!')
+    if (
+      document.body.scrollTop > 500 ||
+      document.documentElement.scrollTop > 500
+    ) {
+      document.getElementById('appbar').style.top = '0'
+      console.log('HEADER VISIBLE')
+      setIsHidden(false)
+    } else {
+      document.getElementById('appbar').style.top = '-96px'
+      setIsHidden(true)
+    }
+  }
+
+  if (hidden) {
+    if (typeof window !== 'undefined') {
+      window.onscroll = handleScroll
+    }
+
     return (
       <AppBar position="fixed" id="appbar">
-        <Toolbar className={classes.toolbar} data-testid="header">
+        <Toolbar
+          className={`${classes.toolbar} ${isHidden ? 'displayNone' : ''}`}
+          data-testid="header"
+        >
           {content}
         </Toolbar>
       </AppBar>
     )
+  }
 
   return (
     <Grid

@@ -309,21 +309,6 @@ function Index({ data }) {
     )
   })
 
-  function handleScroll() {
-    if (
-      document.body.scrollTop > 500 ||
-      document.documentElement.scrollTop > 500
-    ) {
-      document.getElementById('appbar').style.top = '0'
-    } else {
-      document.getElementById('appbar').style.top = '-96px'
-    }
-  }
-
-  if (typeof window !== 'undefined') {
-    window.onscroll = handleScroll
-  }
-
   return (
     <>
       <SEO title="Home" />

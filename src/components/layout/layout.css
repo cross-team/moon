@@ -2,6 +2,9 @@ body {
   margin: 0;
   width: 100%;
   background-color: #222;
-
   font-family: 'Miriam Libre', 'Helvetica', 'Arial', sans-serif;
+}
+
+.displayNone {
+  display: none !important;
 }
