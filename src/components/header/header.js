@@ -22,7 +22,6 @@ import NavLink from 'components/nav-link/nav-link'
 var useStyles = makeStyles(theme => ({
   root: props => ({
     padding: theme.spacing(2),
-    display: props.hidden ? 'none' : 'flex',
   }),
   toolbar: props => ({
     display: 'flex',
@@ -37,6 +36,24 @@ var useStyles = makeStyles(theme => ({
     height: '60px',
     alignSelf: 'center',
   },
+  skipLinkContainer: {
+    border: `4px solid ${theme.palette.primary.main}`,
+    borderRadius: '4px',
+    '&:hover': {
+      backgroundColor: theme.palette.secondary.main,
+      borderRadius: '4px',
+    },
+    '&:focus-within': {
+      border: '4px solid white',
+      backgroundColor: theme.palette.secondary.main,
+    },
+  },
+  skipLink: {
+    padding: theme.spacing(1),
+    display: 'flex',
+    alignItems: 'center',
+    textDecoration: 'none',
+  },
 }))
 
 function Header({ hidden = false }) {
@@ -46,6 +63,11 @@ function Header({ hidden = false }) {
   var theme = useTheme()
   var smallScreen = useMediaQuery(theme.breakpoints.down('sm'))
   var classes = useStyles({ smallScreen, hidden })
+  var skipLinkRef = React.useRef(null)
+
+  React.useEffect(() => {
+    if (!hidden) skipLinkRef.current.focus()
+  }, [])
 
   function handleMenu(event) {
     setAnchorEl(event.currentTarget)
@@ -72,9 +94,20 @@ function Header({ hidden = false }) {
         </>
       )}
 
-      <NavLink onClick={() => skipToMain(mainContentRef)} id="skipToMain">
-        <Typography>Skip to Content</Typography>
-      </NavLink>
+      <Grid
+        item
+        className={classes.skipLinkContainer}
+        onClick={() => skipToMain(mainContentRef)}
+      >
+        <a
+          className={classes.skipLink}
+          href="#"
+          id="skipToMain"
+          ref={skipLinkRef}
+        >
+          <Typography>Skip to Content</Typography>
+        </a>
+      </Grid>
 
       <Divider
         className={classes.divider}

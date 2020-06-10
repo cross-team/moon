@@ -10,6 +10,7 @@ import SEO from 'components/SEO/SEO'
 import Layout from 'components/layout/layout'
 import Section from 'components/section/section'
 import Logo from 'assets/svgs/cross-team-light.svg'
+import ScrollArrow from 'components/scroll-arrow/scroll-arrow'
 
 import thomsonDark from 'assets/svgs/dark/Thomson_Reuters.svg'
 import franklinDark from 'assets/svgs/dark/franklin-templeton-investments.svg'
@@ -31,7 +32,7 @@ var useStyles = makeStyles(theme => ({
     height: 'calc(100vh - 124px)',
   },
   logo: props => ({
-    width: props.smallScreen ? '80%' : '30%',
+    width: props.smallScreen ? '72%' : '30%',
   }),
   section: {
     // textAlign: 'center',
@@ -334,14 +335,13 @@ function Index({ data }) {
             className={classes.logoContainer}
             justify="center"
             alignItems="center"
-            direction="column"
-            onScroll={() => console.log('onScroll triggered!')}
           >
             <img
               className={classes.logo}
               src={Logo}
               alt="The Cross.Team logo is illustrated as a Swiss Army knife, representing the effectiveness and agility of cross-functional teams."
             />
+            <ScrollArrow />
           </Grid>
           {sections}
         </Grid>
