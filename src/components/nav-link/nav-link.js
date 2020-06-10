@@ -6,8 +6,14 @@ import Typography from '@material-ui/core/Typography'
 
 var useStyles = makeStyles(theme => ({
   root: {
-    borderRadius: '2px',
+    border: `4px solid ${theme.palette.primary.main}`,
+    borderRadius: '4px',
     '&:hover': {
+      backgroundColor: theme.palette.secondary.main,
+      borderRadius: '4px',
+    },
+    '&:focus-within': {
+      border: '4px solid white',
       backgroundColor: theme.palette.secondary.main,
     },
   },
@@ -15,6 +21,7 @@ var useStyles = makeStyles(theme => ({
     padding: theme.spacing(1),
     display: 'flex',
     alignItems: 'center',
+    textDecoration: 'none',
   },
 }))
 

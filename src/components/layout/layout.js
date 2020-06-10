@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useContext } from 'react'
+import React, { useContext } from 'react'
 import ReactDOM from 'react-dom'
 import { makeStyles } from '@material-ui/core/styles'
 
@@ -6,7 +6,6 @@ import Header from 'components/header/header'
 import Footer from 'components/footer/footer'
 import ContactModal from 'components/contact-modal/contact-modal'
 
-import { skipToMain } from 'utils/functions'
 import Theme from 'providers/theme'
 import { ContactController } from 'providers/contact-context'
 import MainContentContext from 'providers/main-content-context'
