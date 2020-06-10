@@ -54,6 +54,7 @@ var useStyles = makeStyles(theme => ({
     alignItems: 'center',
     textDecoration: 'none',
   },
+  menu: {},
 }))
 
 function Header({ hidden = false }) {
@@ -123,6 +124,7 @@ function Header({ hidden = false }) {
             <MenuIcon />
           </NavLink>
           <Menu
+            className={classes.menu}
             id="site-menu"
             anchorEl={anchorEl}
             keepMounted
@@ -157,13 +159,11 @@ function Header({ hidden = false }) {
   )
 
   function handleScroll() {
-    console.log('handleScroll called inside header!')
     if (
       document.body.scrollTop > 500 ||
       document.documentElement.scrollTop > 500
     ) {
       document.getElementById('appbar').style.top = '0'
-      console.log('HEADER VISIBLE')
       setIsHidden(false)
     } else {
       document.getElementById('appbar').style.top = '-96px'

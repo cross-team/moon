@@ -12,6 +12,9 @@ import Section from 'components/section/section'
 import Logo from 'assets/svgs/cross-team-light.svg'
 import ScrollArrow from 'components/scroll-arrow/scroll-arrow'
 
+import MainContentContext from 'providers/main-content-context'
+import { skipToMain } from 'utils/functions'
+
 import thomsonDark from 'assets/svgs/dark/Thomson_Reuters.svg'
 import franklinDark from 'assets/svgs/dark/franklin-templeton-investments.svg'
 import safrapayDark from 'assets/svgs/dark/safrapay.svg'
@@ -71,6 +74,7 @@ export var POSTS_QUERY = graphql`
 
 function Index({ data }) {
   var theme = useTheme()
+  var { mainContentRef } = React.useContext(MainContentContext)
   var mediumScreen = useMediaQuery(theme.breakpoints.down('md'))
   var smallScreen = useMediaQuery(theme.breakpoints.down('sm'))
   var classes = useStyles({ mediumScreen, smallScreen })
@@ -297,7 +301,7 @@ function Index({ data }) {
       sectionTheme = 'dark'
     }
     return (
-      <Section color={sectionTheme}>
+      <Section color={sectionTheme} linkID={`skipLink${index}`}>
         <div
           className={classes.section}
           dangerouslySetInnerHTML={{ __html: node.html }}
@@ -326,7 +330,7 @@ function Index({ data }) {
               src={Logo}
               alt="The Cross.Team logo is illustrated as a Swiss Army knife, representing the effectiveness and agility of cross-functional teams."
             />
-            <ScrollArrow />
+            <ScrollArrow onClick={() => skipToMain(mainContentRef)} />
           </Grid>
           {sections}
         </Grid>
