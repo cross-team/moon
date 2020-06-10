@@ -1,3 +1,6 @@
+import * as Scroll from 'react-scroll'
+var scroll = Scroll.animateScroll
+
 // Takes a nested array of elements and returns the first focusable element in the DOM tree
 // Returns null if array contains no focusable elements
 export function getFirstFocusableChild(children) {
@@ -29,6 +32,12 @@ export function hexToRgbA(hex, opacity = '1') {
 // If there are none, it sends focus to the ref itself
 export function skipToMain(ref) {
   let child = getFirstFocusableChild(ref.current.children)
-  if (child === null) ref.current.focus()
-  else child.focus()
+  if (child === null) {
+    ref.current.focus()
+    window.scrollTo(0, ref.current.offsetTop)
+  } else {
+    child.focus()
+    let offset = child.offsetTop - 180
+    scroll.scrollTo(offset, { smooth: 'easeInQuad', duration: 1500 })
+  }
 }

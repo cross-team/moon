@@ -20,6 +20,7 @@ function Section({
   imgAlt = 'Image Needs Proper Alt Text',
   videoURL = '',
   transcript = 'Video Needs Proper Transcript',
+  linkID = '',
   height,
 }) {
   var classes = useStyles({ color, bgImg, height })
@@ -58,6 +59,7 @@ function Section({
         <a
           href="#skipToMain"
           data-testid="skipLink"
+          id={linkID}
           className={classes.skipLink}
         >
           <Typography component="span">Skip to Navigation</Typography>

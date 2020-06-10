@@ -11,11 +11,11 @@ var useStyles = makeStyles(theme => ({
   },
 }))
 
-export default function ScrollArrow() {
+export default function ScrollArrow({ onClick }) {
   var classes = useStyles()
   return (
     <div class="arrow bounce">
-      <Arrow className={classes.icon} />
+      <Arrow className={classes.icon} onClick={onClick} tabIndex="0" />
     </div>
   )
 }
