@@ -7,7 +7,6 @@ import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 import Divider from '@material-ui/core/Divider'
 import Menu from '@material-ui/core/Menu'
-import MenuItem from '@material-ui/core/MenuItem'
 import Grid from '@material-ui/core/Grid'
 import MenuIcon from '@material-ui/icons/Menu'
 
@@ -17,6 +16,7 @@ import { skipToMain } from 'utils/functions'
 import ContactContext from 'providers/contact-context'
 import MainContentContext from 'providers/main-content-context'
 import Logo from 'assets/svgs/cross-team-light.svg'
+import StyledMenuItem from 'components/styled-menu-item/styled-menu-item'
 import NavLink from 'components/nav-link/nav-link'
 
 var useStyles = makeStyles(theme => ({
@@ -54,7 +54,16 @@ var useStyles = makeStyles(theme => ({
     alignItems: 'center',
     textDecoration: 'none',
   },
-  menu: {},
+  menuItem: {
+    '&:hover': {
+      backgroundColor: theme.palette.secondary.main,
+      color: theme.palette.secondary.contrastText,
+    },
+    '&:focus': {
+      backgroundColor: theme.palette.secondary.main,
+      color: theme.palette.secondary.contrastText,
+    },
+  },
 }))
 
 function Header({ hidden = false }) {
@@ -124,24 +133,29 @@ function Header({ hidden = false }) {
             <MenuIcon />
           </NavLink>
           <Menu
-            className={classes.menu}
             id="site-menu"
             anchorEl={anchorEl}
             keepMounted
             open={Boolean(anchorEl)}
             onClose={() => setAnchorEl(null)}
           >
-            <MenuItem onClick={() => setAnchorEl(null)}>About Us</MenuItem>
-            <MenuItem onClick={() => setAnchorEl(null)}>Blog</MenuItem>
-            <MenuItem onClick={() => setAnchorEl(null)}>Resources</MenuItem>
-            <MenuItem
+            <StyledMenuItem onClick={() => setAnchorEl(null)}>
+              About Us
+            </StyledMenuItem>
+            <StyledMenuItem onClick={() => setAnchorEl(null)}>
+              Blog
+            </StyledMenuItem>
+            <StyledMenuItem onClick={() => setAnchorEl(null)}>
+              Resources
+            </StyledMenuItem>
+            <StyledMenuItem
               onClick={() => {
                 setAnchorEl(null)
                 contactContext.setOpen(true)
               }}
             >
               Contact Us
-            </MenuItem>
+            </StyledMenuItem>
           </Menu>
         </>
       ) : (
