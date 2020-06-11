@@ -68,6 +68,12 @@ module.exports = {
       },
     },
     {
+      resolve: `gatsby-source-medium`,
+      options: {
+        username: `@claudioluisvera`,
+      },
+    },
+    {
       resolve: `gatsby-plugin-gdpr-cookies`,
       options: {
         googleAnalytics: {

@@ -15,7 +15,7 @@ export default function ScrollArrow({ onClick }) {
   var classes = useStyles()
   return (
     <div class="arrow bounce">
-      <Arrow className={classes.icon} onClick={onClick} tabIndex="0" />
+      <Arrow className={classes.icon} onClick={onClick} />
     </div>
   )
 }
