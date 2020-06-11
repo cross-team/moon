@@ -15,12 +15,9 @@ var theme = createMuiTheme({
       dark: '#0030b3',
       contrastText: '#fefefe',
     },
-    text: {
-      primary: '#fefefe',
-    },
     divider: '#fefefe',
     background: {
-      paper: '#04f',
+      paper: '#fefefe',
     },
     components: {
       dark: {
