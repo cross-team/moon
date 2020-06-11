@@ -1,4 +1,5 @@
 import React, { useContext, useState } from 'react'
+import { navigate } from 'gatsby'
 import { makeStyles } from '@material-ui/core/styles'
 import { useTheme } from '@material-ui/core/styles'
 import useMediaQuery from '@material-ui/core/useMediaQuery'
@@ -142,7 +143,12 @@ function Header({ hidden = false }) {
             <StyledMenuItem onClick={() => setAnchorEl(null)}>
               About Us
             </StyledMenuItem>
-            <StyledMenuItem onClick={() => setAnchorEl(null)}>
+            <StyledMenuItem
+              onClick={() => {
+                setAnchorEl(null)
+                navigate('/blog/')
+              }}
+            >
               Blog
             </StyledMenuItem>
             <StyledMenuItem onClick={() => setAnchorEl(null)}>
@@ -161,7 +167,7 @@ function Header({ hidden = false }) {
       ) : (
         <>
           <NavLink label="About Us" />
-          <NavLink label="Blog" />
+          <NavLink label="Blog" to="/blog/" />
           <NavLink label="Resources" />
           <NavLink
             label="Contact Us"
