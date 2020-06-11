@@ -44,9 +44,9 @@ var useStyles = makeStyles(theme => ({
     marginTop: theme.spacing(4),
   },
   brandLogo: props => {
-    let logoWidth = '10%'
-    if (props.mediumScreen) logoWidth = '20%'
-    if (props.smallScreen) logoWidth = '36%'
+    let logoWidth = '50%'
+    // if (props.mediumScreen) logoWidth = '20%'
+    // if (props.smallScreen) logoWidth = '36%'
     return {
       width: logoWidth,
     }
@@ -194,99 +194,13 @@ function Index({ data }) {
       return null
     }
 
-    if (smallScreen) {
-      return (
-        <>
-          <Grid
-            className={classes.brandContainer}
-            container
-            alignItems="center"
-            justify="space-around"
-          >
-            {logos.slice(0, 2).map(logo => (
-              <img
-                className={classes.brandLogo}
-                src={logo.src}
-                alt={logo.alt}
-              />
-            ))}
-          </Grid>
-          <Grid
-            className={classes.brandContainer}
-            container
-            alignItems="center"
-            justify="space-around"
-          >
-            {logos.slice(2, 4).map(logo => (
-              <img
-                className={classes.brandLogo}
-                src={logo.src}
-                alt={logo.alt}
-              />
-            ))}
-          </Grid>
-          <Grid
-            className={classes.brandContainer}
-            container
-            alignItems="center"
-            justify="space-around"
-          >
-            {logos.slice(4, 6).map(logo => (
-              <img
-                className={classes.brandLogo}
-                src={logo.src}
-                alt={logo.alt}
-              />
-            ))}
-          </Grid>
-          <Grid
-            className={classes.brandContainer}
-            container
-            alignItems="center"
-            justify="space-around"
-          >
-            {logos.slice(6, 8).map(logo => (
-              <img
-                className={classes.brandLogo}
-                src={logo.src}
-                alt={logo.alt}
-              />
-            ))}
-          </Grid>
-        </>
-      )
-    }
-
-    if (mediumScreen) {
-      return (
-        <>
-          <Grid container alignItems="center" justify="space-around">
-            {logos.slice(0, 4).map(logo => (
-              <img
-                className={classes.brandLogo}
-                src={logo.src}
-                alt={logo.alt}
-              />
-            ))}
-          </Grid>
-          <Grid container alignItems="center" justify="space-around">
-            {logos.slice(4, 8).map(logo => (
-              <img
-                className={classes.brandLogo}
-                src={logo.src}
-                alt={logo.alt}
-              />
-            ))}
-          </Grid>
-        </>
-      )
-    }
-
     let images = logos.map(logo => (
-      <img className={classes.brandLogo} src={logo.src} alt={logo.alt} />
+      <Grid item xs={6} md={4} container justify="center">
+        <img className={classes.brandLogo} src={logo.src} alt={logo.alt} />
+      </Grid>
     ))
     return (
-      <Grid container alignItems="center" justify="space-around">
+      <Grid container alignItems="center">
         {images}
       </Grid>
     )
