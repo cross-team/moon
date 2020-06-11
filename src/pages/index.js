@@ -49,6 +49,7 @@ var useStyles = makeStyles(theme => ({
     // if (props.smallScreen) logoWidth = '36%'
     return {
       width: logoWidth,
+      minHeight: '25vh',
     }
   },
   brandContainer: {
@@ -195,7 +196,7 @@ function Index({ data }) {
     }
 
     let images = logos.map(logo => (
-      <Grid item xs={6} md={4} container justify="center">
+      <Grid item xs={12} sm={6} md={4} container justify="center">
         <img className={classes.brandLogo} src={logo.src} alt={logo.alt} />
       </Grid>
     ))
