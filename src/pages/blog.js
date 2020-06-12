@@ -12,7 +12,6 @@ var useStyles = makeStyles(theme => ({
     color: theme.palette.primary.contrastText,
     padding: theme.spacing(8),
   },
-  postsContainer: {},
 }))
 
 export var POSTS_QUERY = graphql`
@@ -37,7 +36,6 @@ export var POSTS_QUERY = graphql`
 
 function Blog({ data }) {
   var classes = useStyles()
-  console.log(data.allMediumPost.edges)
 
   var posts = data.allMediumPost.edges.map(post => (
     <BlogPost post={post.node} />

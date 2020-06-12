@@ -37,16 +37,18 @@ export default function Layout({ children }) {
   return (
     <Theme>
       <ContactController>
-        <Header hidden={true} />
-        <Header />
-        <main
-          className={classes.main}
-          ref={mainContentRef}
-          data-testid="mainContent"
-        >
-          <ContactModal />
-          {children}
-        </main>
+        <>
+          <Header hidden={true} />
+          <Header />
+          <main
+            className={classes.main}
+            ref={mainContentRef}
+            data-testid="mainContent"
+          >
+            <ContactModal />
+            {children}
+          </main>
+        </>
       </ContactController>
       <Footer />
     </Theme>

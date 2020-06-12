@@ -64,13 +64,15 @@ function Section({
         >
           <Typography component="span">Skip to Navigation</Typography>
         </a>
-        <Typography
-          className={classes.heading}
-          variant={headingSize}
-          component="h2"
-        >
-          {heading}
-        </Typography>
+        {heading && (
+          <Typography
+            className={classes.heading}
+            variant={headingSize}
+            component="h2"
+          >
+            {heading}
+          </Typography>
+        )}
         <Grid container justify="center" item spacing={8}>
           {(videoURL || img) && (
             <Grid

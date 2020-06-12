@@ -159,9 +159,9 @@ function Index({ data }) {
 
   var services = (
     <Grid container spacing={4} className={classes.services}>
-      {servicesData.map(service => (
-        <Grid item xs={12} md={4}>
-          <h3 ariaLevel="2">{service.title}</h3>
+      {servicesData.map((service, index) => (
+        <Grid item xs={12} md={4} key={service.title}>
+          <h3 aria-level="2">{service.title}</h3>
           <Typography>{service.content}</Typography>
         </Grid>
       ))}
@@ -196,7 +196,15 @@ function Index({ data }) {
     }
 
     let images = logos.map(logo => (
-      <Grid item xs={12} sm={6} md={4} container justify="center">
+      <Grid
+        item
+        xs={12}
+        sm={6}
+        md={4}
+        container
+        justify="center"
+        key={logo.alt}
+      >
         <img className={classes.brandLogo} src={logo.src} alt={logo.alt} />
       </Grid>
     ))
@@ -216,7 +224,7 @@ function Index({ data }) {
       sectionTheme = 'dark'
     }
     return (
-      <Section color={sectionTheme} linkID={`skipLink${index}`}>
+      <Section color={sectionTheme} linkID={`skipLink${index}`} key={index}>
         <div
           className={classes.section}
           dangerouslySetInnerHTML={{ __html: node.html }}
