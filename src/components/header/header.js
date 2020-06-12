@@ -114,7 +114,7 @@ function Header({ hidden = false }) {
         <a
           className={classes.skipLink}
           href="#"
-          id="skipToMain"
+          id={`skipToMain${hidden && 'h'}`}
           ref={skipLinkRef}
         >
           <Typography>Skip to Content</Typography>
@@ -140,7 +140,12 @@ function Header({ hidden = false }) {
             open={Boolean(anchorEl)}
             onClose={() => setAnchorEl(null)}
           >
-            <StyledMenuItem onClick={() => setAnchorEl(null)}>
+            <StyledMenuItem
+              onClick={() => {
+                setAnchorEl(null)
+                navigate('/about/')
+              }}
+            >
               About Us
             </StyledMenuItem>
             <StyledMenuItem
@@ -151,7 +156,12 @@ function Header({ hidden = false }) {
             >
               Blog
             </StyledMenuItem>
-            <StyledMenuItem onClick={() => setAnchorEl(null)}>
+            <StyledMenuItem
+              onClick={() => {
+                setAnchorEl(null)
+                navigate('/resources/')
+              }}
+            >
               Resources
             </StyledMenuItem>
             <StyledMenuItem
@@ -166,9 +176,9 @@ function Header({ hidden = false }) {
         </>
       ) : (
         <>
-          <NavLink label="About Us" />
+          <NavLink label="About Us" to="/about/" />
           <NavLink label="Blog" to="/blog/" />
-          <NavLink label="Resources" />
+          <NavLink label="Resources" to="/resources/" />
           <NavLink
             label="Contact Us"
             onClick={() => contactContext.setOpen(true)}
@@ -210,6 +220,7 @@ function Header({ hidden = false }) {
 
   return (
     <Grid
+      role="banner"
       className={classes.root}
       container
       alignItems="center"

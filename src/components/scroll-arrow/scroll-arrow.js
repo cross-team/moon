@@ -14,7 +14,7 @@ var useStyles = makeStyles(theme => ({
 export default function ScrollArrow({ onClick }) {
   var classes = useStyles()
   return (
-    <div class="arrow bounce">
+    <div className="arrow bounce">
       <Arrow className={classes.icon} onClick={onClick} />
     </div>
   )
