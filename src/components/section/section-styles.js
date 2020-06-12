@@ -32,10 +32,20 @@ var useStyles = makeStyles(theme => ({
     paddingTop: theme.spacing(12),
     paddingBottom: theme.spacing(12),
   },
-  skipLink: props => ({
+  skipLinkContainer: {
     alignSelf: 'flex-end',
+  },
+  skipLink: props => ({
     color: theme.palette.components[props.color].linkColor,
-    margin: theme.spacing(1),
+    padding: theme.spacing(1),
+    '&:hover': {
+      backgroundColor: theme.palette.components[props.color].linkColor,
+      color: theme.palette.components[props.color].bgColor,
+    },
+    '&:focus': {
+      backgroundColor: theme.palette.components[props.color].linkColor,
+      color: theme.palette.components[props.color].bgColor,
+    },
   }),
   playerContainer: {
     width: '80%',
@@ -61,6 +71,15 @@ var useStyles = makeStyles(theme => ({
     textAlign: 'left',
     '& a': {
       color: theme.palette.components[props.color].linkColor,
+      padding: '0 4px',
+      '&:hover': {
+        backgroundColor: theme.palette.components[props.color].linkColor,
+        color: theme.palette.components[props.color].bgColor,
+      },
+      '&:focus': {
+        backgroundColor: theme.palette.components[props.color].linkColor,
+        color: theme.palette.components[props.color].bgColor,
+      },
     },
   }),
 }))
