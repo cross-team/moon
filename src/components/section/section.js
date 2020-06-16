@@ -56,14 +56,17 @@ function Section({
         wrap="nowrap"
         justify="center"
       >
-        <a
-          href="#skipToMain"
-          data-testid="skipLink"
-          id={linkID}
-          className={classes.skipLink}
-        >
-          <Typography component="span">Skip to Navigation</Typography>
-        </a>
+        <Typography className={classes.skipLinkContainer}>
+          <a
+            className={classes.skipLink}
+            href="#skipToMain"
+            data-testid="skipLink"
+            id={linkID}
+          >
+            Skip to Navigation
+          </a>
+        </Typography>
+
         {heading && (
           <Typography
             className={classes.heading}
