@@ -59,15 +59,14 @@ var useStyles = makeStyles(theme => ({
 
 export var POSTS_QUERY = graphql`
   query {
-    allMarkdownRemark(
-      filter: { frontmatter: { tag: { eq: "home" } } }
-      sort: { fields: frontmatter___title }
-    ) {
-      nodes {
-        frontmatter {
-          title
+    github {
+      repository(name: "moon", owner: "cross-team") {
+        issues(first: 10, filterBy: { labels: "home" }) {
+          nodes {
+            title
+            bodyHTML
+          }
         }
-        html
       }
     }
   }
@@ -79,21 +78,17 @@ function Index({ data }) {
   var mediumScreen = useMediaQuery(theme.breakpoints.down('md'))
   var smallScreen = useMediaQuery(theme.breakpoints.down('sm'))
   var classes = useStyles({ mediumScreen, smallScreen })
-  // var images = Object.keys(data).reduce(function dataReducer(imageSet, key) {
-  //   let image = data[key].nodes[0].childImageSharp.fluid
-  //   let srcArr = image.srcSet.split(',\n')
-  //   let srcObj = srcArr.reduce(function srcReducer(srcSet, src) {
-  //     let splitSrc = src.split(' ')
-  //     return { ...srcSet, [splitSrc[1]]: splitSrc[0] }
-  //   }, {})
-  //   let result = {
-  //     name: image.originalName,
-  //     originalImg: image.originalImg,
-  //     src: image.src,
-  //     srcSet: srcObj,
-  //   }
-  //   return { ...imageSet, [key]: result }
-  // }, {})
+
+  function compareTitles(a, b) {
+    if (a.title < b.title) {
+      return -1
+    }
+    if (a.title > b.title) {
+      return 1
+    }
+    // a must be equal to b
+    return 0
+  }
 
   var servicesData = [
     {
@@ -215,8 +210,12 @@ function Index({ data }) {
     )
   }
 
-  var nodes = data.allMarkdownRemark.nodes
-  var sections = nodes.map((node, index) => {
+  console.log(data.github.repository.issues.nodes)
+
+  var nodes = data.github.repository.issues.nodes
+  var sortedNodes = nodes.sort(compareTitles)
+  var sections = sortedNodes.map((node, index) => {
+    console.log(node)
     let sectionTheme = ''
     if (index % 2 === 0) {
       sectionTheme = 'light'
@@ -227,11 +226,10 @@ function Index({ data }) {
       <Section color={sectionTheme} linkID={`skipLink${index}`} key={index}>
         <div
           className={classes.section}
-          dangerouslySetInnerHTML={{ __html: node.html }}
+          dangerouslySetInnerHTML={{ __html: node.bodyHTML }}
         />
-        {node.frontmatter.title.includes('Our Services') && services}
-        {node.frontmatter.title.includes('brands') &&
-          renderBrandLogos(sectionTheme)}
+        {node.title.includes('Our Services') && services}
+        {node.title.includes('brands') && renderBrandLogos(sectionTheme)}
       </Section>
     )
   })

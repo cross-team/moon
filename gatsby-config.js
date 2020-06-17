@@ -1,3 +1,7 @@
+require('dotenv').config({
+  path: `.env.${process.env.NODE_ENV}`,
+})
+
 module.exports = {
   siteMetadata: {
     title: 'Home',
@@ -92,6 +96,18 @@ module.exports = {
         },
         // defines the environments where the tracking should be available  - default is ["production"]
         environments: ['production', 'development'],
+      },
+    },
+    {
+      resolve: `gatsby-source-graphql`,
+      options: {
+        typeName: 'GitHub',
+        fieldName: 'github',
+        url: 'https://api.github.com/graphql',
+        headers: {
+          // Learn about environment variables: https://gatsby.dev/env-vars
+          Authorization: `Bearer ${process.env.GITHUB_API_TOKEN}`,
+        },
       },
     },
     'gatsby-transformer-sharp',
