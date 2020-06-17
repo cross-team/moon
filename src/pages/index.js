@@ -9,25 +9,13 @@ import { graphql } from 'gatsby'
 import SEO from 'components/SEO/SEO'
 import Layout from 'components/layout/layout'
 import Section from 'components/section/section'
-import Logo from 'assets/svgs/cross-team-light.svg'
 import ScrollArrow from 'components/scroll-arrow/scroll-arrow'
+import Clients from 'components/clients/clients'
 
 import MainContentContext from 'providers/main-content-context'
 import { skipToMain } from 'utils/functions'
 
-import thomsonDark from 'assets/svgs/dark/Thomson_Reuters.svg'
-import franklinDark from 'assets/svgs/dark/franklin-templeton-investments.svg'
-import safrapayDark from 'assets/svgs/dark/safrapay.svg'
-import deustcheDark from 'assets/svgs/dark/Deutsche_Bank.svg'
-import verizonDark from 'assets/svgs/dark/Verizon.svg'
-import siemensDark from 'assets/svgs/dark/Siemens.svg'
-
-import thomsonLight from 'assets/svgs/light/Thomson_Reuters.svg'
-import franklinLight from 'assets/svgs/light/franklin-templeton-investments_white.svg'
-import safrapayLight from 'assets/svgs/light/safrapay.svg'
-import deustcheLight from 'assets/svgs/light/Deutsche_Bank.svg'
-import verizonLight from 'assets/svgs/light/Verizon.svg'
-import siemensLight from 'assets/svgs/light/Siemens.svg'
+import Logo from 'assets/svgs/cross-team-light.svg'
 
 var useStyles = makeStyles(theme => ({
   logoContainer: {
@@ -43,31 +31,18 @@ var useStyles = makeStyles(theme => ({
   services: {
     marginTop: theme.spacing(4),
   },
-  brandLogo: props => {
-    let logoWidth = '50%'
-    // if (props.mediumScreen) logoWidth = '20%'
-    // if (props.smallScreen) logoWidth = '36%'
-    return {
-      width: logoWidth,
-      minHeight: '25vh',
-    }
-  },
-  brandContainer: {
-    minHeight: '30vw',
-  },
 }))
 
 export var POSTS_QUERY = graphql`
   query {
-    allMarkdownRemark(
-      filter: { frontmatter: { tag: { eq: "home" } } }
-      sort: { fields: frontmatter___title }
-    ) {
-      nodes {
-        frontmatter {
-          title
+    github {
+      repository(name: "moon", owner: "cross-team") {
+        issues(first: 10, filterBy: { labels: "home" }) {
+          nodes {
+            title
+            bodyHTML
+          }
         }
-        html
       }
     }
   }
@@ -79,21 +54,17 @@ function Index({ data }) {
   var mediumScreen = useMediaQuery(theme.breakpoints.down('md'))
   var smallScreen = useMediaQuery(theme.breakpoints.down('sm'))
   var classes = useStyles({ mediumScreen, smallScreen })
-  // var images = Object.keys(data).reduce(function dataReducer(imageSet, key) {
-  //   let image = data[key].nodes[0].childImageSharp.fluid
-  //   let srcArr = image.srcSet.split(',\n')
-  //   let srcObj = srcArr.reduce(function srcReducer(srcSet, src) {
-  //     let splitSrc = src.split(' ')
-  //     return { ...srcSet, [splitSrc[1]]: splitSrc[0] }
-  //   }, {})
-  //   let result = {
-  //     name: image.originalName,
-  //     originalImg: image.originalImg,
-  //     src: image.src,
-  //     srcSet: srcObj,
-  //   }
-  //   return { ...imageSet, [key]: result }
-  // }, {})
+
+  function compareTitles(a, b) {
+    if (a.title < b.title) {
+      return -1
+    }
+    if (a.title > b.title) {
+      return 1
+    }
+    // a must be equal to b
+    return 0
+  }
 
   var servicesData = [
     {
@@ -168,55 +139,12 @@ function Index({ data }) {
     </Grid>
   )
 
-  var lightBrandLogos = [
-    { src: thomsonLight, alt: 'Thomson Reuters' },
-    { src: franklinLight, alt: 'Franklin Templeton Investments' },
-    { src: safrapayLight, alt: 'Safrapay' },
-    { src: deustcheLight, alt: 'Deutsche Bank' },
-    { src: verizonLight, alt: 'Verizon' },
-    { src: siemensLight, alt: 'Siemens' },
-  ]
-  var darkBrandLogos = [
-    { src: thomsonDark, alt: 'Thomson Reuters' },
-    { src: franklinDark, alt: 'Franklin Templeton Investments' },
-    { src: safrapayDark, alt: 'Safrapay' },
-    { src: deustcheDark, alt: 'Deutsche Bank' },
-    { src: verizonDark, alt: 'Verizon' },
-    { src: siemensDark, alt: 'Siemens' },
-  ]
+  console.log(data.github.repository.issues.nodes)
 
-  function renderBrandLogos(theme) {
-    let logos
-    if (theme === 'light') {
-      logos = darkBrandLogos
-    } else if (theme === 'dark') {
-      logos = lightBrandLogos
-    } else {
-      return null
-    }
-
-    let images = logos.map(logo => (
-      <Grid
-        item
-        xs={12}
-        sm={6}
-        md={4}
-        container
-        justify="center"
-        key={logo.alt}
-      >
-        <img className={classes.brandLogo} src={logo.src} alt={logo.alt} />
-      </Grid>
-    ))
-    return (
-      <Grid container alignItems="center">
-        {images}
-      </Grid>
-    )
-  }
-
-  var nodes = data.allMarkdownRemark.nodes
-  var sections = nodes.map((node, index) => {
+  var nodes = data.github.repository.issues.nodes
+  var sortedNodes = nodes.sort(compareTitles)
+  var sections = sortedNodes.map((node, index) => {
+    console.log(node)
     let sectionTheme = ''
     if (index % 2 === 0) {
       sectionTheme = 'light'
@@ -227,11 +155,12 @@ function Index({ data }) {
       <Section color={sectionTheme} linkID={`skipLink${index}`} key={index}>
         <div
           className={classes.section}
-          dangerouslySetInnerHTML={{ __html: node.html }}
+          dangerouslySetInnerHTML={{ __html: node.bodyHTML }}
         />
-        {node.frontmatter.title.includes('Our Services') && services}
-        {node.frontmatter.title.includes('brands') &&
-          renderBrandLogos(sectionTheme)}
+        {node.title.includes('Our Services') && services}
+        {node.title.includes('brands') && (
+          <Clients sectionTheme={sectionTheme} />
+        )}
       </Section>
     )
   })
