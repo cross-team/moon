@@ -33,11 +33,13 @@ export function hexToRgbA(hex, opacity = '1') {
 export function skipToMain(ref) {
   let child = getFirstFocusableChild(ref.current.children)
   if (child === null) {
+    console.log('child is null')
     ref.current.focus()
     window.scrollTo(0, ref.current.offsetTop)
   } else {
+    console.log(child)
     child.focus()
     let offset = child.offsetTop - 180
-    scroll.scrollTo(offset, { smooth: 'easeInQuad', duration: 1500 })
+    scroll.scrollTo(offset, { duration: 1 })
   }
 }

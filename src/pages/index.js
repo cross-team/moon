@@ -23,7 +23,7 @@ var useStyles = makeStyles(theme => ({
     height: 'calc(100vh - 124px)',
   },
   logo: props => ({
-    width: props.smallScreen ? '72%' : '30%',
+    width: props.smallScreen ? '64%' : '30%',
   }),
 }))
 
@@ -83,28 +83,28 @@ function Index({ data }) {
     )
   })
 
+  var landing = (
+    <Grid
+      item
+      container
+      className={classes.logoContainer}
+      justify="center"
+      alignItems="center"
+      direction="column"
+    >
+      <img
+        className={classes.logo}
+        src={Logo}
+        alt="The Cross.Team logo is illustrated as a Swiss Army knife, representing the effectiveness and agility of cross-functional teams."
+      />
+      <ScrollArrow onClick={() => skipToMain(mainContentRef)} />
+    </Grid>
+  )
+
   return (
     <>
       <SEO title="Home" />
-      <Layout>
-        <Grid container direction="column">
-          <Grid
-            item
-            container
-            className={classes.logoContainer}
-            justify="center"
-            alignItems="center"
-          >
-            <img
-              className={classes.logo}
-              src={Logo}
-              alt="The Cross.Team logo is illustrated as a Swiss Army knife, representing the effectiveness and agility of cross-functional teams."
-            />
-            <ScrollArrow onClick={() => skipToMain(mainContentRef)} />
-          </Grid>
-          {sections}
-        </Grid>
-      </Layout>
+      <Layout landing={landing}>{sections}</Layout>
     </>
   )
 }
