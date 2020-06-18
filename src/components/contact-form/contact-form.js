@@ -39,7 +39,6 @@ export default function ContactForm() {
   }
 
   function handleSubmit(e) {
-    console.log('handleSubmit called')
     e.preventDefault()
     let form = e.target
     fetch('/', {
@@ -51,7 +50,6 @@ export default function ContactForm() {
       }),
     })
       .then(() => {
-        console.log(state)
         navigate('/')
       })
       .catch(error => alert(error))

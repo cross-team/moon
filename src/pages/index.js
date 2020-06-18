@@ -62,7 +62,6 @@ function Index({ data }) {
   var nodes = data.github.repository.issues.nodes
   var sortedNodes = nodes.sort(compareTitles)
   var sections = sortedNodes.map((node, index) => {
-    console.log(node)
     let sectionTheme = ''
     if (index % 2 === 0) {
       sectionTheme = 'light'
