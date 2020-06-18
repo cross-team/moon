@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import ReactDOM from 'react-dom'
 import { makeStyles } from '@material-ui/core/styles'
+import Grid from '@material-ui/core/Grid'
 
 import Header from 'components/header/header'
 import Footer from 'components/footer/footer'
@@ -24,7 +25,7 @@ var useStyles = makeStyles(theme => ({
   },
 }))
 
-export default function Layout({ children }) {
+export default function Layout({ children, landing }) {
   var classes = useStyles()
   var { mainContentRef } = useContext(MainContentContext)
 
@@ -40,13 +41,14 @@ export default function Layout({ children }) {
         <>
           <Header hidden={true} />
           <Header />
-          <main
-            className={classes.main}
-            ref={mainContentRef}
-            data-testid="mainContent"
-          >
+          <main className={classes.main}>
             <ContactModal />
-            {children}
+            <Grid container direction="column">
+              {landing}
+              <div ref={mainContentRef} data-testid="mainContent">
+                {children}
+              </div>
+            </Grid>
           </main>
         </>
       </ContactController>

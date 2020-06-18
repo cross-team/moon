@@ -9,13 +9,20 @@ var useStyles = makeStyles(theme => ({
     color: theme.palette.primary.contrastText,
     fontSize: '6rem',
   },
+  iconContainer: {
+    maxWidth: '96px',
+  },
 }))
 
 export default function ScrollArrow({ onClick }) {
   var classes = useStyles()
   return (
-    <div className="arrow bounce">
-      <Arrow className={classes.icon} onClick={onClick} />
-    </div>
+    <a
+      className={`arrow bounce ${classes.iconContainer}`}
+      href="#"
+      onClick={onClick}
+    >
+      <Arrow className={classes.icon} />
+    </a>
   )
 }
