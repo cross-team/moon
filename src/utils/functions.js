@@ -40,6 +40,6 @@ export function skipToMain(ref) {
     console.log(child)
     child.focus()
     let offset = child.offsetTop - 180
-    scroll.scrollTo(offset, { duration: 1500 })
+    scroll.scrollTo(offset, { duration: 1 })
   }
 }

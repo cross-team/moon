@@ -23,7 +23,7 @@ var useStyles = makeStyles(theme => ({
     height: 'calc(100vh - 124px)',
   },
   logo: props => ({
-    width: props.smallScreen ? '72%' : '30%',
+    width: props.smallScreen ? '64%' : '30%',
   }),
 }))
 
