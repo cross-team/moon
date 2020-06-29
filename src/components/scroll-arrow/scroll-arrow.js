@@ -18,6 +18,7 @@ export default function ScrollArrow({ onClick }) {
   var classes = useStyles()
   return (
     <a
+      aria-label="Skip to content"
       className={`arrow bounce ${classes.iconContainer}`}
       href="#"
       onClick={onClick}

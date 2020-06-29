@@ -220,6 +220,7 @@ function Header({ hidden = false }) {
 
   return (
     <Grid
+      title="static header"
       role="banner"
       className={classes.root}
       container
