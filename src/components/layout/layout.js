@@ -54,8 +54,8 @@ export default function Layout({ children, landing, title, test = false }) {
             </Grid>
           </main>
         </>
+        <Footer />
       </ContactController>
-      <Footer />
     </Theme>
   )
 }
