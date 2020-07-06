@@ -14,6 +14,8 @@ jobs:
         run: |
           yarn
           yarn build
+        env:
+          GITHUB_API_TOKEN: 54726d21cec52f451376fcbc28525527c28da672
       - name: run Lighthouse CI
         run: |
           sudo yarn global add @lhci/cli@0.4.x
