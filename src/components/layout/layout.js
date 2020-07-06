@@ -27,7 +27,7 @@ var useStyles = makeStyles(theme => ({
   },
 }))
 
-export default function Layout({ children, landing, title }) {
+export default function Layout({ children, landing, title, test = false }) {
   var classes = useStyles({ title })
   var { mainContentRef } = useContext(MainContentContext)
 
@@ -41,7 +41,7 @@ export default function Layout({ children, landing, title }) {
     <Theme>
       <ContactController>
         <>
-          <SEO title={title} />
+          {!test && <SEO title={title} />}
           <Header fixed={true} alwaysFixed={title !== 'Home' ? true : false} />
           {title === 'Home' && <Header />}
           <main className={classes.main}>

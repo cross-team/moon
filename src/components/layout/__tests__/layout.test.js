@@ -10,7 +10,7 @@ describe('Layout', () => {
   it('skip to main sends focus to first focusable element inside the main content container', () => {
     let { getAllByText, getByTestId } = render(
       <MainContentController>
-        <Layout noSQL={true}>
+        <Layout noSQL={true} test={true}>
           <a href="#" data-testid="firstFocusableElement">
             Hello World!
           </a>
@@ -27,7 +27,7 @@ describe('Layout', () => {
   it('Contact Us tab opens contact form modal', () => {
     let { getAllByText, getByLabelText } = render(
       <MainContentController>
-        <Layout />
+        <Layout test={true} />
       </MainContentController>
     )
     let modalButton = getAllByText('Contact Us')
