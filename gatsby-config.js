@@ -114,7 +114,6 @@ module.exports = {
     'gatsby-plugin-material-ui',
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-react-axe',
-    `gatsby-plugin-offline`,
     `gatsby-plugin-resolve-src`,
     `gatsby-transformer-remark`,
   ],
