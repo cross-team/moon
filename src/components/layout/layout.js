@@ -6,6 +6,7 @@ import Grid from '@material-ui/core/Grid'
 import Header from 'components/header/header'
 import Footer from 'components/footer/footer'
 import ContactModal from 'components/contact-modal/contact-modal'
+import SEO from 'components/SEO/SEO'
 
 import Theme from 'providers/theme'
 import { ContactController } from 'providers/contact-context'
@@ -14,10 +15,11 @@ import MainContentContext from 'providers/main-content-context'
 import './layout.css'
 
 var useStyles = makeStyles(theme => ({
-  main: {
+  main: props => ({
     width: '100%',
     margin: 'auto',
-  },
+    paddingTop: props.title !== 'Home' ? '96px' : 'auto',
+  }),
   skipLink: {
     display: 'inline-block',
     marginTop: theme.spacing(4),
@@ -25,8 +27,8 @@ var useStyles = makeStyles(theme => ({
   },
 }))
 
-export default function Layout({ children, landing }) {
-  var classes = useStyles()
+export default function Layout({ children, landing, title }) {
+  var classes = useStyles({ title })
   var { mainContentRef } = useContext(MainContentContext)
 
   if (process.env.NODE_ENV !== 'production') {
@@ -39,8 +41,9 @@ export default function Layout({ children, landing }) {
     <Theme>
       <ContactController>
         <>
-          <Header hidden={true} />
-          <Header />
+          <SEO title={title} />
+          <Header fixed={true} alwaysFixed={title !== 'Home' ? true : false} />
+          {title === 'Home' && <Header />}
           <main className={classes.main}>
             <ContactModal />
             <Grid container direction="column">

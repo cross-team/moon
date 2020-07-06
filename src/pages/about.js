@@ -18,8 +18,7 @@ function About() {
 
   return (
     <>
-      <SEO title="About" />
-      <Layout>
+      <Layout title="About">
         <Grid className={classes.root} container direction="column">
           <Typography variant="h1">About</Typography>
         </Grid>

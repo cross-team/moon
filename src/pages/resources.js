@@ -18,8 +18,7 @@ function Resources() {
 
   return (
     <>
-      <SEO title="Resources" />
-      <Layout>
+      <Layout title="Resources">
         <Grid className={classes.root} container direction="column">
           <Typography variant="h1">Resources</Typography>
         </Grid>
