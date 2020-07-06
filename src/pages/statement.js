@@ -5,7 +5,6 @@ import Typography from '@material-ui/core/Typography'
 
 import SEO from 'components/SEO/SEO'
 import Layout from 'components/layout/layout'
-import BlogPost from 'components/blog-post/blog-post'
 
 var useStyles = makeStyles(theme => ({
   root: {
@@ -16,43 +15,35 @@ var useStyles = makeStyles(theme => ({
 
 export var POSTS_QUERY = graphql`
   query {
-    allMediumPost {
-      edges {
-        node {
-          title
-          content {
-            subtitle
+    github {
+      repository(name: "moon", owner: "cross-team") {
+        issues(first: 1, filterBy: { labels: "a11y" }) {
+          nodes {
+            bodyHTML
           }
-          author {
-            name
-            username
-          }
-          uniqueSlug
         }
       }
     }
   }
 `
 
-function Blog({ data }) {
+function A11yStatement({ data }) {
   var classes = useStyles()
-
-  var posts = data.allMediumPost.edges.map(post => (
-    <BlogPost post={post.node} />
-  ))
 
   return (
     <>
-      <Layout title="Blog">
+      <Layout title="Accessibility Statement">
         <Grid className={classes.root} container direction="column">
-          <Typography variant="h1">Blog Posts</Typography>
-          <Grid className={classes.postsContainer} container direction="column">
-            {posts}
-          </Grid>
+          <Typography variant="h1">Accessibility Statement</Typography>
+          <Typography
+            dangerouslySetInnerHTML={{
+              __html: data.github.repository.issues.nodes[0].bodyHTML,
+            }}
+          />
         </Grid>
       </Layout>
     </>
   )
 }
 
-export default Blog
+export default A11yStatement

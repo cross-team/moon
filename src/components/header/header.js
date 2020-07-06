@@ -29,6 +29,9 @@ var useStyles = makeStyles(theme => ({
     justifyContent: props.smallScreen ? 'center' : 'flex-start',
     height: '100%',
   }),
+  appbar: props => ({
+    top: props.alwaysFixed ? '0' : '-96px',
+  }),
   logo: {
     width: '80px',
   },
@@ -67,18 +70,18 @@ var useStyles = makeStyles(theme => ({
   },
 }))
 
-function Header({ hidden = false }) {
+function Header({ fixed = false, alwaysFixed = false }) {
   var contactContext = useContext(ContactContext)
   var { mainContentRef } = useContext(MainContentContext)
   var [anchorEl, setAnchorEl] = useState(null)
-  var [isHidden, setIsHidden] = useState(true)
+  var [isHidden, setIsHidden] = useState(!alwaysFixed)
   var theme = useTheme()
   var smallScreen = useMediaQuery(theme.breakpoints.down('sm'))
-  var classes = useStyles({ smallScreen, hidden })
+  var classes = useStyles({ smallScreen, alwaysFixed })
   var skipLinkRef = React.useRef(null)
 
   React.useEffect(() => {
-    if (!hidden) skipLinkRef.current.focus()
+    if (!fixed) skipLinkRef.current.focus()
   }, [])
 
   function handleMenu(event) {
@@ -87,7 +90,7 @@ function Header({ hidden = false }) {
 
   var content = (
     <>
-      {hidden && (
+      {fixed && (
         <>
           <NavLink to="/">
             <img
@@ -114,7 +117,7 @@ function Header({ hidden = false }) {
         <a
           className={classes.skipLink}
           href="#"
-          id={`skipToMain${hidden && 'h'}`}
+          id={`skipToMain${fixed && 'h'}`}
           ref={skipLinkRef}
         >
           <Typography>Skip to Content</Typography>
@@ -159,18 +162,18 @@ function Header({ hidden = false }) {
             <StyledMenuItem
               onClick={() => {
                 setAnchorEl(null)
-                navigate('/resources/')
-              }}
-            >
-              Resources
-            </StyledMenuItem>
-            <StyledMenuItem
-              onClick={() => {
-                setAnchorEl(null)
                 contactContext.setOpen(true)
               }}
             >
               Contact Us
+            </StyledMenuItem>
+            <StyledMenuItem
+              onClick={() => {
+                setAnchorEl(null)
+                navigate('/statement/')
+              }}
+            >
+              A11y Statement
             </StyledMenuItem>
           </Menu>
         </>
@@ -178,11 +181,11 @@ function Header({ hidden = false }) {
         <>
           <NavLink label="About Us" to="/about/" />
           <NavLink label="Blog" to="/blog/" />
-          <NavLink label="Resources" to="/resources/" />
           <NavLink
             label="Contact Us"
             onClick={() => contactContext.setOpen(true)}
           />
+          <NavLink label="A11y Statement" to="/statement/" />
         </>
       )}
     </>
@@ -201,13 +204,15 @@ function Header({ hidden = false }) {
     }
   }
 
-  if (hidden) {
-    if (typeof window !== 'undefined') {
-      window.onscroll = handleScroll
+  if (fixed) {
+    if (!alwaysFixed) {
+      if (typeof window !== 'undefined') {
+        window.onscroll = handleScroll
+      }
     }
 
     return (
-      <AppBar position="fixed" id="appbar">
+      <AppBar position="fixed" id="appbar" className={classes.appbar}>
         <Toolbar
           className={`${classes.toolbar} ${isHidden ? 'displayNone' : ''}`}
           data-testid="header"

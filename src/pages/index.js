@@ -5,7 +5,6 @@ import useMediaQuery from '@material-ui/core/useMediaQuery'
 import Grid from '@material-ui/core/Grid'
 import { graphql } from 'gatsby'
 
-import SEO from 'components/SEO/SEO'
 import Layout from 'components/layout/layout'
 import Section from 'components/section/section'
 import ScrollArrow from 'components/scroll-arrow/scroll-arrow'
@@ -102,8 +101,9 @@ function Index({ data }) {
 
   return (
     <>
-      <SEO title="Home" />
-      <Layout landing={landing}>{sections}</Layout>
+      <Layout landing={landing} title="Home">
+        {sections}
+      </Layout>
     </>
   )
 }

@@ -3,6 +3,5 @@ a {
 }
 
 #appbar {
-  top: -96px;
   transition: top 0.3s;
 }
