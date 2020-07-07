@@ -7,7 +7,7 @@ import Header from 'components/header/header'
 import Footer from 'components/footer/footer'
 import ContactModal from 'components/contact-modal/contact-modal'
 import SEO from 'components/SEO/SEO'
-import CC from 'components/CC/CC'
+import CC from 'components/cc/cc'
 import Theme from 'providers/theme'
 
 import { ContactController } from 'providers/contact-context'
