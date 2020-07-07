@@ -25,7 +25,7 @@ function Section({
   linkID = '',
   height,
 }) {
-  var { mainContentRef, skipToMainRef } = React.useContext(RefsContext)
+  var { skipToMainRef } = React.useContext(RefsContext)
   var classes = useStyles({ color, bgImg, height })
   var theme = useTheme()
   var smallScreen = useMediaQuery(theme.breakpoints.down('sm'))
