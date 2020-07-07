@@ -13,7 +13,21 @@ var useStyles = makeStyles(theme => ({
   },
 }))
 
-function About() {
+export var POSTS_QUERY = graphql`
+  query {
+    github {
+      repository(name: "moon", owner: "cross-team") {
+        issues(first: 1, filterBy: { labels: "about" }) {
+          nodes {
+            bodyHTML
+          }
+        }
+      }
+    }
+  }
+`
+
+function About({ data }) {
   var classes = useStyles()
 
   return (
@@ -21,6 +35,11 @@ function About() {
       <Layout title="About">
         <Grid className={classes.root} container direction="column">
           <Typography variant="h1">About</Typography>
+          <Typography
+            dangerouslySetInnerHTML={{
+              __html: data.github.repository.issues.nodes[0].bodyHTML,
+            }}
+          />
         </Grid>
       </Layout>
     </>
