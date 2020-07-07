@@ -7,8 +7,9 @@ import Header from 'components/header/header'
 import Footer from 'components/footer/footer'
 import ContactModal from 'components/contact-modal/contact-modal'
 import SEO from 'components/SEO/SEO'
-
+import CC from 'components/cc/cc'
 import Theme from 'providers/theme'
+
 import { ContactController } from 'providers/contact-context'
 import MainContentContext from 'providers/main-content-context'
 
@@ -56,6 +57,7 @@ export default function Layout({ children, landing, title, test = false }) {
         </>
         <Footer />
       </ContactController>
+      <CC>This website uses cookies to enhance the user experience.</CC>
     </Theme>
   )
 }
