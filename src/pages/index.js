@@ -13,7 +13,6 @@ import Services from 'components/services/services'
 
 import RefsContext from 'providers/refs-context'
 import { skipToMain } from 'utils/functions'
-
 import Logo from 'assets/svgs/cross-team-light.svg'
 
 var useStyles = makeStyles(theme => ({
