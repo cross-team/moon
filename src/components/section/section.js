@@ -10,6 +10,8 @@ import useStyles from './section-styles'
 
 import './section.css'
 
+import RefsContext from 'providers/refs-context'
+
 function Section({
   children,
   color = 'dark',
@@ -23,6 +25,7 @@ function Section({
   linkID = '',
   height,
 }) {
+  var { mainContentRef, skipToMainRef } = React.useContext(RefsContext)
   var classes = useStyles({ color, bgImg, height })
   var theme = useTheme()
   var smallScreen = useMediaQuery(theme.breakpoints.down('sm'))
@@ -46,6 +49,11 @@ function Section({
     setTranscriptOn(!transcriptOn)
   }
 
+  function handleSkipToNav() {
+    skipToMainRef.current.focus()
+    window.scrollTo(0, 0)
+  }
+
   return (
     <div className={classes.root} aria-label={bgImg && bgImgAlt}>
       <Grid
@@ -59,9 +67,10 @@ function Section({
         <Typography className={classes.skipLinkContainer}>
           <a
             className={classes.skipLink}
-            href="#skipToMain"
+            href="#"
             data-testid="skipLink"
             id={linkID}
+            onClick={handleSkipToNav}
           >
             Skip to Navigation
           </a>

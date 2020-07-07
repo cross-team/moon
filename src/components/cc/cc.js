@@ -4,7 +4,6 @@ import { useTheme } from '@material-ui/core/styles'
 
 export default function CC({ children }) {
   var theme = useTheme()
-  console.log(theme)
   var buttonStyle = {
     background: theme.palette.secondary.main,
     color: theme.palette.secondary.contrastText,

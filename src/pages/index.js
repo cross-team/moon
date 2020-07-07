@@ -11,7 +11,7 @@ import ScrollArrow from 'components/scroll-arrow/scroll-arrow'
 import Clients from 'components/clients/clients'
 import Services from 'components/services/services'
 
-import MainContentContext from 'providers/main-content-context'
+import RefsContext from 'providers/refs-context'
 import { skipToMain } from 'utils/functions'
 
 import Logo from 'assets/svgs/cross-team-light.svg'
@@ -43,7 +43,7 @@ export var POSTS_QUERY = graphql`
 
 function Index({ data }) {
   var theme = useTheme()
-  var { mainContentRef } = React.useContext(MainContentContext)
+  var { mainContentRef } = React.useContext(RefsContext)
   var smallScreen = useMediaQuery(theme.breakpoints.down('sm'))
   var classes = useStyles({ smallScreen })
 

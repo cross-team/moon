@@ -11,7 +11,7 @@ import CC from 'components/cc/cc'
 import Theme from 'providers/theme'
 
 import { ContactController } from 'providers/contact-context'
-import MainContentContext from 'providers/main-content-context'
+import RefsContext from 'providers/refs-context'
 
 import './layout.css'
 
@@ -30,7 +30,7 @@ var useStyles = makeStyles(theme => ({
 
 export default function Layout({ children, landing, title, test = false }) {
   var classes = useStyles({ title })
-  var { mainContentRef } = useContext(MainContentContext)
+  var { mainContentRef } = useContext(RefsContext)
 
   if (process.env.NODE_ENV !== 'production') {
     import('react-axe').then(axe => {

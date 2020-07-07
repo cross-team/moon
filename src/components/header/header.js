@@ -15,7 +15,7 @@ import './header.css'
 
 import { skipToMain } from 'utils/functions'
 import ContactContext from 'providers/contact-context'
-import MainContentContext from 'providers/main-content-context'
+import RefsContext from 'providers/refs-context'
 import Logo from 'assets/svgs/cross-team-light.svg'
 import StyledMenuItem from 'components/styled-menu-item/styled-menu-item'
 import NavLink from 'components/nav-link/nav-link'
@@ -72,16 +72,15 @@ var useStyles = makeStyles(theme => ({
 
 function Header({ fixed = false, alwaysFixed = false }) {
   var contactContext = useContext(ContactContext)
-  var { mainContentRef } = useContext(MainContentContext)
+  var { mainContentRef, skipToMainRef } = useContext(RefsContext)
   var [anchorEl, setAnchorEl] = useState(null)
   var [isHidden, setIsHidden] = useState(!alwaysFixed)
   var theme = useTheme()
   var smallScreen = useMediaQuery(theme.breakpoints.down('sm'))
   var classes = useStyles({ smallScreen, alwaysFixed })
-  var skipLinkRef = React.useRef(null)
 
   React.useEffect(() => {
-    if (!fixed) skipLinkRef.current.focus()
+    if (!fixed) skipToMainRef.current.focus()
   }, [])
 
   function handleMenu(event) {
@@ -117,8 +116,8 @@ function Header({ fixed = false, alwaysFixed = false }) {
         <a
           className={classes.skipLink}
           href="#"
-          id={`skipToMain${fixed && 'h'}`}
-          ref={skipLinkRef}
+          id={`skipToMain${fixed && 'F'}`}
+          ref={skipToMainRef}
         >
           <Typography>Skip to Content</Typography>
         </a>
