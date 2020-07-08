@@ -9,6 +9,16 @@ import Layout from 'components/layout/layout'
 var useStyles = makeStyles(theme => ({
   root: {
     color: theme.palette.primary.contrastText,
+  },
+  contentContainer: {
+    backgroundColor: '#fefefe',
+    color: '#222',
+    padding: theme.spacing(8),
+    '& a': {
+      color: '#04f',
+    },
+  },
+  title: {
     padding: theme.spacing(8),
   },
 }))
@@ -34,12 +44,20 @@ function A11yStatement({ data }) {
     <>
       <Layout title="Accessibility Statement">
         <Grid className={classes.root} container direction="column">
-          <Typography variant="h1">Accessibility Statement</Typography>
-          <Typography
-            dangerouslySetInnerHTML={{
-              __html: data.github.repository.issues.nodes[0].bodyHTML,
-            }}
-          />
+          <Typography variant="h1" className={classes.title}>
+            Accessibility Statement
+          </Typography>
+          <Grid
+            className={classes.contentContainer}
+            container
+            direction="column"
+          >
+            <Typography
+              dangerouslySetInnerHTML={{
+                __html: data.github.repository.issues.nodes[0].bodyHTML,
+              }}
+            />
+          </Grid>
         </Grid>
       </Layout>
     </>

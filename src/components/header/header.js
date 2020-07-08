@@ -80,7 +80,7 @@ function Header({ fixed = false, alwaysFixed = false }) {
   var classes = useStyles({ smallScreen, alwaysFixed })
 
   React.useEffect(() => {
-    if (!fixed) skipToMainRef.current.focus()
+    if (!fixed || alwaysFixed) skipToMainRef.current.focus()
   }, [])
 
   function handleMenu(event) {
@@ -172,7 +172,7 @@ function Header({ fixed = false, alwaysFixed = false }) {
                 navigate('/statement/')
               }}
             >
-              A11y Statement
+              Accessibility Statement
             </StyledMenuItem>
           </Menu>
         </>
@@ -184,7 +184,7 @@ function Header({ fixed = false, alwaysFixed = false }) {
             label="Contact Us"
             onClick={() => contactContext.setOpen(true)}
           />
-          <NavLink label="A11y Statement" to="/statement/" />
+          <NavLink label="Accessibility Statement" to="/statement/" />
         </>
       )}
     </>
