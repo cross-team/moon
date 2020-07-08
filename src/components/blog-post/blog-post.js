@@ -26,8 +26,15 @@ var useStyles = makeStyles(theme => ({
   },
   title: {
     width: '100%',
+    color: theme.palette.secondary.main,
+    textDecoration: 'none',
+    fontSize: '2.5rem',
+    fontWeight: 'bold',
+    lineHeight: '2.75rem',
+    marginBottom: theme.spacing(2),
   },
   subtitle: {
+    fontWeight: 'normal',
     marginTop: theme.spacing(2),
   },
   button: {
@@ -47,49 +54,20 @@ function BlogPost({ post }) {
   var mediumScreen = useMediaQuery(theme.breakpoints.down('md'))
   return (
     <Grid className={classes.root} container direction="column">
-      <Grid
-        className={classes.topRow}
-        item
-        container
-        wrap={mediumScreen ? 'wrap' : 'nowrap'}
-        justify="space-evenly"
-        alignItems="center"
-      >
-        <Typography variant="h4" component="h2" className={classes.title}>
-          {post.title}
+      <Grid className={classes.topRow} item container direction="column">
+        <Typography variant="body1" component="h2" className={classes.title}>
+          <a
+            href={`https://medium.com/${post.username}/${post.uniqueSlug}`}
+            className={classes.title}
+          >
+            {post.title}
+          </a>
         </Typography>
-        <Grid
-          className={classes.authorContainer}
-          item
-          container
-          alignItems="center"
-          justify={mediumScreen ? 'flex-start' : 'flex-end'}
-        >
-          <Typography variant="h6" component="p">
-            {post.author.name}
-          </Typography>
-          <Typography variant="h6" component="p">
-            <a
-              href={`https://medium.com/@${post.username}`}
-              className={classes.username}
-            >
-              @{post.author.username}
-            </a>
-          </Typography>
-        </Grid>
+        <Typography>by {post.author.name}</Typography>
       </Grid>
       <Typography className={classes.subtitle}>
         {post.content.subtitle}
       </Typography>
-      <Button
-        className={classes.button}
-        variant="contained"
-        color="primary"
-        disableFocusRipple
-        href={`https://medium.com/${post.username}/${post.uniqueSlug}`}
-      >
-        Read More...
-      </Button>
     </Grid>
   )
 }
