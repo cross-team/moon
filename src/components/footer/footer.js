@@ -39,7 +39,7 @@ function Footer() {
           label="Contact Us"
           onClick={() => contactContext.setOpen(true)}
         />
-        <NavLink label="A11y Statement" to="/statement/" />
+        <NavLink label="Accessibility Statement" to="/statement/" />
       </Grid>
       <Typography className={classes.copyright}>
         © 2020 Cross.Team, Inc.

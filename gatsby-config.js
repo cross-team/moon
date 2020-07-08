@@ -68,12 +68,6 @@ module.exports = {
     {
       resolve: `gatsby-source-medium`,
       options: {
-        username: `sketch-app-sources`,
-      },
-    },
-    {
-      resolve: `gatsby-source-medium`,
-      options: {
         username: `@claudioluisvera`,
       },
     },
