@@ -44,7 +44,7 @@ function About({ data }) {
       <Layout title="About">
         <Grid className={classes.root} container direction="column">
           <Typography variant="h1" className={classes.title}>
-            About
+            About Us
           </Typography>
           <Grid
             container

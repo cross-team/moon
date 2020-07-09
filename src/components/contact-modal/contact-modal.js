@@ -4,9 +4,12 @@ import Dialog from '@material-ui/core/Dialog'
 import DialogTitle from '@material-ui/core/DialogTitle'
 import DialogContent from '@material-ui/core/DialogContent'
 import Typography from '@material-ui/core/Typography'
+import IconButton from '@material-ui/core/IconButton'
+import CloseIcon from '@material-ui/icons/Close'
 
 import ContactForm from 'components/contact-form/contact-form'
 import ContactContext from 'providers/contact-context'
+import { Grid } from '@material-ui/core'
 
 var useStyles = makeStyles(theme => ({
   title: {
@@ -14,6 +17,14 @@ var useStyles = makeStyles(theme => ({
   },
   content: {
     paddingBottom: theme.spacing(4),
+  },
+  close: {
+    color: theme.palette.primary.main,
+    alignSelf: 'flex-start',
+    '&:focus, &:hover': {
+      backgroundColor: theme.palette.secondary.main,
+      color: theme.palette.secondary.contrastText,
+    },
   },
 }))
 
@@ -29,9 +40,19 @@ export default function ContactModal() {
       fullWidth
     >
       <DialogTitle disableTypography>
-        <Typography className={classes.title} variant="h2">
-          Contact Us
-        </Typography>
+        <Grid container direction="column" alignItems="center">
+          <IconButton
+            disableFocusRipple
+            aria-label="close contact modal"
+            className={classes.close}
+            onClick={() => contactContext.setOpen(false)}
+          >
+            <CloseIcon />
+          </IconButton>
+          <Typography className={classes.title} variant="h2">
+            Contact Us
+          </Typography>
+        </Grid>
       </DialogTitle>
       <DialogContent className={classes.content}>
         <ContactForm />
