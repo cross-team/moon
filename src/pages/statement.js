@@ -39,8 +39,6 @@ export var POSTS_QUERY = graphql`
 
 function A11yStatement({ data }) {
   var classes = useStyles()
-  console.log(data)
-  console.log(data.github.repository.issues.nodes[0].bodyHTML)
   return (
     <>
       <Layout title="Accessibility Statement">
@@ -53,11 +51,13 @@ function A11yStatement({ data }) {
             container
             direction="column"
           >
-            <Typography
-              dangerouslySetInnerHTML={{
-                __html: data.github.repository.issues.nodes[0].bodyHTML,
-              }}
-            />
+            <Typography>
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: data.github.repository.issues.nodes[0].bodyHTML,
+                }}
+              />
+            </Typography>
           </Grid>
         </Grid>
       </Layout>
