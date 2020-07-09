@@ -39,7 +39,8 @@ export var POSTS_QUERY = graphql`
 
 function About({ data }) {
   var classes = useStyles()
-
+  console.log(data)
+  console.log(data.github.repository.issues.nodes[0].bodyHTML)
   return (
     <>
       <Layout title="About">
