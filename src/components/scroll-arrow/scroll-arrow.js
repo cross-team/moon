@@ -11,6 +11,11 @@ var useStyles = makeStyles(theme => ({
   },
   iconContainer: {
     maxWidth: '96px',
+    borderRadius: '48px',
+    '&:focus, &:hover': {
+      backgroundColor: theme.palette.secondary.main,
+      outline: 'none',
+    },
   },
 }))
 
