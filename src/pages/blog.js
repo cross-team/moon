@@ -1,5 +1,6 @@
 import React from 'react'
-import { makeStyles } from '@material-ui/core/styles'
+import { makeStyles, useTheme } from '@material-ui/core/styles'
+import useMediaQuery from '@material-ui/core/useMediaQuery'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 
@@ -61,6 +62,8 @@ export var POSTS_QUERY = graphql`
 
 function Blog({ data }) {
   var classes = useStyles()
+  var theme = useTheme()
+  var smallScreen = useMediaQuery(theme.breakpoints.down('sm'))
 
   var posts = data.allMediumPost.edges.map(post => (
     <>
@@ -74,7 +77,9 @@ function Blog({ data }) {
       <Layout title="Blog">
         <Grid className={classes.root} container direction="column">
           <Grid className={classes.textContainer} container direction="column">
-            <Typography variant="h1">Blog Posts</Typography>
+            <Typography variant={smallScreen ? 'h2' : 'h1'} component="h1">
+              Blog Posts
+            </Typography>
             <Typography>
               The following is a list of our original posts about inclusive
               design and development best practices.
