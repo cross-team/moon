@@ -35,11 +35,6 @@ var useStyles = makeStyles(theme => ({
   logo: {
     width: '80px',
   },
-  divider: {
-    width: '2px',
-    height: '60px',
-    alignSelf: 'center',
-  },
   skipLinkContainer: {
     border: `4px solid ${theme.palette.primary.main}`,
     borderRadius: '4px',

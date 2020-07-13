@@ -1,5 +1,6 @@
 import React from 'react'
-import { makeStyles } from '@material-ui/core/styles'
+import { makeStyles, useTheme } from '@material-ui/core/styles'
+import useMediaQuery from '@material-ui/core/useMediaQuery'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 
@@ -39,11 +40,17 @@ export var POSTS_QUERY = graphql`
 
 function A11yStatement({ data }) {
   var classes = useStyles()
+  var theme = useTheme()
+  var smallScreen = useMediaQuery(theme.breakpoints.down('sm'))
   return (
     <>
       <Layout title="Accessibility Statement">
         <Grid className={classes.root} container direction="column">
-          <Typography variant="h1" className={classes.title}>
+          <Typography
+            variant={smallScreen ? 'h2' : 'h1'}
+            component="h1"
+            className={classes.title}
+          >
             Accessibility Statement
           </Typography>
           <Grid
