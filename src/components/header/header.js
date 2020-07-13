@@ -98,13 +98,6 @@ function Header({ fixed = false, alwaysFixed = false }) {
               alt="The Cross.Team logo is illustrated as a Swiss Army knife, representing the effectiveness and agility of cross-functional teams."
             />
           </NavLink>
-
-          <Divider
-            className={classes.divider}
-            orientation="vertical"
-            variant="middle"
-            flexItem
-          />
         </>
       )}
 
@@ -122,13 +115,6 @@ function Header({ fixed = false, alwaysFixed = false }) {
           <Typography>Skip to Content</Typography>
         </a>
       </Grid>
-
-      <Divider
-        className={classes.divider}
-        orientation="vertical"
-        variant="middle"
-        flexItem
-      />
 
       {smallScreen ? (
         <>
