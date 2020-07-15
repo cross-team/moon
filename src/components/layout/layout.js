@@ -43,7 +43,7 @@ export default function Layout({ children, landing, title, test = false }) {
       <ContactController>
         <>
           {!test && <SEO title={title} />}
-          <Header fixed={true} alwaysFixed={title !== 'Home' ? true : false} />
+          <Header fixed={true} alwaysFixed={title !== 'Home'} />
           {title === 'Home' && <Header />}
           <main className={classes.main}>
             <ContactModal />

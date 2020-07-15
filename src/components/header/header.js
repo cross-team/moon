@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import { navigate } from 'gatsby'
 import { makeStyles } from '@material-ui/core/styles'
 import { useTheme } from '@material-ui/core/styles'
@@ -74,9 +74,30 @@ function Header({ fixed = false, alwaysFixed = false }) {
   var smallScreen = useMediaQuery(theme.breakpoints.down('sm'))
   var classes = useStyles({ smallScreen, alwaysFixed })
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (!fixed || alwaysFixed) skipToMainRef.current.focus()
-  }, [])
+
+    function handleScroll() {
+      if (alwaysFixed) return null
+      if (
+        document.body.scrollTop > 500 ||
+        document.documentElement.scrollTop > 500
+      ) {
+        document.getElementById('appbar').style.top = '0'
+        setIsHidden(false)
+      } else {
+        document.getElementById('appbar').style.top = '-96px'
+        setIsHidden(true)
+      }
+    }
+
+    if (fixed && !alwaysFixed) {
+      window.addEventListener('scroll', handleScroll)
+    } else {
+      window.removeEventListener('scroll', handleScroll)
+    }
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [alwaysFixed, fixed])
 
   function handleMenu(event) {
     setAnchorEl(event.currentTarget)
@@ -171,26 +192,7 @@ function Header({ fixed = false, alwaysFixed = false }) {
     </>
   )
 
-  function handleScroll() {
-    if (
-      document.body.scrollTop > 500 ||
-      document.documentElement.scrollTop > 500
-    ) {
-      document.getElementById('appbar').style.top = '0'
-      setIsHidden(false)
-    } else {
-      document.getElementById('appbar').style.top = '-96px'
-      setIsHidden(true)
-    }
-  }
-
   if (fixed) {
-    if (!alwaysFixed) {
-      if (typeof window !== 'undefined') {
-        window.onscroll = handleScroll
-      }
-    }
-
     return (
       <AppBar position="fixed" id="appbar" className={classes.appbar}>
         <Toolbar
