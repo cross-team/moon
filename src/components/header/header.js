@@ -75,7 +75,13 @@ function Header({ fixed = false, alwaysFixed = false }) {
   var classes = useStyles({ smallScreen, alwaysFixed })
 
   useEffect(() => {
-    if (!fixed || alwaysFixed) skipToMainRef.current.focus()
+    if (!fixed || alwaysFixed) {
+      setTimeout(() => {
+        console.log(document.getElementById('CookieConsentButton') === null)
+        document.getElementById('CookieConsentButton') === null &&
+          skipToMainRef.current.focus()
+      }, 1)
+    }
 
     function handleScroll() {
       if (alwaysFixed) return null
