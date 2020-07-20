@@ -40,6 +40,7 @@ export default function Layout({ children, landing, title, test = false }) {
 
   return (
     <Theme>
+      <CC>This website uses cookies to enhance the user experience.</CC>
       <ContactController>
         <>
           {!test && <SEO title={title} />}
@@ -57,7 +58,6 @@ export default function Layout({ children, landing, title, test = false }) {
         </>
         <Footer />
       </ContactController>
-      <CC>This website uses cookies to enhance the user experience.</CC>
     </Theme>
   )
 }
