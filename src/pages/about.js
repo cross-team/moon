@@ -7,6 +7,8 @@ import Typography from '@material-ui/core/Typography'
 import SEO from 'components/SEO/SEO'
 import Layout from 'components/layout/layout'
 
+import RefsContext from 'providers/refs-context'
+
 var useStyles = makeStyles(theme => ({
   root: {
     color: theme.palette.primary.contrastText,
@@ -21,6 +23,9 @@ var useStyles = makeStyles(theme => ({
   },
   title: {
     padding: theme.spacing(8),
+  },
+  skipLinkContainer: {
+    alignSelf: 'flex-end',
   },
 }))
 
@@ -39,9 +44,16 @@ export var POSTS_QUERY = graphql`
 `
 
 function About({ data }) {
+  var { skipToMainRef } = React.useContext(RefsContext)
   var classes = useStyles()
   var theme = useTheme()
   var smallScreen = useMediaQuery(theme.breakpoints.down('sm'))
+
+  function handleSkipToNav() {
+    skipToMainRef.current.focus()
+    window.scrollTo(0, 0)
+  }
+
   return (
     <>
       <Layout title="About">
@@ -58,6 +70,17 @@ function About({ data }) {
             direction="column"
             className={classes.contentContainer}
           >
+            <Typography className={classes.skipLinkContainer}>
+              <a
+                className={classes.skipLink}
+                href="#"
+                data-testid="skipLink"
+                id="skipToNav-about"
+                onClick={handleSkipToNav}
+              >
+                Skip to Navigation
+              </a>
+            </Typography>
             <Typography>
               <div
                 dangerouslySetInnerHTML={{
