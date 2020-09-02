@@ -1,9 +1,10 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
-import { navigate } from 'gatsby-link'
 import Grid from '@material-ui/core/Grid'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
+
+import ContactContext from 'providers/contact-context'
 
 var useStyles = makeStyles(theme => ({
   root: {
@@ -25,7 +26,7 @@ function encode(data) {
     .join('&')
 }
 
-export default function ContactForm() {
+export default function ContactForm({ closeModal }) {
   var classes = useStyles()
   var [state, setState] = React.useState({
     firstName: '',
@@ -33,6 +34,7 @@ export default function ContactForm() {
     email: '',
     company: '',
   })
+  var contactContext = React.useContext(ContactContext)
 
   function handleChange(e) {
     setState({ ...state, [e.target.name]: e.target.value })
@@ -50,9 +52,13 @@ export default function ContactForm() {
       }),
     })
       .then(() => {
-        navigate('/')
+        closeModal()
+        contactContext.setSuccess(true)
       })
-      .catch(error => alert(error))
+      .catch(error => {
+        alert(error)
+        contactContext.setError(true)
+      })
   }
 
   return (
