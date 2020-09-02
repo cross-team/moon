@@ -92,8 +92,8 @@ export default function ContactModal() {
           vertical: 'bottom',
           horizontal: 'left',
         }}
-        open={true}
-        // autoHideDuration={5000}
+        open={contactContext.success}
+        autoHideDuration={5000}
         onClose={handleCloseSuccess}
         message="Success!"
         action={
